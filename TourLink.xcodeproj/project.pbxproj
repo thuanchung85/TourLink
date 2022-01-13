@@ -11,6 +11,7 @@
 		E0F047722790200E0065262D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F047712790200E0065262D /* ContentView.swift */; };
 		E0F04774279020100065262D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F04773279020100065262D /* Assets.xcassets */; };
 		E0F04777279020100065262D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F04776279020100065262D /* Preview Assets.xcassets */; };
+		E0F0477F279026A20065262D /* myModel_QuanLyUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0477E279026A20065262D /* myModel_QuanLyUserLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		E0F04773279020100065262D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0F04776279020100065262D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E0F04778279020100065262D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0F0477E279026A20065262D /* myModel_QuanLyUserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myModel_QuanLyUserLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				E0F0476F2790200E0065262D /* TourLinkApp.swift */,
+				E0F0477E279026A20065262D /* myModel_QuanLyUserLocation.swift */,
 				E0F047712790200E0065262D /* ContentView.swift */,
 				E0F04773279020100065262D /* Assets.xcassets */,
 				E0F04778279020100065262D /* Info.plist */,
@@ -140,6 +143,7 @@
 			files = (
 				E0F047722790200E0065262D /* ContentView.swift in Sources */,
 				E0F047702790200E0065262D /* TourLinkApp.swift in Sources */,
+				E0F0477F279026A20065262D /* myModel_QuanLyUserLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

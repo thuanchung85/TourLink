@@ -8,12 +8,17 @@
 import Foundation
 import MapKit
 
+enum MapDetails {
+    static let startingLocation = CLLocationCoordinate2D(latitude: 10.833404020168635, longitude: 106.78408553084277)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+}
+
 class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager?
     
     //vi tri hien tai 10.833404020168635, 106.78408553084277 la nha minh
-    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 10.833404020168635, longitude: 106.78408553084277), span: MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009))
+    @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation, span: MapDetails.defaultSpan)
     
     
     //===ham kiem tra em co dich vu location tren iphone hay khong?===///
@@ -59,7 +64,7 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
                 //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
                 //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
                 if let vitriUser = locationManager?.location?.coordinate {
-                    region = MKCoordinateRegion(center: vitriUser, span:  MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009))
+                    region = MKCoordinateRegion(center: vitriUser, span:  MapDetails.defaultSpan)
                 }
                 else{
                     print("co loi: khong lay duoc toa do cua user")

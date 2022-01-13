@@ -12,6 +12,10 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     
     var locationManager: CLLocationManager?
     
+    //vi tri hien tai 10.833404020168635, 106.78408553084277 la nha minh
+    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 10.833404020168635, longitude: 106.78408553084277), span: MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009))
+    
+    
     //===ham kiem tra em co dich vu location tren iphone hay khong?===///
     func kiemTraIphoneCoDichVuLocation()
     {
@@ -50,13 +54,19 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
             case .denied:
                 print("dich vu location bi cam: \(locationManager!.authorizationStatus)")
                 
-            case .authorizedAlways:
-                print("dich vu location duoc cap phep vinh vien: \(locationManager!.authorizationStatus)")
-                break
+            case .authorizedAlways ,.authorizedWhenInUse:
+                print("dich vu location duoc cap phep: \(locationManager!.authorizationStatus)")
+                //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
+                //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
+                if let vitriUser = locationManager?.location?.coordinate {
+                    region = MKCoordinateRegion(center: vitriUser, span:  MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009))
+                }
+                else{
+                    print("co loi: khong lay duoc toa do cua user")
+                }
                 
-            case.authorizedWhenInUse:
-                print("dich vu location duoc cap phep tam thoi: \(locationManager!.authorizationStatus)")
-                break
+                
+            
                 
             @unknown default:
                 print("dich vu location manager khong co authorizationStatus: \(locationManager!.authorizationStatus)")

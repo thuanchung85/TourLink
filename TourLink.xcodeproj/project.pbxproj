@@ -59,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				E0F047A3279174DF0065262D /* View */,
-				E0F047A2279174CC0065262D /* ViewModel */,
 				E0F0476F2790200E0065262D /* TourLinkApp.swift */,
 				E0F047712790200E0065262D /* ContentView.swift */,
 				E0F04773279020100065262D /* Assets.xcassets */,
@@ -77,21 +76,30 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E0F047A2279174CC0065262D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E0F047A8279176330065262D /* MapViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		E0F047A3279174DF0065262D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E0F047A4279174F90065262D /* Home.swift */,
-				E0F047A6279175520065262D /* MapView.swift */,
+				E0F047AB279183DF0065262D /* Childrens */,
+				E0F047AA279183D20065262D /* Mother */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E0F047AA279183D20065262D /* Mother */ = {
+			isa = PBXGroup;
+			children = (
+				E0F047A4279174F90065262D /* Home.swift */,
+			);
+			path = Mother;
+			sourceTree = "<group>";
+		};
+		E0F047AB279183DF0065262D /* Childrens */ = {
+			isa = PBXGroup;
+			children = (
+				E0F047A8279176330065262D /* MapViewModel.swift */,
+				E0F047A6279175520065262D /* MapView.swift */,
+			);
+			path = Childrens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

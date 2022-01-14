@@ -10,7 +10,7 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     
-    
+    //map view nay co link toi viewmodel la mapData
     @StateObject var mapData : MapViewModel
     
     func makeCoordinator() -> Coordinator {

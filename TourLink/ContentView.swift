@@ -13,16 +13,29 @@ struct ContentView: View {
     @StateObject var myModel_QuanLyUserLocation1 = myModel_QuanLyUserLocation()
     
     
-    
+   
     
     //====BODY===//
     var body: some View {
-        Map(coordinateRegion: $myModel_QuanLyUserLocation1.region, showsUserLocation:true)
-            .ignoresSafeArea()
-            .onAppear(){
-                myModel_QuanLyUserLocation1.kiemTraIphoneCoDichVuLocation()
+        ZStack(alignment: .top){
+           
+            //ban do
+            Map(coordinateRegion: $myModel_QuanLyUserLocation1.region, showsUserLocation:true)
+                .ignoresSafeArea()
+                .onAppear(){
+                    myModel_QuanLyUserLocation1.kiemTraIphoneCoDichVuLocation()
+                }
+            
+            VStack(alignment: .leading)
+            {
+                //text input
+                TextEditor(text: $myModel_QuanLyUserLocation1.thongtinTrenTextField)
+                    .frame(height: max(40,0))
+                    .padding()
+                    .font(.system(size: 11.0))
+                    
             }
-    
+        }
     }//end body
     
     

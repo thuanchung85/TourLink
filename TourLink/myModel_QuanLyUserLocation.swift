@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 enum MapDetails {
-    static let startingLocation = CLLocationCoordinate2D(latitude: 9.833404020168635, longitude: 106.78408553084277)
+    static let startingLocation = CLLocationCoordinate2D(latitude: 1.833404020168635, longitude: 1.78408553084277)
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
 }
 
@@ -20,6 +20,8 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     //vi tri hien tai 10.833404020168635, 106.78408553084277 la nha minh
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation, span: MapDetails.defaultSpan)
     
+    //data ban ra text field
+    @Published var thongtinTrenTextField: String = ""
     
     //===ham kiem tra em co dich vu location tren iphone hay khong?===///
     func kiemTraIphoneCoDichVuLocation()
@@ -64,6 +66,10 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
                 //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
                 //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
                 if let vitriUser = locationManager?.location?.coordinate {
+                    print("da co vi tri user: \(vitriUser)")
+                    
+                    thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
+                    
                     region = MKCoordinateRegion(center: vitriUser, span:  MapDetails.defaultSpan)
                 }
                 else{

@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 enum MapDetails {
-    static let startingLocation = CLLocationCoordinate2D(latitude: 10.833404020168635, longitude: 106.78408553084277)
+    static let startingLocation = CLLocationCoordinate2D(latitude: 9.833404020168635, longitude: 106.78408553084277)
     static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
 }
 

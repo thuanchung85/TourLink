@@ -33,11 +33,13 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
             locationManager = CLLocationManager()
             locationManager!.delegate = self
             locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager!.startUpdatingLocation()
            
         }
         //neu khong co dich vu location chay tren iPhone
         else
         {
+            
             print("iphone hok co dich vu location")
         }
     }
@@ -49,8 +51,10 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
             return
         }
         
+       
         switch locationManager!.authorizationStatus
         {
+       
             case .notDetermined:
                 print("dich vu location chua xac dinh: \(locationManager!.authorizationStatus)")
                 locationManager?.requestWhenInUseAuthorization()
@@ -66,6 +70,7 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
                 //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
                 //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
                 if let vitriUser = locationManager?.location?.coordinate {
+                   
                     print("da co vi tri user: \(vitriUser)")
                     
                     thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
@@ -82,6 +87,7 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
                 //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
                 //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
                 if let vitriUser = locationManager?.location?.coordinate {
+                   
                     print("da co vi tri user: \(vitriUser)")
                     
                     thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
@@ -104,5 +110,20 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         kiemtraIphoneCoChoPhepTruyCapUserLocation()
         
+    }
+    
+    //== ham chay lien tuc khi location cua user thay doi
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
+        //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
+        
+        if let vitriUser = locationManager?.location?.coordinate {
+            thongtinTrenTextField = "\(vitriUser)"
+            print("da co vi tri user: \(vitriUser)")
+            
+            thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
+            
+            region = MKCoordinateRegion(center: vitriUser, span:  MapDetails.defaultSpan)
+        }
     }
 }//end class

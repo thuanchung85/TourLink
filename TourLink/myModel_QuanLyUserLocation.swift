@@ -10,7 +10,7 @@ import MapKit
 
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 1.833404020168635, longitude: 1.78408553084277)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
 }
 
 class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -22,6 +22,9 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     
     //data ban ra text field
     @Published var thongtinTrenTextField: String = "chua co thong tin"
+    
+    //toa do hien tai
+    var toadoHientai: CLLocationCoordinate2D? = nil
     
     //===ham kiem tra em co dich vu location tren iphone hay khong?===///
     func kiemTraIphoneCoDichVuLocation()
@@ -113,17 +116,20 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     }
     
     //== ham chay lien tuc khi location cua user thay doi
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
-        //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
-        
-        if let vitriUser = locationManager?.location?.coordinate {
-            thongtinTrenTextField = "\(vitriUser)"
-            print("da co vi tri user: \(vitriUser)")
-            
-            thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
-            
-            region = MKCoordinateRegion(center: vitriUser, span:  MapDetails.defaultSpan)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        if let vitriUserMoiLayVe = locationManager?.location?.coordinate {
+           
+            //neu ma vi tri toa do cu da save ma khac gia tri voi toa do moi query ve thi update
+            if(vitriUserMoiLayVe.longitude != self.toadoHientai?.longitude) ||
+                (vitriUserMoiLayVe.latitude != self.toadoHientai?.latitude)
+            {
+                let chiSoZoomMapHienTai = region.span
+                region = MKCoordinateRegion(center: vitriUserMoiLayVe, span: chiSoZoomMapHienTai)
+                self.toadoHientai = vitriUserMoiLayVe
+                print("update toa do moi: ", self.toadoHientai!)
+                thongtinTrenTextField = String(self.toadoHientai!.longitude) + " || " + String(self.toadoHientai!.latitude)
+            }
         }
     }
 }//end class

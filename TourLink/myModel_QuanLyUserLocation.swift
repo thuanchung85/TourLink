@@ -21,7 +21,7 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation, span: MapDetails.defaultSpan)
     
     //data ban ra text field
-    @Published var thongtinTrenTextField: String = ""
+    @Published var thongtinTrenTextField: String = "chua co thong tin"
     
     //===ham kiem tra em co dich vu location tren iphone hay khong?===///
     func kiemTraIphoneCoDichVuLocation()
@@ -61,8 +61,8 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
             case .denied:
                 print("dich vu location bi cam: \(locationManager!.authorizationStatus)")
                 
-            case .authorizedAlways ,.authorizedWhenInUse:
-                print("dich vu location duoc cap phep: \(locationManager!.authorizationStatus)")
+            case .authorizedAlways:
+                print("dich vu location duoc cap phep Always: \(locationManager!.authorizationStatus)")
                 //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
                 //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
                 if let vitriUser = locationManager?.location?.coordinate {
@@ -75,9 +75,23 @@ class myModel_QuanLyUserLocation:NSObject, ObservableObject, CLLocationManagerDe
                 else{
                     print("co loi: khong lay duoc toa do cua user")
                 }
+                break
                 
-                
-            
+            case .authorizedWhenInUse:
+                print("dich vu location duoc cap phep WhenInUse: \(locationManager!.authorizationStatus)")
+                //trong truong hop duoc phep truy cap user location thi lay user location lam trung tam va show tren map
+                //locationManager!.location!.coordinate chua thong tin vi tri toa do cua user
+                if let vitriUser = locationManager?.location?.coordinate {
+                    print("da co vi tri user: \(vitriUser)")
+                    
+                    thongtinTrenTextField = String(vitriUser.longitude) + " || " + String(vitriUser.latitude)
+                    
+                    region = MKCoordinateRegion(center: vitriUser, span:  MapDetails.defaultSpan)
+                }
+                else{
+                    print("co loi: khong lay duoc toa do cua user")
+                }
+                break
                 
             @unknown default:
                 print("dich vu location manager khong co authorizationStatus: \(locationManager!.authorizationStatus)")

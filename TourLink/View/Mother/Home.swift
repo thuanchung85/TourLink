@@ -30,9 +30,7 @@ struct Home: View {
             VStack{
                 //thanh text search dia chi nam ngang
                 HStack{
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.blue)
-                        .frame(width: 20, height: 20)
+                    //khu nhap dia chi
                     TextField("Search", text: $mapData.searchTxt)
                         .foregroundColor(.blue)
                         .font(Font.system(size: 12, design: .default))
@@ -42,9 +40,13 @@ struct Home: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
                             )
-                    
-                   
-                        
+                    //nut chi duong
+                    Image(systemName: "scribble")
+                        .foregroundColor(.blue)
+                        .frame(width: 20, height: 20)
+                        .onTapGesture {
+                            print("chi duong")
+                        }
                 }
                 .padding(.vertical,5)
                 .padding(.horizontal)

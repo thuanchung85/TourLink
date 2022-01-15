@@ -49,6 +49,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(pointAnnotation)
+        
+        //moving map to location
+        let coorinateRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(coorinateRegion, animated: true)
+        self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
     
     

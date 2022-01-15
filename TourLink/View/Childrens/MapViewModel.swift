@@ -16,6 +16,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region: MKCoordinateRegion!
     @Published var permissionDenied = false
     @Published var mapType = MKMapType.standard
+    @Published var searchTxt = ""
+    
     
     //thay doi dang map
     func updateMapType(){

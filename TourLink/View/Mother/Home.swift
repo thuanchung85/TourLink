@@ -19,14 +19,42 @@ struct Home: View {
     
     var body: some View {
         ZStack{
-            //MapView...
+            
+            //đây là MapView la view con nam bên dưới zstack
             MapView(mapData: mapData)
                 .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
             
             
+            //đây la khu cac nut bam va text search nam o tren zstack
             VStack{
+                //thanh text search dia chi nam ngang
+                HStack{
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.blue)
+                        .frame(width: 20, height: 20)
+                    TextField("Search", text: $mapData.searchTxt)
+                        .foregroundColor(.blue)
+                        .font(Font.system(size: 12, design: .default))
+                        .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
+                        .frame(width: 300, height: 30)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
+                            )
+                        
+                }
+                .padding(.vertical,5)
+                .padding(.horizontal)
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(15)
+                
+                
+                
+                //spacer de đẩy vùng HStack o tren va VStack o dưới ra xa nhau maximun
                 Spacer()
+                
+                //vùng cac nut ben duoi mang hinh
                 VStack{
                     
                     //nut 1 zoom vao vitri user

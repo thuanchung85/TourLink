@@ -42,6 +42,8 @@ struct Home: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
                             )
+                    
+                   
                         
                 }
                 .padding(.vertical,5)
@@ -49,6 +51,28 @@ struct Home: View {
                 .background(Color.white.opacity(0.8))
                 .cornerRadius(15)
                 
+                //hien ket qua tim dia chi, neu co data trong arrPlacesFound
+                if (!mapData.arrPlacesFound.isEmpty && mapData.searchTxt != "") {
+                    //tao 1 scroll view
+                    ScrollView{
+                        VStack (spacing: 20){
+                            ForEach(mapData.arrPlacesFound, id: \.id) { item in
+                                Text(item.place.name ?? "none")
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth:.infinity, alignment: .leading)
+                                    .foregroundColor(.blue)
+                                    .font(Font.system(size: 12, design: .default))
+                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                }
+                            Divider()
+                        }
+                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    }
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(5)
+                    .padding(.horizontal)
+                    
+                }
                 
                 
                 //spacer de đẩy vùng HStack o tren va VStack o dưới ra xa nhau maximun
@@ -96,6 +120,16 @@ struct Home: View {
                   dismissButton: .default(Text("Open Settings"), action: {
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                   }))
+        }
+        .onChange(of: mapData.searchTxt) { valueTextInputOnSearchText in
+            //chay tim kiem dia chi, phai delay 1s de no khong bi nghet mang
+            let delayTime = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
+                if(valueTextInputOnSearchText == mapData.searchTxt)
+                {
+                    mapData.searchQuery()
+                }
+            }
         }
     }
 }

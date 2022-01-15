@@ -17,6 +17,24 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var permissionDenied = false
     @Published var mapType = MKMapType.standard
     @Published var searchTxt = ""
+    @Published var arrPlacesFound : [PlaceModel] = []
+    
+    //Search Dia Chi
+    func searchQuery()
+    {
+        self.arrPlacesFound.removeAll()
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = searchTxt
+        
+        MKLocalSearch(request: request).start { valueReturn, error in
+            guard let valueRe = valueReturn else {return}
+        
+            self.arrPlacesFound = valueRe.mapItems.compactMap({ item -> PlaceModel? in
+                return PlaceModel(place: item.placemark)
+            })
+        }
+    }
     
     
     //thay doi dang map

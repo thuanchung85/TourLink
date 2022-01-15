@@ -45,7 +45,8 @@ struct Home: View {
                         .foregroundColor(.blue)
                         .frame(width: 20, height: 20)
                         .onTapGesture {
-                            print("chi duong")
+                            
+                            mapData.showDirection()
                         }
                 }
                 .padding(.vertical,5)

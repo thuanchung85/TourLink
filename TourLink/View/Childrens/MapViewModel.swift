@@ -19,6 +19,22 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var searchTxt = ""
     @Published var arrPlacesFound : [PlaceModel] = []
     
+    var vitri1: CLLocationCoordinate2D?
+    var vitri2:CLLocationCoordinate2D?
+    
+    //show duong di
+    func showDirection()
+    {
+        print("chi duong")
+        guard let p1 = vitri1 else {return}
+        guard let p2 = vitri2  else {return}
+        
+        let mark1 = MKPlacemark(coordinate: p1)
+        let mark2 = MKPlacemark(coordinate: p2)
+        print(mark1)
+        print(mark2)
+    }
+    
     //Search Dia Chi
     func searchQuery()
     {
@@ -42,6 +58,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.searchTxt = ""
         
         guard let coordinate = place.place.location?.coordinate else {return}
+        
+        //save vitri 1
+        self.vitri1 = coordinate
         
         let pointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = coordinate
@@ -109,6 +128,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else {
             return
         }
+        //save vitri 2
+        self.vitri2 = location.coordinate
         
         self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         self.mapView.setRegion(region, animated: true)

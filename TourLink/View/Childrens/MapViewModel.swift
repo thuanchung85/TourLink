@@ -36,6 +36,22 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    //chon dia chi sau khi search text
+    func selectPlace(place: PlaceModel)
+    {
+        self.searchTxt = ""
+        
+        guard let coordinate = place.place.location?.coordinate else {return}
+        
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = coordinate
+        pointAnnotation.title = place.place.name ?? "no name"
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(pointAnnotation)
+    }
+    
+    
     
     //thay doi dang map
     func updateMapType(){

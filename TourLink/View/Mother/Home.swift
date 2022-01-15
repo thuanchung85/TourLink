@@ -63,6 +63,9 @@ struct Home: View {
                                     .foregroundColor(.blue)
                                     .font(Font.system(size: 12, design: .default))
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    .onTapGesture {
+                                        mapData.selectPlace(place: item)
+                                    }
                                 }
                             Divider()
                         }

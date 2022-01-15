@@ -31,7 +31,7 @@ struct MapView: UIViewRepresentable {
         
     }
     
-    
+    //====CLASS COORDINATOR===///
     class Coordinator: NSObject,MKMapViewDelegate{
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -59,6 +59,10 @@ struct MapView: UIViewRepresentable {
                 return pinAnnotation
             }
         }
-    }
-}
+        
+        
+    }//end class Coordination
+    
+    
+}//end struct MapView
 

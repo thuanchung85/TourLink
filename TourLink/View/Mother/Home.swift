@@ -118,6 +118,8 @@ struct Home: View {
             //khi init home view xong thi khoi tao location manager
             locationManager.delegate = mapData
             locationManager.requestWhenInUseAuthorization()
+            //locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
         }
         //neu chua co cap phep thi alert xin phep truy cap location cua user
         .alert(isPresented: $mapData.permissionDenied) {

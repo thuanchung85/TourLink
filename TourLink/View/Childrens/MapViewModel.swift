@@ -153,4 +153,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
     
+    //ghi nhan huong quay cua user, dong tay nam bac
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        print(newHeading)
+        
+    }
+    
 }

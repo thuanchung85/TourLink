@@ -20,13 +20,13 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need access your location to show the map </string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need access your location to show the map </string>
 	<key>NSLocationUsageDescription</key>
 	<string>We need access your location to show the map </string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need access your location to show the map </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -44,8 +44,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

@@ -40,9 +40,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         requestDirection.destination = MKMapItem(placemark: mark2)
         requestDirection.transportType = .automobile
         
+        self.mapView.removeOverlays(mapView.overlays)
+        
         let directions = MKDirections(request: requestDirection)
         directions.calculate { [weak self] res, err in
             guard let route = res?.routes.first else {return}
+            
             //self!.mapView.addAnnotations([mark1,mark2])
             self!.mapView.addOverlay(route.polyline)
             self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)

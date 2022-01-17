@@ -133,7 +133,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
         //mapView.setRegion(region, animated: true)
-        self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        //self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
         
         
     }

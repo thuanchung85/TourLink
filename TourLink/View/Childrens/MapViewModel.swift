@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import Foundation
 //all map data goes here
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -28,7 +29,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //chua 1 locationManager
     @Published var locationManager = CLLocationManager()
-   
+    var myRoute:MKRoute?
     
     //show duong di
     func showDirection()
@@ -57,10 +58,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let directions = MKDirections(request: requestDirection)
         directions.calculate { [weak self] res, err in
             guard let route = res?.routes.first else {return}
-            
+            self!.myRoute = route
             //tinh khoan cach bao nhieu km
-            let distanceKM = round(route.distance / 1000)
-            self!.soKm = String(distanceKM) + " km"
+            let distanceKM = (route.distance / 1000)
+            self!.soKm = String(distanceKM) + " Km"
            
             
             self!.mapView.addOverlay(route.polyline)
@@ -137,6 +138,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
+        //locationManager.startUpdatingHeading()
     }
     
     
@@ -192,10 +194,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
           //  i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
        // }
         //thay sokm
-        /*if(vitri1 != nil){
-        let distance: CLLocationDistance = vitri2.distance(from: CLLocation(latitude: vitri1!.latitude, longitude: vitri1!.longitude))
-            self.soKm = String(round(distance)) + " km"
-        }*/
+        //if(vitri1 != nil) && (myRoute != nil){
+            //let distance = 10
+            
+           
+        //}
     }
     
     

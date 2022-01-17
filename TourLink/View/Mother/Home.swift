@@ -27,70 +27,13 @@ struct Home: View {
             
             
             //đây la khu cac nut bam va text search nam o tren zstack
-            VStack(alignment: .leading, spacing: 0){
-                //thanh text search dia chi nam ngang
-                HStack (){
-                    //khu nhap dia chi
-                    TextField("Search", text: $mapData.searchTxt)
-                        .foregroundColor(.blue)
-                        .font(Font.system(size: 12, design: .default))
-                        .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
-                        .frame(width: 270, height: 30)
-                        .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                            )
-                    //nut chi duong
-                    Image(systemName: "scribble")
-                        .foregroundColor(.blue)
-                        .frame(width: 20, height: 20)
-                        .onTapGesture {
-                            
-                            mapData.showDirection()
-                        }
-                    
-                   
-                }
-                .padding(.vertical,5)
-                .padding(.horizontal)
-                .background(Color.white.opacity(0.8))
-                .cornerRadius(15)
-                
-                Spacer()
-                
-                //hien ket qua tim dia chi, neu co data trong arrPlacesFound
-                if (!mapData.arrPlacesFound.isEmpty && mapData.searchTxt != "") {
-                    //tao 1 scroll view
-                    ScrollView{
-                        VStack (spacing: 20){
-                            ForEach(mapData.arrPlacesFound, id: \.id) { item in
-                                Text(item.place.name ?? "none")
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth:.infinity, alignment: .leading)
-                                    .foregroundColor(.blue)
-                                    .font(Font.system(size: 12, design: .default))
-                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    .onTapGesture {
-                                        mapData.selectPlace(place: item)
-                                        self.endTextEditing()
-                                    }
-                                }
-                            Divider()
-                        }
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
-                    }
-                    .background(Color.white.opacity(0.8))
-                    .cornerRadius(5)
-                    .padding(.horizontal)
-                    
-                }
-                
-                
+            VStack(alignment: .leading, spacing: 0)
+            {
                 //spacer de đẩy vùng HStack o tren va VStack o dưới ra xa nhau maximun
                 Spacer()
                 
                 //vùng cac nut ben duoi mang hinh
-                VStack{
+                HStack{
                     
                     //nut 1 zoom vao vitri user
                     Button {
@@ -130,6 +73,68 @@ struct Home: View {
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)
                 .padding()
+                
+                //thanh text search dia chi nam ngang
+                HStack (){
+                    //khu nhap dia chi
+                    TextField("Search", text: $mapData.searchTxt)
+                        .foregroundColor(.blue)
+                        .font(Font.system(size: 12, design: .default))
+                        .padding()
+                        .frame( height: 30)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
+                            )
+                    //nut chi duong
+                    Image(systemName: "scribble")
+                        .foregroundColor(.blue)
+                        .frame(width: 20, height: 20)
+                        .onTapGesture {
+                            
+                            mapData.showDirection()
+                        }
+                    
+                   
+                }
+                .padding(.vertical,5)
+                .padding(.horizontal)
+                .background(Color.white.opacity(0.8))
+                //.cornerRadius(15)
+                
+               
+                
+                //hien ket qua tim dia chi, neu co data trong arrPlacesFound
+                if (!mapData.arrPlacesFound.isEmpty && mapData.searchTxt != "") {
+                    //tao 1 scroll view
+                    ScrollView{
+                        VStack (spacing: 20){
+                            ForEach(mapData.arrPlacesFound, id: \.id) { item in
+                                Text(item.place.name ?? "none")
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth:.infinity, alignment: .leading)
+                                    .foregroundColor(.blue)
+                                    .font(Font.system(size: 12, design: .default))
+                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    .onTapGesture {
+                                        mapData.selectPlace(place: item)
+                                        self.endTextEditing()
+                                    }
+                                }
+                            Divider()
+                        }
+                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    }
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(5)
+                    .padding(.horizontal)
+                    
+                }
+                
+                
+               
+                
+                
             }
         }.onAppear {
             //khi init home view xong thi khoi tao location manager

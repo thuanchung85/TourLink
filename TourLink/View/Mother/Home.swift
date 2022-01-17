@@ -72,7 +72,7 @@ struct Home: View {
                     }*/
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)
-                .padding()
+                .padding(.horizontal)
                 
                 //thanh text search dia chi nam ngang
                 HStack (){
@@ -89,20 +89,24 @@ struct Home: View {
                                     
                         ).background(Color.white)
                         .cornerRadius(10)
+                    
                     //nut chi duong
                     Button {
                         mapData.showDirection()
                         
                     } label: {
                         Image(systemName: "scribble")
-                            .font(.title2)
-                            .padding(10)
-                            .background(Color.primary.opacity(0.8))
-                            .clipShape(Circle())
-                        
-                           
+                            .padding()
                     }
-                    
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .background(Color.primary.opacity(0.8))
+                    .cornerRadius(15)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.blue, lineWidth: 1)
+                                
+                    )
+                    .padding(.horizontal,5)
                     
                    
                 }

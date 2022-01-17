@@ -78,29 +78,39 @@ struct Home: View {
                 HStack (){
                     //khu nhap dia chi
                     TextField("Search", text: $mapData.searchTxt)
+                        .background(Color.white)
                         .foregroundColor(.blue)
-                        .font(Font.system(size: 12, design: .default))
+                        .font(Font.system(size: 15, design: .default))
                         .padding()
                         .frame( height: 30)
                         .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
-                            )
+                                    
+                        ).background(Color.white)
+                        .cornerRadius(10)
                     //nut chi duong
-                    Image(systemName: "scribble")
-                        .foregroundColor(.blue)
-                        .frame(width: 20, height: 20)
-                        .onTapGesture {
-                            
-                            mapData.showDirection()
-                        }
+                    Button {
+                        mapData.showDirection()
+                        
+                    } label: {
+                        Image(systemName: "scribble")
+                            .font(.title2)
+                            .padding(10)
+                            .background(Color.primary.opacity(0.8))
+                            .clipShape(Circle())
+                        
+                           
+                    }
+                    
                     
                    
                 }
                 .padding(.vertical,5)
                 .padding(.horizontal)
-                .background(Color.white.opacity(0.8))
-                //.cornerRadius(15)
+                
+                //.background(Color.white.opacity(0.9))
+                //.cornerRadius(5)
                 
                
                 

@@ -131,8 +131,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let _ = region else {
             return
         }
-        mapView.setRegion(region, animated: true)
+        self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
+        //mapView.setRegion(region, animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        
+        
     }
     
     
@@ -171,9 +174,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
        
         
         self.region = MKCoordinateRegion(center: vitri2!, latitudinalMeters: 300, longitudinalMeters: 300)
-        
-        self.mapView.setRegion(region, animated: true)
+        self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
+        //self.mapView.setRegion(region, animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+       
+        
+        
     }
     
     //ghi nhan huong quay cua user, dong tay nam bac
@@ -181,13 +187,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
     {
         //print(newHeading)
-        if newHeading.headingAccuracy < 0 { return }
+       // if newHeading.headingAccuracy < 0 { return }
 
-        let heading = newHeading.trueHeading > 0 ? newHeading.trueHeading : newHeading.magneticHeading
-        userHeading = heading
-        if let i = headingImageView {
-            i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
-        }
+        //let heading = newHeading.trueHeading > 0 ? newHeading.trueHeading : newHeading.magneticHeading
+        //userHeading = heading
+        //if let i = headingImageView {
+          //  i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
+       // }
         
     }
     

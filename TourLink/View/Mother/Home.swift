@@ -117,7 +117,7 @@ struct Home: View {
                     }
                     
                     //nut 3 let go bat dau hanh trinh
-                    Button {
+                    /*Button {
                         mapData.startHanhTrinh()
                         
                     } label: {
@@ -126,7 +126,7 @@ struct Home: View {
                             .padding(10)
                             .background(Color.primary)
                             .clipShape(Circle())
-                    }
+                    }*/
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)
                 .padding()

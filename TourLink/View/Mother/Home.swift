@@ -97,10 +97,10 @@ struct Home: View {
                         mapData.focusLocation()
                         
                     } label: {
-                        Image(systemName: "location.fill")
+                        Image(systemName: "figure.walk")
                             .font(.title2)
                             .padding(10)
-                            .background(Color.primary)
+                            .background(Color.primary.opacity(0.8))
                             .clipShape(Circle())
                     }
                     
@@ -112,7 +112,7 @@ struct Home: View {
                         Image(systemName: mapData.mapType == .standard ? "network" : "map")
                             .font(.title2)
                             .padding(10)
-                            .background(Color.primary)
+                            .background(Color.primary.opacity(0.8))
                             .clipShape(Circle())
                     }
                     

@@ -36,9 +36,10 @@ struct MapView: UIViewRepresentable {
     class Coordinator: NSObject,MKMapViewDelegate{
         
         private let parent: MapViewModel?
+        private var isUserAddHeadingArrow =  false
         
         init(_ parent: MapViewModel) {
-                    self.parent = parent
+            self.parent = parent
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -82,7 +83,10 @@ struct MapView: UIViewRepresentable {
         //=======TEST====//
         func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
             if views.last?.annotation is MKUserLocation {
-                parent!.addHeadingView(toAnnotationView: views.last!)
+                if(isUserAddHeadingArrow == false){
+                    parent!.addHeadingView(toAnnotationView: views.last!)
+                    isUserAddHeadingArrow = true
+                }
             }
         }
         

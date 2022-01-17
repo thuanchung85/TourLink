@@ -16,7 +16,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region: MKCoordinateRegion!
     @Published var permissionDenied = false
     @Published var mapType = MKMapType.standard
-    @Published var isStartHanhTrinh = false
+   
     @Published var searchTxt = ""
     @Published var soKm = ""
     @Published var arrPlacesFound : [PlaceModel] = []
@@ -68,17 +68,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    //func start stop hanh trinh
-    func startHanhTrinh()
-    {
-        self.isStartHanhTrinh.toggle()
-        if(isStartHanhTrinh == true){
-            self.locationManager.startUpdatingLocation()
-        }
-        else{
-            self.locationManager.stopUpdatingLocation()
-        }
-    }
+   
     
     
     
@@ -144,10 +134,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             return
         }
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
-        //mapView.setRegion(region, animated: true)
-        //self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
-        //locationManager.startUpdatingLocation()
-        
+       
     }
     
     
@@ -187,7 +174,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         self.region = MKCoordinateRegion(center: vitri2!, latitudinalMeters: 300, longitudinalMeters: 300)
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
-        //self.mapView.setRegion(region, animated: true)
+       
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
        
        
@@ -228,10 +215,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                              y: (annotationView.frame.size.height - image.size.height)/2,
                                              width: image.size.width,
                                              height: image.size.height )
-            //headingImageView?.backgroundColor = .red
-            
             annotationView.insertSubview(headingImageView!, at: 0)
-            //headingImageView!.isHidden = true
         }
             
          

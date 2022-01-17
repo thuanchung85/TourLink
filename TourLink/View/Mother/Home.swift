@@ -13,9 +13,7 @@ struct Home: View {
     //chua 1 environment object de update data mapData
     @StateObject var mapData = MapViewModel()
     
-    //chua 1 locationManager
-    //@State var locationManager = CLLocationManager()
-    
+   
     
     var body: some View {
         ZStack{
@@ -59,17 +57,7 @@ struct Home: View {
                             .clipShape(Circle())
                     }
                     
-                    //nut 3 let go bat dau hanh trinh
-                    /*Button {
-                        mapData.startHanhTrinh()
-                        
-                    } label: {
-                        Image(systemName: mapData.isStartHanhTrinh == true ? "hand.raised" : "figure.walk")
-                            .font(.title2)
-                            .padding(10)
-                            .background(Color.primary)
-                            .clipShape(Circle())
-                    }*/
+                   
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)
                 .padding(.horizontal)
@@ -130,9 +118,7 @@ struct Home: View {
                 .padding(.vertical,5)
                 .padding(.horizontal)
                 
-                //.background(Color.white.opacity(0.9))
-                //.cornerRadius(5)
-                
+               
                
                 
                 //hien ket qua tim dia chi, neu co data trong arrPlacesFound
@@ -171,7 +157,6 @@ struct Home: View {
             //khi init home view xong thi khoi tao location manager
             mapData.locationManager.delegate = mapData
             mapData.locationManager.requestWhenInUseAuthorization()
-            //locationManager.startUpdatingLocation()
             mapData.locationManager.startUpdatingHeading()
         }
         //neu chua co cap phep thi alert xin phep truy cap location cua user

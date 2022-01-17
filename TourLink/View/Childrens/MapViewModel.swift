@@ -24,6 +24,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var vitri1: CLLocationCoordinate2D?
     var vitri2:CLLocationCoordinate2D?
     
+    var locationDangDung:CLLocation?
+    
     //chua 1 locationManager
     @Published var locationManager = CLLocationManager()
    
@@ -33,10 +35,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     {
         print("chi duong")
         guard let p1 = vitri1 else {return}
-        guard let p2 = vitri2  else {return}
+        //guard let p2 = vitri2  else {return}
+        guard let p2 = locationManager.location  else {return}
+        vitri2 = p2.coordinate
         
         let mark1 = MKPlacemark(coordinate: p1)
-        let mark2 = MKPlacemark(coordinate: p2)
+        let mark2 = MKPlacemark(coordinate: p2.coordinate)
         print(mark1)
         print(mark2)
         
@@ -106,6 +110,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //save vitri 1
         self.vitri1 = coordinate
         
+        
         let pointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = coordinate
         pointAnnotation.title = place.place.name ?? "no name"
@@ -141,7 +146,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
         //mapView.setRegion(region, animated: true)
         //self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
-        
+        //locationManager.startUpdatingLocation()
         
     }
     
@@ -185,7 +190,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //self.mapView.setRegion(region, animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
        
-        
+       
         
     }
     
@@ -201,7 +206,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //if let i = headingImageView {
           //  i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
        // }
-        
+        //thay sokm
+        /*if(vitri1 != nil){
+        let distance: CLLocationDistance = vitri2.distance(from: CLLocation(latitude: vitri1!.latitude, longitude: vitri1!.longitude))
+            self.soKm = String(round(distance)) + " km"
+        }*/
     }
     
     

@@ -46,8 +46,8 @@
             filePath = "TourLink/View/Childrens/MapViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "MapViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "TourLink/View/Childrens/MapViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,9 +94,25 @@
             filePath = "TourLink/View/Childrens/MapViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF898321-F1DA-4EF7-A9C5-0AC6EC869E75"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TourLink/View/Childrens/MapViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "showDirection()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

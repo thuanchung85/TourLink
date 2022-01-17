@@ -18,6 +18,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapType = MKMapType.standard
     @Published var isStartHanhTrinh = false
     @Published var searchTxt = ""
+    @Published var soKm = ""
     @Published var arrPlacesFound : [PlaceModel] = []
     
     var vitri1: CLLocationCoordinate2D?
@@ -53,7 +54,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         directions.calculate { [weak self] res, err in
             guard let route = res?.routes.first else {return}
             
-            //self!.mapView.addAnnotations([mark1,mark2])
+            //tinh khoan cach bao nhieu km
+            let distanceKM = round(route.distance / 1000)
+            self!.soKm = String(distanceKM) + " km"
+           
+            
             self!.mapView.addOverlay(route.polyline)
             self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
         }

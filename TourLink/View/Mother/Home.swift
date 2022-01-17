@@ -78,7 +78,7 @@ struct Home: View {
                 HStack (){
                     //khu nhap dia chi
                     TextField("Search", text: $mapData.searchTxt)
-                        .background(Color.white)
+                        //.background(Color.white.opacity(0.9))
                         .foregroundColor(.blue)
                         .font(Font.system(size: 15, design: .default))
                         .padding()
@@ -87,8 +87,25 @@ struct Home: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
                                     
-                        ).background(Color.white)
+                        ).background(Color.white.opacity(0.9))
                         .cornerRadius(10)
+                    
+                    //so km
+                    TextField("Km", text: $mapData.soKm )
+                        .multilineTextAlignment(.center)
+                        //.background(Color.white.opacity(0.8))
+                        .foregroundColor(.blue)
+                        .font(Font.system(size: 15, design: .default))
+                        .padding(.horizontal,5)
+                        .minimumScaleFactor(0.01)
+                        .frame(width: 80, height: 30)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
+                                    
+                        ).background(Color.white.opacity(0.8))
+                        .cornerRadius(10)
+                        .disabled(true)
                     
                     //nut chi duong
                     Button {

@@ -100,9 +100,9 @@ struct Home: View {
                     }
                     .frame(width: 40, height: 40, alignment: .center)
                     .background(Color.primary.opacity(0.8))
-                    .cornerRadius(15)
+                    .cornerRadius(20)
                     .overlay(
-                            RoundedRectangle(cornerRadius: 15)
+                            RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.blue, lineWidth: 1)
                                 
                     )

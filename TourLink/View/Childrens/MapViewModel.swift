@@ -41,8 +41,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         //request direction
         let requestDirection = MKDirections.Request()
-        requestDirection.source = MKMapItem(placemark: mark1)
-        requestDirection.destination = MKMapItem(placemark: mark2)
+        //vi tri hien tai
+        requestDirection.source = MKMapItem(placemark: mark2)
+        //vitri can den
+        requestDirection.destination = MKMapItem(placemark: mark1)
         requestDirection.transportType = .automobile
         
         self.mapView.removeOverlays(mapView.overlays)

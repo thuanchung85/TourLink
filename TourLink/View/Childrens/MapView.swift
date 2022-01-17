@@ -38,10 +38,12 @@ struct MapView: UIViewRepresentable {
         private let parent: MapViewModel?
         private var isUserAddHeadingArrow =  false
         
+        //init
         init(_ parent: MapViewModel) {
             self.parent = parent
         }
         
+        //===ham ve duong di mau xanh duong==///
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = .blue
@@ -50,7 +52,7 @@ struct MapView: UIViewRepresentable {
         }
         
         
-        //=====
+        //===HAM thay doi hinh anh cua vi tri cac node tren map==//
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             //custom pins...
             
@@ -80,9 +82,10 @@ struct MapView: UIViewRepresentable {
         
         
         
-        //=======TEST====//
+        //=======ADD mui ten huong chi duong vao vi tri user====//
         func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
             if views.last?.annotation is MKUserLocation {
+                //neu user chua co gan mui ten chi duong thi gan vao, sau do khoa hok cho gan them nua
                 if(isUserAddHeadingArrow == false){
                     parent!.addHeadingView(toAnnotationView: views.last!)
                     isUserAddHeadingArrow = true

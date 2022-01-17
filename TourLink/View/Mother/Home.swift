@@ -27,15 +27,15 @@ struct Home: View {
             
             
             //đây la khu cac nut bam va text search nam o tren zstack
-            VStack{
+            VStack(alignment: .leading, spacing: 0){
                 //thanh text search dia chi nam ngang
-                HStack{
+                HStack (){
                     //khu nhap dia chi
                     TextField("Search", text: $mapData.searchTxt)
                         .foregroundColor(.blue)
                         .font(Font.system(size: 12, design: .default))
                         .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
-                        .frame(width: 300, height: 30)
+                        .frame(width: 270, height: 30)
                         .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
@@ -48,11 +48,15 @@ struct Home: View {
                             
                             mapData.showDirection()
                         }
+                    
+                   
                 }
                 .padding(.vertical,5)
                 .padding(.horizontal)
                 .background(Color.white.opacity(0.8))
                 .cornerRadius(15)
+                
+                Spacer()
                 
                 //hien ket qua tim dia chi, neu co data trong arrPlacesFound
                 if (!mapData.arrPlacesFound.isEmpty && mapData.searchTxt != "") {

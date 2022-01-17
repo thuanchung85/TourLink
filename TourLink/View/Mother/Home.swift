@@ -115,6 +115,18 @@ struct Home: View {
                             .background(Color.primary)
                             .clipShape(Circle())
                     }
+                    
+                    //nut 3 let go bat dau hanh trinh
+                    Button {
+                        mapData.startHanhTrinh()
+                        
+                    } label: {
+                        Image(systemName: mapData.isStartHanhTrinh == true ? "hand.raised" : "figure.walk")
+                            .font(.title2)
+                            .padding(10)
+                            .background(Color.primary)
+                            .clipShape(Circle())
+                    }
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)
                 .padding()

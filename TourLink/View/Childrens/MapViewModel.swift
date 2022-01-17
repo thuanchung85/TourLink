@@ -16,6 +16,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region: MKCoordinateRegion!
     @Published var permissionDenied = false
     @Published var mapType = MKMapType.standard
+    @Published var isStartHanhTrinh = false
     @Published var searchTxt = ""
     @Published var arrPlacesFound : [PlaceModel] = []
     
@@ -55,6 +56,21 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
         }
     }
+    
+    //func start stop hanh trinh
+    func startHanhTrinh()
+    {
+        self.isStartHanhTrinh.toggle()
+        if(isStartHanhTrinh == true){
+            self.locationManager.startUpdatingLocation()
+        }
+        else{
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    
+    
     
     //Search Dia Chi
     func searchQuery()

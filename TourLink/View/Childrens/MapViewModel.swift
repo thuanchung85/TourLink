@@ -133,6 +133,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let _ = region else {
             return
         }
+        self.vitri2 = locationManager.location?.coordinate
+        
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
     }
@@ -170,14 +172,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //save vitri cua user
         self.vitri2 = location.coordinate
         
-       
-        
         self.region = MKCoordinateRegion(center: vitri2!, latitudinalMeters: 300, longitudinalMeters: 300)
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
-       
-       
         
     }
     

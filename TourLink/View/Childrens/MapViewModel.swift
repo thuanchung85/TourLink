@@ -22,6 +22,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var vitri1: CLLocationCoordinate2D?
     var vitri2:CLLocationCoordinate2D?
     
+    //chua 1 locationManager
+    @Published var locationManager = CLLocationManager()
+   
+    
     //show duong di
     func showDirection()
     {
@@ -154,9 +158,45 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     //ghi nhan huong quay cua user, dong tay nam bac
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    var userHeading: CLLocationDirection?
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
+    {
         print(newHeading)
+        if newHeading.headingAccuracy < 0 { return }
+
+        let heading = newHeading.trueHeading > 0 ? newHeading.trueHeading : newHeading.magneticHeading
+        userHeading = heading
+        if let i = headingImageView {
+            i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
+        }
         
     }
     
-}
+    
+    //gan hinh mui ten vao gan vi tri user
+    var headingImageView: UIImageView?
+    func addHeadingView(toAnnotationView annotationView: MKAnnotationView) {
+        
+       
+        if let image = UIImage.init(named: "BlueArrowIcon")
+        {
+            
+            headingImageView = UIImageView(image: image)
+            
+            headingImageView!.frame = CGRect(x: (annotationView.frame.size.width - image.size.width)/2,
+                                             y: (annotationView.frame.size.height - image.size.height)/2,
+                                             width: image.size.width,
+                                             height: image.size.height )
+            //headingImageView?.backgroundColor = .red
+            
+            annotationView.insertSubview(headingImageView!, at: 0)
+            //headingImageView!.isHidden = true
+        }
+            
+         
+    }
+    
+    
+    
+    
+}//end class

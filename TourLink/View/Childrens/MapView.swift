@@ -13,8 +13,9 @@ struct MapView: UIViewRepresentable {
     //map view nay co link toi viewmodel la mapData
     @StateObject var mapData : MapViewModel
     
+    
     func makeCoordinator() -> Coordinator {
-        return MapView.Coordinator()
+        return MapView.Coordinator(mapData)
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -33,6 +34,12 @@ struct MapView: UIViewRepresentable {
     
     //====CLASS COORDINATOR===///
     class Coordinator: NSObject,MKMapViewDelegate{
+        
+        private let parent: MapViewModel?
+        
+        init(_ parent: MapViewModel) {
+                    self.parent = parent
+        }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolylineRenderer(overlay: overlay)
@@ -75,33 +82,13 @@ struct MapView: UIViewRepresentable {
         //=======TEST====//
         func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
             if views.last?.annotation is MKUserLocation {
-                addHeadingView(toAnnotationView: views.last!)
+                parent!.addHeadingView(toAnnotationView: views.last!)
             }
         }
         
        
-        func addHeadingView(toAnnotationView annotationView: MKAnnotationView) {
-            var headingImageView: UIImageView?
-           
-            if let image = UIImage.init(named: "BlueArrowIcon")
-            {
-                
-                headingImageView = UIImageView(image: image)
-                
-                headingImageView!.frame = CGRect(x: (annotationView.frame.size.width - image.size.width)/2,
-                                                 y: (annotationView.frame.size.height - image.size.height)/2,
-                                                 width: image.size.width,
-                                                 height: image.size.height )
-                //headingImageView?.backgroundColor = .red
-                
-                annotationView.insertSubview(headingImageView!, at: 0)
-                //headingImageView!.isHidden = true
-            }
-                
-             
-        }
         
-        
+       
     }//end class Coordination
     
     

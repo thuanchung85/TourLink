@@ -14,7 +14,7 @@ struct Home: View {
     @StateObject var mapData = MapViewModel()
     
     //chua 1 locationManager
-    @State var locationManager = CLLocationManager()
+    //@State var locationManager = CLLocationManager()
     
     
     var body: some View {
@@ -117,10 +117,10 @@ struct Home: View {
             }
         }.onAppear {
             //khi init home view xong thi khoi tao location manager
-            locationManager.delegate = mapData
-            locationManager.requestWhenInUseAuthorization()
+            mapData.locationManager.delegate = mapData
+            mapData.locationManager.requestWhenInUseAuthorization()
             //locationManager.startUpdatingLocation()
-            locationManager.startUpdatingHeading()
+            mapData.locationManager.startUpdatingHeading()
         }
         //neu chua co cap phep thi alert xin phep truy cap location cua user
         .alert(isPresented: $mapData.permissionDenied) {

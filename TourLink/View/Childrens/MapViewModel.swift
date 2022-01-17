@@ -165,10 +165,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else {
             return
         }
-        //save vitri 2
+        //save vitri cua user
         self.vitri2 = location.coordinate
         
-        self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+       
+        
+        self.region = MKCoordinateRegion(center: vitri2!, latitudinalMeters: 300, longitudinalMeters: 300)
+        
         self.mapView.setRegion(region, animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
     }
@@ -177,7 +180,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userHeading: CLLocationDirection?
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
     {
-        print(newHeading)
+        //print(newHeading)
         if newHeading.headingAccuracy < 0 { return }
 
         let heading = newHeading.trueHeading > 0 ? newHeading.trueHeading : newHeading.magneticHeading

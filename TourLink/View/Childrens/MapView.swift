@@ -21,7 +21,7 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let view = mapData.mapView
         view.showsUserLocation = true
-        view.userTrackingMode = .followWithHeading
+        //view.userTrackingMode = .followWithHeading
         view.delegate = context.coordinator
         return view
     
@@ -47,8 +47,8 @@ struct MapView: UIViewRepresentable {
         //===ham ve duong di mau xanh duong==///
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .blue
-            renderer.lineWidth = 5
+            renderer.strokeColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 0.8507854436)
+            renderer.lineWidth = 6
             return renderer
         }
         

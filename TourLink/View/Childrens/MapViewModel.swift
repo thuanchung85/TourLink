@@ -143,7 +143,18 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
        
         
     }
-    
+    //zoom vao vi tri cua dich den
+    func focusDestination() {
+        guard let _ = region else {
+            return
+        }
+        if (self.vitriNoiCanDen != nil){
+        
+            self.mapView.setRegion(MKCoordinateRegion(center: self.vitriNoiCanDen!, span: region.span), animated: true)
+            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        }
+        
+    }
     
     //xin phep cap quyen lay data location
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

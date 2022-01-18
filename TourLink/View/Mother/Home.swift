@@ -45,6 +45,18 @@ struct Home: View {
                             .clipShape(Circle())
                     }
                     
+                    //nut 1 zoom vao vitri dich den
+                    Button {
+                        mapData.focusDestination()
+                        
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.title2)
+                            .padding(10)
+                            .background(Color.primary.opacity(0.8))
+                            .clipShape(Circle())
+                    }
+                    
                     //nut 2 thay doi dang map
                     Button {
                         mapData.updateMapType()

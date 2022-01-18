@@ -151,14 +151,16 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .denied:
             //show alert
-            permissionDenied.toggle()
+            permissionDenied = true
+            
         case .notDetermined:
             //get permission
             manager.requestWhenInUseAuthorization()
             
         case .authorizedWhenInUse:
             manager.requestLocation()
-            
+        case .authorizedAlways:
+            manager.requestLocation()
         default:
             ()
         }

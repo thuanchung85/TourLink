@@ -157,7 +157,7 @@ struct Home: View {
             //khi init home view xong thi khoi tao location manager
             mapData.locationManager.delegate = mapData
             mapData.locationManager.requestWhenInUseAuthorization()
-            mapData.locationManager.startUpdatingHeading()
+            
         }
         //neu chua co cap phep thi alert xin phep truy cap location cua user
         .alert(isPresented: $mapData.permissionDenied) {
@@ -169,7 +169,7 @@ struct Home: View {
         }
         .onChange(of: mapData.searchTxt) { valueTextInputOnSearchText in
             //chay tim kiem dia chi, phai delay 1s de no khong bi nghet mang
-            let delayTime = 1.0
+            let delayTime = 0.5
             DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
                 if(valueTextInputOnSearchText == mapData.searchTxt)
                 {

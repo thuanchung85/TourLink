@@ -22,28 +22,31 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var soKm = ""
     @Published var arrPlacesFound : [PlaceModel] = []
     
-    var vitri1: CLLocationCoordinate2D?
-    var vitri2:CLLocationCoordinate2D?
+    var vitriNoiCanDen: CLLocationCoordinate2D?
     
-    var locationDangDung:CLLocation?
+    var vitriCuaUserHienTai:CLLocationCoordinate2D?
+    
+   
     
     //chua 1 locationManager
     @Published var locationManager = CLLocationManager()
-    var myRoute:MKRoute?
+   
     
     //show duong di
     func showDirection()
     {
         print("chi duong")
-        guard let p1 = vitri1 else {return}
-        //guard let p2 = vitri2  else {return}
-        guard let p2 = locationManager.location  else {return}
-        vitri2 = p2.coordinate
-        
+        //tao cot moc vi tri can den
+        guard let p1 = vitriNoiCanDen else {return}
         let mark1 = MKPlacemark(coordinate: p1)
+        
+        //tao cot moc vi tri user hien tai
+        guard let p2 = locationManager.location  else {return}
+        vitriCuaUserHienTai = p2.coordinate
         let mark2 = MKPlacemark(coordinate: p2.coordinate)
-        print(mark1)
-        print(mark2)
+       
+        
+        
         
         //request direction
         let requestDirection = MKDirections.Request()
@@ -58,7 +61,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let directions = MKDirections(request: requestDirection)
         directions.calculate { [weak self] res, err in
             guard let route = res?.routes.first else {return}
-            self!.myRoute = route
+           
             //tinh khoan cach bao nhieu km
             let distanceKM = (route.distance / 1000)
             self!.soKm = String(distanceKM) + " Km"
@@ -99,7 +102,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let coordinate = place.place.location?.coordinate else {return}
         
         //save vitri 1
-        self.vitri1 = coordinate
+        self.vitriNoiCanDen = coordinate
         
         
         let pointAnnotation = MKPointAnnotation()
@@ -134,11 +137,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let _ = region else {
             return
         }
-        self.vitri2 = locationManager.location?.coordinate
+        self.vitriCuaUserHienTai = locationManager.location?.coordinate
         
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
-        //locationManager.startUpdatingHeading()
+        
     }
     
     
@@ -166,15 +169,16 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         print(error.localizedDescription)
     }
     
-    //khi user update vi tri
+    //khi user update vi tri CAI HAM NAY AUTO CHAY 1 LAN KHI KHOI TAO LOCATION MANAGER
+    //VA AUTO CHAY KHI USER THAY DOI VI TRI
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {
             return
         }
         //save vitri cua user
-        self.vitri2 = location.coordinate
+        self.vitriCuaUserHienTai = location.coordinate
         
-        self.region = MKCoordinateRegion(center: vitri2!, latitudinalMeters: 300, longitudinalMeters: 300)
+        self.region = MKCoordinateRegion(center: vitriCuaUserHienTai!, latitudinalMeters: 300, longitudinalMeters: 300)
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)

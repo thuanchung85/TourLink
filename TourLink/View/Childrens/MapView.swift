@@ -22,7 +22,6 @@ struct MapView: UIViewRepresentable {
         let view = mapData.mapView
         view.showsUserLocation = true
         
-        //view.userTrackingMode = .followWithHeading
         view.delegate = context.coordinator
         return view
     

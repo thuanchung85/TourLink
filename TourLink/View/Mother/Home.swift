@@ -170,6 +170,9 @@ struct Home: View {
             mapData.locationManager.delegate = mapData
             mapData.locationManager.requestWhenInUseAuthorization()
             
+            //lam cho iphone chay hoai khong duoc off mang hinh
+            UIApplication.shared.isIdleTimerDisabled = true
+            
         }
         //neu chua co cap phep thi alert xin phep truy cap location cua user
         .alert(isPresented: $mapData.permissionDenied) {

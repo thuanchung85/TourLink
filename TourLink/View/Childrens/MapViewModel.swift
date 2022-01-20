@@ -202,8 +202,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.last else {
             return
         }
-        //vi tri cu
-        let vitricu = self.vitriCuaUserHienTai
         
         //save vitri cua user
         self.vitriCuaUserHienTai = location.coordinate
@@ -213,11 +211,21 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
        
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
         
+        
+    }
+    
+    //ghi nhan huong quay cua user, dong tay nam bac
+    var userHeading: CLLocationDirection?
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
+    {
+        //vi tri cu
+        let vitricu = self.vitriCuaUserHienTai
+        
         //save vi tri cua user de update vi tri lien tuc vao database
         //tinh khoan cach voi vitri cua cua user neu di chuyen qua 100m thi ghi vao database
         if(vitricu != nil)
         {
-            let khoanCach = location.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
+            let khoanCach = self.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
             print(khoanCach)
             if(khoanCach >= 100.0)
             {
@@ -227,26 +235,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 }
             }
         }
-    }
-    
-    //ghi nhan huong quay cua user, dong tay nam bac
-    var userHeading: CLLocationDirection?
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
-    {
-        //print(newHeading)
-       // if newHeading.headingAccuracy < 0 { return }
-
-        //let heading = newHeading.trueHeading > 0 ? newHeading.trueHeading : newHeading.magneticHeading
-        //userHeading = heading
-        //if let i = headingImageView {
-          //  i.transform = CGAffineTransform(rotationAngle: CGFloat(heading/180 * Double.pi))
-       // }
-        //thay sokm
-        //if(vitri1 != nil) && (myRoute != nil){
-            //let distance = 10
-            
-           
-        //}
     }
     
     

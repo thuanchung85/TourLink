@@ -169,6 +169,7 @@ struct Home: View {
             //khi init home view xong thi khoi tao location manager
             mapData.locationManager.delegate = mapData
             mapData.locationManager.requestWhenInUseAuthorization()
+            mapData.locationManager.startUpdatingHeading()
             
             //lam cho iphone chay hoai khong duoc off mang hinh
             UIApplication.shared.isIdleTimerDisabled = true

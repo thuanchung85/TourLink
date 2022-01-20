@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct TourLinkApp: App {
+    //ket noi voi firebase google api
+    init()
+    {
+        FirebaseApp.configure()
+    }
+    
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

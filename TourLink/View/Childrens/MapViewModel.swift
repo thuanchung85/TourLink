@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 import CoreLocation
 import Foundation
+import Firebase
+
 //all map data goes here
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -30,11 +32,22 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //chua 1 locationManager
     @Published var locationManager = CLLocationManager()
-   
+    
+    //firestore database
+    let db = Firestore.firestore()
+    
+    //ham add data vao database firestore
+    func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
+        db.collection("My_Location").addDocument(data: ["longitude" : Location.longitude,
+                                                        "latitude": Location.latitude])
+    }
     
     //show duong di
     func showDirection()
     {
+        //TEST thu save lai vitri hien tai cua user vao database
+        saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
+        
         print("chi duong")
         //tao cot moc vi tri can den
         guard let p1 = vitriNoiCanDen else {return}

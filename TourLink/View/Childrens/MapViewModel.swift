@@ -38,9 +38,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //ham add data vao database firestore
     func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
+        DispatchQueue.main.async { [weak self] in
+            self!.db.collection("My_Location").document("vitriHienTai").setData(["longitude" : Location.longitude,
+                                                                           "latitude": Location.latitude])
+        }
        
-        db.collection("My_Location").document("vitriHienTai").setData(["longitude" : Location.longitude,
-                                                                       "latitude": Location.latitude])
     }
     
     //show duong di
@@ -232,6 +234,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 if(vitriCuaUserHienTai != nil){
                     saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
                     self.soKm = "da save vao database"
+                    self.vitriCuaUserHienTai = self.locationManager.location!.coordinate
                 }
             }
         }

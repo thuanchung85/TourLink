@@ -72,7 +72,7 @@ struct MapView: UIViewRepresentable {
                     pinAnnotation.tintColor = .red
                     pinAnnotation.animatesDrop = true
                     pinAnnotation.canShowCallout = true
-                    
+                
                 return pinAnnotation
             }
             return nil
@@ -85,6 +85,7 @@ struct MapView: UIViewRepresentable {
         
         //=======ADD mui ten huong chi duong vao vi tri user====//
         func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+            //neu la user annotation add vao
             if views.last?.annotation is MKUserLocation {
                 //neu user chua co gan mui ten chi duong thi gan vao, sau do khoa hok cho gan them nua
                 if(isUserAddHeadingArrow == false){
@@ -92,6 +93,14 @@ struct MapView: UIViewRepresentable {
                     isUserAddHeadingArrow = true
                 }
             }
+            
+            //neu la location dich den annotation add vao
+            if views.last?.annotation is MKPointAnnotation {
+                if let annotation = views.last(where: { $0.reuseIdentifier == "PIN_VIEW" })?.annotation {
+                        mapView.selectAnnotation(annotation, animated: true)
+                    }
+            }
+            
         }
         
        

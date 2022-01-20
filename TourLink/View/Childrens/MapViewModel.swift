@@ -45,9 +45,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //show duong di
     func showDirection()
     {
-        //TEST thu save lai vitri hien tai cua user vao database
-        saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
-        
+       
         print("chi duong")
         //tao cot moc vi tri can den
         guard let p1 = vitriNoiCanDen else {return}
@@ -58,6 +56,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         vitriCuaUserHienTai = p2.coordinate
         let mark2 = MKPlacemark(coordinate: p2.coordinate)
        
+        //TEST thu save lai vitri hien tai cua user vao database
+        saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
         
         
         

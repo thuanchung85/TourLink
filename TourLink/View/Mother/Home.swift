@@ -193,5 +193,11 @@ struct Home: View {
                 }
             }
         }
+        
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification), perform: { output in
+            //khi user turn off app thi save lai vi tri cuoi cung cua user
+            guard (mapData.vitriCuaUserHienTai != nil) else {return}
+            mapData.saveLocationData_ToFireStore(Location: mapData.vitriCuaUserHienTai!)
+        })
     }
 }

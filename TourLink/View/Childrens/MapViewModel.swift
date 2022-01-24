@@ -38,8 +38,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //ham add data vao database firestore
     func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
+        let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
+        
         DispatchQueue.main.async { [weak self] in
-            self!.db.collection("My_Location").document("vitriHienTai").setData(["longitude" : Location.longitude,
+            self!.db.collection("My_Location").document("vitriHienTai-\(iphoneHardWareUniqueID)").setData(["longitude" : Location.longitude,
                                                                            "latitude": Location.latitude])
         }
        

@@ -21,7 +21,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var mapType = MKMapType.standard
    
     @Published var searchTxt = ""
+    
+    //bien bat tat show so km va so gio
+    @Published var soKmorHourToggle = false
+    @Published var soKmorHour = ""
+    @Published var soHour = ""
     @Published var soKm = ""
+    
     @Published var arrPlacesFound : [PlaceModel] = []
     
     var vitriNoiCanDen: CLLocationCoordinate2D?
@@ -41,8 +47,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
         
         DispatchQueue.main.async { [weak self] in
-            self!.db.collection("My_Location").document("vitriHienTai-\(iphoneHardWareUniqueID)").setData(["longitude" : Location.longitude,
-                                                                           "latitude": Location.latitude])
+            self!.db
+                .collection("My_Location")
+                .document("vitriHienTai-\(iphoneHardWareUniqueID)")
+                .setData(["longitude" : Location.longitude, "latitude": Location.latitude])
         }
        
     }
@@ -83,16 +91,24 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             //tinh khoan cach bao nhieu km
             let distanceKM = (route.distance / 1000)
             self!.soKm = String(distanceKM) + " Km"
-           
+            self!.soHour = String(format:"%.2f",((distanceKM / 40)))  + " h"
+            self!.showSoKM()
             
             self!.mapView.addOverlay(route.polyline)
             self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
         }
     }
     
-   
-    
-    
+   //ham hien so km khi user tap len text so km
+    func showSoKM(){
+        self.soKmorHour = self.soKm
+        soKmorHourToggle = true
+    }
+    //ham hien so gio can phai chay khi user tap len text so km
+     func showSoHour(){
+         self.soKmorHour = self.soHour
+        soKmorHourToggle = false
+     }
     
     
     //Search Dia Chi

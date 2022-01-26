@@ -91,7 +91,7 @@ struct Home: View {
                         .cornerRadius(10)
                     
                     //so km
-                    TextField("Km", text: $mapData.soKm )
+                    TextField("Km", text: $mapData.soKmorHour )
                         .multilineTextAlignment(.center)
                         //.background(Color.white.opacity(0.8))
                         .foregroundColor(.blue)
@@ -106,6 +106,17 @@ struct Home: View {
                         ).background(Color.white.opacity(0.8))
                         .cornerRadius(10)
                         .disabled(true)
+                        .onTapGesture {
+                            if (mapData.soKmorHourToggle == true){
+                                mapData.showSoHour()
+                            }
+                            else
+                            {
+                                mapData.showSoKM()
+                            }
+                            print(mapData.soHour)
+                            print(mapData.soKm)
+                        }
                     
                     //nut chi duong
                     Button {

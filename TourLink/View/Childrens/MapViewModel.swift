@@ -258,7 +258,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userHeading: CLLocationDirection?
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
     {
-        
+        guard vitriCuaUserHienTai != nil else {
+            return
+        }
         saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
                   
     }

@@ -42,15 +42,35 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //firestore database
     let db = Firestore.firestore()
     
-    //ham add data vao database firestore
+    //ham add data vao database firestore chay duoi background theard
     func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
-        let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
-        
         DispatchQueue.main.async { [weak self] in
-            self!.db
-                .collection("My_Location")
-                .document("vitriHienTai-\(iphoneHardWareUniqueID)")
-                .setData(["longitude" : Location.longitude, "latitude": Location.latitude])
+            
+            //vi tri cu
+            let vitricu = self!.vitriCuaUserHienTai
+            
+            //save vi tri cua user de update vi tri lien tuc vao database
+            //tinh khoan cach voi vitri cua cua user neu di chuyen qua 100m thi ghi vao database
+            if(vitricu != nil)
+            {
+                let khoanCach = self!.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
+                //print(khoanCach)
+                if(khoanCach >= 100.0)
+                {
+                    if( self!.vitriCuaUserHienTai != nil)
+                    {
+                        let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
+                        self!.db
+                            .collection("My_Location")
+                            .document("vitriHienTai-\(iphoneHardWareUniqueID)")
+                            .setData(["longitude" : Location.longitude, "latitude": Location.latitude])
+                        
+                        self!.vitriCuaUserHienTai = self!.locationManager.location!.coordinate
+                    }
+                }
+                        
+            }
+            
         }
        
     }
@@ -238,24 +258,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userHeading: CLLocationDirection?
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
     {
-        //vi tri cu
-        let vitricu = self.vitriCuaUserHienTai
         
-        //save vi tri cua user de update vi tri lien tuc vao database
-        //tinh khoan cach voi vitri cua cua user neu di chuyen qua 100m thi ghi vao database
-        if(vitricu != nil)
-        {
-            let khoanCach = self.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
-            print(khoanCach)
-            if(khoanCach >= 100.0)
-            {
-                if(vitriCuaUserHienTai != nil){
-                    saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
-                    self.soKm = "da save vao database"
-                    self.vitriCuaUserHienTai = self.locationManager.location!.coordinate
-                }
-            }
-        }
+        saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
+                  
     }
     
     

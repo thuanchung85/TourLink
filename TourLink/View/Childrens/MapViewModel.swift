@@ -110,7 +110,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
            
             //tinh khoan cach bao nhieu km
             let distanceKM = (route.distance / 1000)
-            self!.soKm = String(distanceKM) + " Km"
+            if(distanceKM >= 1)
+            {
+                self!.soKm = String(distanceKM) + " Km"
+            }
+            else{
+                self!.soKm = String(distanceKM * 1000) + " meter"
+            }
             
             //tinh thoi gian = quang duong / van toc (50km/h)
             let tinhsoGio = Int(distanceKM / 50)

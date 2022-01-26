@@ -91,7 +91,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             //tinh khoan cach bao nhieu km
             let distanceKM = (route.distance / 1000)
             self!.soKm = String(distanceKM) + " Km"
-            self!.soHour = String(format:"%.2f",((distanceKM / 40)))  + " h"
+            self!.soHour = String(format:"%.2f",((distanceKM / 60)))  + " h"
             self!.showSoKM()
             
             self!.mapView.addOverlay(route.polyline)

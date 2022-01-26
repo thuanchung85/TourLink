@@ -55,7 +55,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             {
                 let khoanCach = self!.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
                 //print(khoanCach)
-                if(khoanCach >= 100.0)
+                if(khoanCach >= 50.0)
                 {
                     if( self!.vitriCuaUserHienTai != nil)
                     {
@@ -111,7 +111,16 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             //tinh khoan cach bao nhieu km
             let distanceKM = (route.distance / 1000)
             self!.soKm = String(distanceKM) + " Km"
-            self!.soHour = String(format:"%.2f",((distanceKM / 60)))  + " h"
+            
+            //tinh thoi gian = quang duong / van toc (50km/h)
+            let tinhsoGio = Int(distanceKM / 50)
+            
+            var tinhsoPhut = (distanceKM / 50) - Double(tinhsoGio)
+            if tinhsoPhut < 1 && tinhsoPhut > 0
+            {
+                tinhsoPhut = tinhsoPhut * 60
+            }
+            self!.soHour = String(tinhsoGio)  + " h " + String(Int(round(tinhsoPhut))) + " m"
             self!.showSoKM()
             
             self!.mapView.addOverlay(route.polyline)

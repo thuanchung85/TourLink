@@ -42,6 +42,30 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //firestore database
     let db = Firestore.firestore()
     
+    //ham lay het data tu firebase
+    func getAllDataFromDatabase()
+    {
+        DispatchQueue.main.async { [weak self] in
+            self!.db
+                .collection("My_Location")
+                .getDocuments{ data, error in
+                    guard error == nil else {
+                        print(error as Any)
+                        return}
+                    
+                    if(data != nil)
+                    {
+                        print(data as Any)
+                        data?.documents.forEach({ doc in
+                            print(doc.documentID)
+                            print(doc["latitude"])
+                            print(doc["longitude"])
+                        })
+                    }
+                }
+        }
+    }
+    
     //ham add data vao database firestore chay duoi background theard
     func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
         DispatchQueue.main.async { [weak self] in
@@ -79,6 +103,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func showDirection()
     {
        
+        //--test lay data het tu database---//
+        getAllDataFromDatabase()
+        
         print("chi duong")
         //tao cot moc vi tri can den
         guard let p1 = vitriNoiCanDen else {return}

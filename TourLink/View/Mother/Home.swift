@@ -32,6 +32,19 @@ struct Home: View {
                 
                 //vùng cac nut ben duoi mang hinh
                 HStack{
+                    //nut show vi tri cac member thay doi dang map
+                    Button {
+                        mapData.getAllMemberDataFromDatabase()
+                        
+                    } label: {
+                        Image(systemName: mapData.mapType == .standard ? "person.2" : "map")
+                            .font(.title2)
+                            .padding(10)
+                            .background(Color.primary.opacity(0.8))
+                            .clipShape(Circle())
+                    }
+                    
+                    Spacer()
                     
                     //nut 1 zoom vao vitri user
                     Button {
@@ -69,6 +82,8 @@ struct Home: View {
                             .clipShape(Circle())
                     }
                     
+                    
+                   
                    
 
                 }.frame(maxWidth: .infinity,  alignment: .trailing)

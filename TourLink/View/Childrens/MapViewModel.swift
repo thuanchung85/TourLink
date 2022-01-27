@@ -45,7 +45,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     let db = Firestore.firestore()
     
     //ham lay het data tu firebase
-    func getAllDataFromDatabase()
+    func getAllMemberDataFromDatabase()
     {
         DispatchQueue.main.async { [weak self] in
             self!.db
@@ -105,8 +105,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         arrVitri.forEach { vitri in
             let pointAnnotation = MKPointAnnotation()
+            
             pointAnnotation.coordinate = vitri.toado
-            pointAnnotation.title = vitri.tenMember
+            pointAnnotation.title = "MEMBER @_@" + vitri.tenMember
             self.arrHinhVeCacVitriMember.append(pointAnnotation)
             mapView.addAnnotation(pointAnnotation)
         }
@@ -138,6 +139,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                         
                         self!.vitriCuaUserHienTai = self!.locationManager.location!.coordinate
                     }
+                    
+                    //--test lay data vitri cac member het tu database---//
+                    //self!.getAllMemberDataFromDatabase()
                 }
                         
             }
@@ -150,8 +154,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func showDirection()
     {
        
-        //--test lay data het tu database---//
-        getAllDataFromDatabase()
+        //--test lay data vitri cac member het tu database---//
+        //self.getAllMemberDataFromDatabase()
         
         print("chi duong")
         //tao cot moc vi tri can den
@@ -347,11 +351,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var userHeading: CLLocationDirection?
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading)
     {
+        //khi user quay dau thi save vitri vao database
         guard vitriCuaUserHienTai != nil else {
             return
         }
         saveLocationData_ToFireStore(Location: vitriCuaUserHienTai!)
-                  
+        
+        
     }
     
     

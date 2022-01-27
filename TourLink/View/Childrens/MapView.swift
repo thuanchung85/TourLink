@@ -68,12 +68,25 @@ struct MapView: UIViewRepresentable {
             //thay doi hinh dang cac diem tren map
             if(annotation.isKind(of: MKPointAnnotation.self))
             {
-                let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
+                let s = annotation.title ?? ""
+                //neu la cac member thi dung hinh marker
+                if (s?.contains(find: "MEMBER @_@") == true)
+                {
+                    let memberAnnotation = MKMarkerAnnotationView()
+                    //pinAnnotation.tintColor = .green
+                    //pinAnnotation.animatesDrop = true
+                    //pinAnnotation.canShowCallout = true
+                    return memberAnnotation
+                }
+                //neu là dich den thi dung hinh kim cham
+                else{
+                    let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
                     pinAnnotation.tintColor = .red
                     pinAnnotation.animatesDrop = true
                     pinAnnotation.canShowCallout = true
+                    return pinAnnotation
+                }
                 
-                return pinAnnotation
             }
             return nil
                 
@@ -97,6 +110,7 @@ struct MapView: UIViewRepresentable {
             //neu la location dich den annotation add vao
             if views.last?.annotation is MKPointAnnotation {
                 if let annotation = views.last(where: { $0.reuseIdentifier == "PIN_VIEW" })?.annotation {
+                    //zoom toi vi tri location dich den
                         mapView.selectAnnotation(annotation, animated: true)
                     }
             }

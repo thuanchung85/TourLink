@@ -112,6 +112,30 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             mapView.addAnnotation(pointAnnotation)
         }
         
+        //neu co 2 member tro len zoom vao toa do cac member
+        if(arrVitri.count >= 2)
+        {
+            // these are your two lat/long coordinates
+            let coordinate1 = CLLocationCoordinate2DMake((arrVitri.first?.toado.latitude)!,(arrVitri.first?.toado.longitude)!);
+            let coordinate2 = CLLocationCoordinate2DMake((arrVitri.last?.toado.latitude)!,(arrVitri.last?.toado.longitude)!);
+            
+            // convert them to MKMapPoint
+            let p1 = MKMapPoint (coordinate1);
+            let p2 = MKMapPoint (coordinate2);
+            
+            // and make a MKMapRect using mins and spans
+            let mapRect = MKMapRect(x: fmin(p1.x,p2.x), y: fmin(p1.y,p2.y), width: fabs(p1.x-p2.x), height: fabs(p1.y-p2.y));
+            
+            
+            self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),animated: true)
+            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+            
+        }
+        else if (arrVitri.count == 1)
+        {
+            self.mapView.setRegion(MKCoordinateRegion(center: arrVitri.first!.toado, span: region.span), animated: true)
+            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        }
     }
     
     //ham add data vao database firestore chay duoi background theard

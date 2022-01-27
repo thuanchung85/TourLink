@@ -34,7 +34,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var vitriCuaUserHienTai:CLLocationCoordinate2D?
     
-   
+    //array cac diem tren map cua cac member trong tuor
+    @Published var arrCacVitriMember : [(toado: CLLocationCoordinate2D, tenMember: String)]?
+    @Published var arrHinhVeCacVitriMember = [MKPointAnnotation]()
     
     //chua 1 locationManager
     @Published var locationManager = CLLocationManager()
@@ -55,15 +57,60 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     
                     if(data != nil)
                     {
-                        print(data as Any)
-                        data?.documents.forEach({ doc in
+                        print("so luong member: ",data?.documents.count as Any)
+                        /*data?.documents.forEach({ doc in
                             print(doc.documentID)
                             print(doc["latitude"])
                             print(doc["longitude"])
+                        })*/
+                        //lay data vitri cac member roi covert qua dang arrCacVitriMember
+                        self!.arrCacVitriMember =  data?.documents.map({ doc in
+                            let pointAnnotation = MKPointAnnotation()
+                            pointAnnotation.coordinate = CLLocationCoordinate2D.init(latitude: doc["latitude"] as! CLLocationDegrees,
+                                                                                     longitude: doc["longitude"] as! CLLocationDegrees)
+                            pointAnnotation.title = String(doc.documentID)
+                            
+                            return ( toado: pointAnnotation.coordinate, tenMember: pointAnnotation.title ?? "no name")
                         })
+                        //loai tru vitri chinh user
+                        .filter({ item in
+                            let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
+                            let name = "vitriHienTai-\(iphoneHardWareUniqueID)"
+                            
+                            if item.tenMember == name{
+                                return false
+                            }
+                            else
+                            {
+                                return true
+                            }
+                        })
+                        
+                        //ve hinh ngoi sao vi tri cac member
+                        if(self!.arrCacVitriMember?.isEmpty == false){
+                            self!.makeStarForMemberLocation(arrVitri:   self!.arrCacVitriMember!)
+                        }
                     }
                 }
         }
+    }
+    
+    //ham gan ngoi sao vao vi tri cua cac member
+    func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])
+    {
+        if(self.arrHinhVeCacVitriMember.isEmpty == false){
+            mapView.removeAnnotations(self.arrHinhVeCacVitriMember)
+            self.arrHinhVeCacVitriMember.removeAll()
+        }
+        
+        arrVitri.forEach { vitri in
+            let pointAnnotation = MKPointAnnotation()
+            pointAnnotation.coordinate = vitri.toado
+            pointAnnotation.title = vitri.tenMember
+            self.arrHinhVeCacVitriMember.append(pointAnnotation)
+            mapView.addAnnotation(pointAnnotation)
+        }
+        
     }
     
     //ham add data vao database firestore chay duoi background theard

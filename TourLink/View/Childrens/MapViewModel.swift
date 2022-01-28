@@ -30,9 +30,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var arrPlacesFound : [PlaceModel] = []
     
-    var vitriNoiCanDen: CLLocationCoordinate2D?
+    @Published var vitriNoiCanDen: CLLocationCoordinate2D?
     
-    var vitriCuaUserHienTai:CLLocationCoordinate2D?
+    @Published var vitriCuaUserHienTai:CLLocationCoordinate2D?
     
     //array cac diem tren map cua cac member trong tuor
     @Published var arrCacVitriMember : [(toado: CLLocationCoordinate2D, tenMember: String)]?
@@ -128,7 +128,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
             
             self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),animated: true)
-            self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+            
             
         }
         else if (arrVitri.count == 1)

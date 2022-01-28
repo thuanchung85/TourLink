@@ -45,7 +45,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     let db = Firestore.firestore()
     
     //ham lay het data tu firebase
-    func getAllMemberDataFromDatabase()
+    func getAllMemberDataFromDatabase(isZoomin:Bool? = false)
     {
         DispatchQueue.main.async { [weak self] in
             self!.db
@@ -58,11 +58,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     if(data != nil)
                     {
                         print("so luong member: ",data?.documents.count as Any)
-                        /*data?.documents.forEach({ doc in
-                            print(doc.documentID)
-                            print(doc["latitude"])
-                            print(doc["longitude"])
-                        })*/
+                        
                         //lay data vitri cac member roi covert qua dang arrCacVitriMember
                         self!.arrCacVitriMember =  data?.documents.map({ doc in
                             let pointAnnotation = MKPointAnnotation()
@@ -86,9 +82,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             }
                         })
                         
-                        //ve hinh ngoi sao vi tri cac member
-                        if(self!.arrCacVitriMember?.isEmpty == false){
-                            self!.makeStarForMemberLocation(arrVitri:   self!.arrCacVitriMember!)
+                        if(isZoomin == true){
+                            //ve hinh ngoi sao vi tri cac member
+                            if(self!.arrCacVitriMember?.isEmpty == false){
+                                self!.makeStarForMemberLocation(arrVitri:   self!.arrCacVitriMember!)
+                            }
                         }
                     }
                 }

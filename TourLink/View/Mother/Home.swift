@@ -35,7 +35,7 @@ struct Home: View {
                     //nut show vi tri cac member thay doi dang map
                     if(mapData.arrCacVitriMember?.count ?? 1 > 1){
                         Button {
-                            mapData.getAllMemberDataFromDatabase()
+                            mapData.getAllMemberDataFromDatabase(isZoomin: true)
                             
                         } label: {
                             Image(systemName: mapData.mapType == .standard ? "person.2" : "map")

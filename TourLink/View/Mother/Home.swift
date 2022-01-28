@@ -33,7 +33,7 @@ struct Home: View {
                 //vùng cac nut ben duoi mang hinh
                 HStack{
                     //nut show vi tri cac member thay doi dang map
-                    if(mapData.arrCacVitriMember?.count ?? 1 > 1){
+                    if(mapData.arrCacVitriMember?.count ?? 0 >= 1){
                         Button {
                             mapData.getAllMemberDataFromDatabase(isZoomin: true)
                             

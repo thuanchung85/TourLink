@@ -49,7 +49,7 @@
             startingLineNumber = "374"
             endingLineNumber = "374"
             landmarkName = "locationManager(_:didUpdateHeading:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -81,7 +81,7 @@
             startingLineNumber = "363"
             endingLineNumber = "363"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -97,7 +97,7 @@
             startingLineNumber = "364"
             endingLineNumber = "364"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -113,7 +113,7 @@
             startingLineNumber = "232"
             endingLineNumber = "232"
             landmarkName = "showDirection()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -129,7 +129,7 @@
             startingLineNumber = "359"
             endingLineNumber = "359"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,7 +145,7 @@
             startingLineNumber = "188"
             endingLineNumber = "188"
             landmarkName = "showDirection()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -161,7 +161,7 @@
             startingLineNumber = "313"
             endingLineNumber = "313"
             landmarkName = "focusLocation()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -177,7 +177,7 @@
             startingLineNumber = "367"
             endingLineNumber = "367"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -209,7 +209,7 @@
             startingLineNumber = "331"
             endingLineNumber = "331"
             landmarkName = "locationManagerDidChangeAuthorization(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -273,7 +273,7 @@
             startingLineNumber = "172"
             endingLineNumber = "172"
             landmarkName = "saveLocationData_ToFireStore(Location:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -289,7 +289,7 @@
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "saveLocationData_ToFireStore(Location:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -305,7 +305,7 @@
             startingLineNumber = "193"
             endingLineNumber = "193"
             landmarkName = "showDirection()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -321,7 +321,7 @@
             startingLineNumber = "182"
             endingLineNumber = "182"
             landmarkName = "showDirection()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -337,7 +337,7 @@
             startingLineNumber = "357"
             endingLineNumber = "357"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -353,7 +353,7 @@
             startingLineNumber = "362"
             endingLineNumber = "362"
             landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,7 +384,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
             endingLineNumber = "52"
-            landmarkName = "getAllMemberDataFromDatabase()"
+            landmarkName = "getAllMemberDataFromDatabase(isZoomin:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -400,7 +400,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
             endingLineNumber = "60"
-            landmarkName = "getAllMemberDataFromDatabase()"
+            landmarkName = "getAllMemberDataFromDatabase(isZoomin:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -416,7 +416,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
-            landmarkName = "getAllMemberDataFromDatabase()"
+            landmarkName = "getAllMemberDataFromDatabase(isZoomin:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -433,7 +433,7 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "makeStarForMemberLocation(arrVitri:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -449,7 +449,7 @@
             startingLineNumber = "99"
             endingLineNumber = "99"
             landmarkName = "makeStarForMemberLocation(arrVitri:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -465,7 +465,7 @@
             startingLineNumber = "109"
             endingLineNumber = "109"
             landmarkName = "makeStarForMemberLocation(arrVitri:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

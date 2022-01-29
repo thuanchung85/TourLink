@@ -131,8 +131,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         else if (arrVitri.count == 1)
         {
-            self.mapView.setRegion(MKCoordinateRegion(center: arrVitri.first!.toado, span: region.span), animated: true)
-            //self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+            if(region != nil){
+                self.mapView.setRegion(MKCoordinateRegion(center: arrVitri.first!.toado, span: region.span), animated: true)
+            }
         }
     }
     

@@ -149,7 +149,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             {
                 let khoanCach = self!.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
                 //print(khoanCach)
-                if(khoanCach >= 50.0)
+                if(khoanCach >= 10.0)
                 {
                     if( self!.vitriCuaUserHienTai != nil)
                     {

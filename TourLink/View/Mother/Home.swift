@@ -13,7 +13,9 @@ struct Home: View {
     //chua 1 environment object de update data mapData
     @StateObject var mapData = MapViewModel()
     
-   
+    //bien co show va hide action sheet
+    @State var showEnterGroupNameView = false
+    
     
     var body: some View {
         ZStack{
@@ -33,9 +35,9 @@ struct Home: View {
                 //vùng cac nut ben duoi mang hinh
                 HStack{
                     //nut show vi tri cac member thay doi dang map
-                    //if(mapData.arrCacVitriMember?.count ?? 0 >= 1){
+                   
                     Button {
-                        //mapData.showDirection()
+                        self.showEnterGroupNameView.toggle()
                         
                     } label: {
                         Image(systemName: "person.2")
@@ -52,7 +54,7 @@ struct Home: View {
                     .padding(.horizontal,5)
                        
                     Spacer()
-                    //}
+                
                     
                     //nut 1 zoom vao vitri user
                     Button {
@@ -199,7 +201,18 @@ struct Home: View {
                 
                 
             }
-        }.onAppear {
+       
+            //ACTION SHEET hien ra khi bam nut group view
+            VStack{
+                if(self.showEnterGroupNameView == true)
+                {
+                    CustomActionSheet()
+                        .padding(.horizontal)
+                }
+            }
+        
+        }
+        .onAppear {
             //lay thong tin member co bao nhieu nguoi
             mapData.getAllMemberDataFromDatabase()
             

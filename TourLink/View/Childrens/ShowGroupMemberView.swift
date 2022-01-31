@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct CustomActionSheet : View {
-    
+struct ShowGroupMemberView : View {
+    var mapData : MapViewModel
     @State var groupName  = ""
     
     var body: some View{
@@ -32,7 +32,7 @@ struct CustomActionSheet : View {
                 
                 //nut show vi tri cac member
                 Button {
-                   
+                    mapData.getAllMemberDataFromDatabase(isZoomin: true)
                     
                 } label: {
                     Image(systemName: "person.fill.questionmark")

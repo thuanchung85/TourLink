@@ -38,6 +38,7 @@ struct Home: View {
                    
                     Button {
                         self.showEnterGroupNameView.toggle()
+                        //mapData.getAllMemberDataFromDatabase(isZoomin: true)
                         
                     } label: {
                         Image(systemName: "person.2")
@@ -206,7 +207,7 @@ struct Home: View {
             VStack{
                 if(self.showEnterGroupNameView == true)
                 {
-                    CustomActionSheet()
+                    ShowGroupMemberView(mapData: self.mapData)
                         .padding(.horizontal)
                 }
             }

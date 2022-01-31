@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ShowGroupMemberView : View {
     var mapData : MapViewModel
+    @Binding var showEnterGroupNameView:Bool
     @State var groupName  = ""
     
     var body: some View{
@@ -33,7 +34,7 @@ struct ShowGroupMemberView : View {
                 //nut show vi tri cac member
                 Button {
                     mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                    
+                    showEnterGroupNameView = false
                 } label: {
                     Image(systemName: "person.fill.questionmark")
                         .padding()

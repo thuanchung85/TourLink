@@ -207,7 +207,7 @@ struct Home: View {
             VStack{
                 if(self.showEnterGroupNameView == true)
                 {
-                    ShowGroupMemberView(mapData: self.mapData)
+                    ShowGroupMemberView(mapData: self.mapData, showEnterGroupNameView: $showEnterGroupNameView)
                         .padding(.horizontal)
                 }
             }

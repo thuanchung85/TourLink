@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct ShowGroupMemberView : View {
-    var mapData : MapViewModel
+    @StateObject var mapData : MapViewModel
     @Binding var showEnterGroupNameView:Bool
-    @State var groupName  = ""
+    //@State var groupName  = ""
     
     var body: some View{
         VStack(alignment: .center, spacing: 15, content: {
@@ -19,7 +19,7 @@ struct ShowGroupMemberView : View {
             {
                 Text("Group: ")
                     .font(Font.system(size: 15, design: .default))
-                TextField("Name of your group", text: $groupName)
+                TextField("Name of your group", text: $mapData.groupName)
                     .foregroundColor(.blue)
                     .font(Font.system(size: 15, design: .default))
                     .padding()

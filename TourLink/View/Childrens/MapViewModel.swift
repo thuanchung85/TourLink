@@ -44,11 +44,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //firestore database
     let db = Firestore.firestore()
     
-    var groupName = "My_Location"
+     var groupName = "My_Location"
     
     //ham lay het data tu firebase
     func getAllMemberDataFromDatabase(isZoomin:Bool? = false)
     {
+        print("name of group: ", self.groupName)
         DispatchQueue.main.async { [weak self] in
             self!.db
                 .collection(self!.groupName)

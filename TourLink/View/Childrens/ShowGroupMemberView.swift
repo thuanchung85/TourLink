@@ -11,7 +11,7 @@ import SwiftUI
 struct ShowGroupMemberView : View {
     @StateObject var mapData : MapViewModel
     @Binding var showEnterGroupNameView:Bool
-    //@State var groupName  = ""
+    
     
     var body: some View{
         VStack(alignment: .center, spacing: 15, content: {

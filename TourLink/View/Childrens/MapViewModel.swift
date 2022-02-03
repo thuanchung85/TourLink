@@ -161,7 +161,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     {
                         let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
                         self!.db
-                            .collection("My_Location")
+                            .collection(((self!.groupName == "") || (self!.groupName == " ")) ? "My_Location" : self!.groupName)
                             .document("vitriHienTai-\(iphoneHardWareUniqueID)")
                             .setData(["longitude" : Location.longitude, "latitude": Location.latitude])
                         

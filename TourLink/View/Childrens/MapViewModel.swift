@@ -56,7 +56,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         
         //neu o text nhap group name bi bo trong thi hok lam gi ca
-        guard !self.groupName.isEmpty && self.groupName != ""  else {
+        guard !self.groupName.isEmpty && self.groupName != "" && self.groupName != " " else {
             return
         }
         

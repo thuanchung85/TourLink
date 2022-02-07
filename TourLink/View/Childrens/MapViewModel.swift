@@ -44,7 +44,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //firestore database
     let db = Firestore.firestore()
     
-     var groupName = ""
+    var groupName:String = ""
     
     //ham lay het data tu firebase
     func getAllMemberDataFromDatabase(isZoomin:Bool? = false)
@@ -53,6 +53,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //xoa cac dinh vi ton tai truoc do tren map cua group truoc
         if(!arrHinhVeCacVitriMember.isEmpty){
         self.mapView.removeAnnotations(arrHinhVeCacVitriMember)
+        }
+        
+        //neu o text nhap group name bi bo trong thi hok lam gi ca
+        guard !self.groupName.isEmpty && self.groupName != ""  else {
+            return
         }
         
         DispatchQueue.main.async { [weak self] in

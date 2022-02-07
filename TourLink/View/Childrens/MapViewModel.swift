@@ -50,7 +50,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func getAllMemberDataFromDatabase(isZoomin:Bool? = false)
     {
         print("name of group: ", self.groupName)
-        
+        //xoa cac dinh vi ton tai truoc do tren map cua group truoc
+        if(!arrHinhVeCacVitriMember.isEmpty){
+        self.mapView.removeAnnotations(arrHinhVeCacVitriMember)
+        }
         
         DispatchQueue.main.async { [weak self] in
             self!.db

@@ -181,7 +181,7 @@ struct Home: View {
                                     .foregroundColor(.black)
                                     .frame(maxWidth:.infinity, alignment: .leading)
                                     .foregroundColor(.blue)
-                                    .font(Font.system(size: 12, design: .default))
+                                    .font(Font.system(size: 16, design: .default))
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                     .onTapGesture {
                                         mapData.selectPlace(place: item)
@@ -210,7 +210,7 @@ struct Home: View {
                                     .foregroundColor(.black)
                                     .frame(maxWidth:.infinity, alignment: .leading)
                                     .foregroundColor(.blue)
-                                    .font(Font.system(size: 12, design: .default))
+                                    .font(Font.system(size: 16, design: .default))
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                     .onTapGesture {
                                         mapData.drawRoute(route: item.route)

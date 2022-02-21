@@ -104,7 +104,9 @@ struct Home: View {
                 HStack (){
                     //khu nhap dia chi
                     TextField("Search", text: $mapData.searchTxt)
-                        //.background(Color.white.opacity(0.9))
+                        .onTapGesture {
+                            self.mapData.arrRouteOptionsFound.removeAll()
+                        }
                         .foregroundColor(.blue)
                         .font(Font.system(size: 15, design: .default))
                         .padding()
@@ -178,14 +180,13 @@ struct Home: View {
                         VStack (spacing: 20){
                             ForEach(mapData.arrPlacesFound, id: \.id) { item in
                                 Text(item.place.name ?? "none")
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth:.infinity, alignment: .leading)
                                     .foregroundColor(.blue)
-                                    .font(Font.system(size: 16, design: .default))
+                                    .frame(maxWidth:.infinity, alignment: .leading)
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                     .onTapGesture {
                                         mapData.selectPlace(place: item)
                                         self.endTextEditing()
+                                        self.mapData.isShowTableRouteOption = false
                                     }
                                 }
                             Divider()
@@ -206,15 +207,20 @@ struct Home: View {
                     ScrollView{
                         VStack (spacing: 20){
                             ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
-                                Text(item.route.name )
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth:.infinity, alignment: .leading)
-                                    .foregroundColor(.blue)
-                                    .font(Font.system(size: 16, design: .default))
-                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    .onTapGesture {
-                                        mapData.drawRoute(route: item.route)
-                                        mapData.isShowTableRouteOption = false
+                                HStack{
+                                    Text(item.route.name )
+                                        .foregroundColor(.black)
+                                        .frame(maxWidth:.infinity, alignment: .leading)
+                                        .foregroundColor(.blue)
+                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                        .onTapGesture {
+                                            mapData.drawRoute(route: item.route)
+                                            mapData.isShowTableRouteOption = false
+                                        }
+                                    
+                                    Text("\(Int(round(item.route.distance / 1000))) Km")
+                                        .font(Font.system(size: 16, design: .default))
+                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                     }
                                 }
                             Divider()

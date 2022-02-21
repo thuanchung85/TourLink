@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E034103427C32A8200BFC511 /* RouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E034103327C32A8200BFC511 /* RouteModel.swift */; };
 		E038200B27990C2500104801 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E038200A27990C2500104801 /* GoogleService-Info.plist */; };
 		E038200E2799102C00104801 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E038200D2799102C00104801 /* FirebaseFirestore */; };
 		E03820102799102C00104801 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E038200F2799102C00104801 /* FirebaseFirestoreSwift-Beta */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E034103327C32A8200BFC511 /* RouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteModel.swift; sourceTree = "<group>"; };
 		E038200A27990C2500104801 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
 		E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroupMemberView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				E0F047AD279269050065262D /* PlaceModel.swift */,
+				E034103327C32A8200BFC511 /* RouteModel.swift */,
 				E0F047A8279176330065262D /* MapViewModel.swift */,
 				E0F047A6279175520065262D /* MapView.swift */,
 				E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */,
@@ -213,6 +216,7 @@
 				E0F047722790200E0065262D /* ContentView.swift in Sources */,
 				E0F047A9279176330065262D /* MapViewModel.swift in Sources */,
 				E0F047A7279175520065262D /* MapView.swift in Sources */,
+				E034103427C32A8200BFC511 /* RouteModel.swift in Sources */,
 				E0F047A5279174F90065262D /* Home.swift in Sources */,
 				E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */,
 				E0F047AE279269050065262D /* PlaceModel.swift in Sources */,

@@ -30,6 +30,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var arrPlacesFound : [PlaceModel] = []
     
+    @Published var isShowTableRouteOption = false
+    @Published var arrRouteOptionsFound : [RouteModel] = []
+    
     @Published var vitriNoiCanDen: CLLocationCoordinate2D?
     
     @Published var vitriCuaUserHienTai:CLLocationCoordinate2D?
@@ -186,6 +189,40 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
        
     }
     
+    //show ra bang liet ke cac option duong di co the
+    func showRoutesOptionsTable()
+    {
+        showDirection()
+    }
+    
+    //ve duong di len map
+    func drawRoute(route:MKRoute)
+    {
+        //tinh khoan cach bao nhieu km
+        let distanceKM = (route.distance / 1000)
+        if(distanceKM >= 1)
+        {
+            self.soKm = String(distanceKM) + " Km"
+        }
+        else{
+            self.soKm = String(distanceKM * 1000) + " meter"
+        }
+        
+        //tinh thoi gian = quang duong / van toc (50km/h)
+        let tinhsoGio = Int(distanceKM / 50)
+        
+        var tinhsoPhut = (distanceKM / 50) - Double(tinhsoGio)
+        if tinhsoPhut < 1 && tinhsoPhut > 0
+        {
+            tinhsoPhut = tinhsoPhut * 60
+        }
+        self.soHour = String(tinhsoGio)  + " h " + String(Int(round(tinhsoPhut))) + " m"
+        self.showSoKM()
+        
+        self.mapView.addOverlay(route.polyline)
+        self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
+    }
+    
     //show duong di
     func showDirection()
     {
@@ -215,15 +252,34 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //vitri can den
         requestDirection.destination = MKMapItem(placemark: mark1)
         requestDirection.transportType = .automobile
+        requestDirection.requestsAlternateRoutes = true
         
         self.mapView.removeOverlays(mapView.overlays)
         
         let directions = MKDirections(request: requestDirection)
         directions.calculate { [weak self] res, err in
+           //neu khong tim ra duoc duong di nao thi return
             guard let route = res?.routes.first else {return}
            
+            //save lai vao arr cac options duong di kiem duoc
+            self!.arrRouteOptionsFound.removeAll()
+            if(res != nil){
+                self!.arrRouteOptionsFound = res!.routes.map({ item in
+                    return RouteModel( route: item)
+                })
+            }
+            //neu chi con 1 option thi chi duong luon
+            if(self!.arrRouteOptionsFound.count <= 1){
+                self!.drawRoute(route: route)
+            }
+            //neu co nhieu option thi show table lua chon
+            else{
+                //show ban lua chon
+                self!.isShowTableRouteOption = true
+            }
+            
             //tinh khoan cach bao nhieu km
-            let distanceKM = (route.distance / 1000)
+            /*let distanceKM = (route.distance / 1000)
             if(distanceKM >= 1)
             {
                 self!.soKm = String(distanceKM) + " Km"
@@ -244,8 +300,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             self!.showSoKM()
             
             self!.mapView.addOverlay(route.polyline)
-            self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)
-        }
+            self!.mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),animated: true)*/
+        }//end directions.calculate
     }
     
    //ham hien so km khi user tap len text so km

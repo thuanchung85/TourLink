@@ -146,7 +146,8 @@ struct Home: View {
                     
                     //nut chi duong
                     Button {
-                        mapData.showDirection()
+                        //mapData.showDirection()
+                        mapData.showRoutesOptionsTable()
                         
                     } label: {
                         Image(systemName: "scribble")
@@ -198,7 +199,32 @@ struct Home: View {
                 }
                 
                 
-               
+               //hien table neu bam nut chi duong ma co nhieu option routes tra ra
+                if(mapData.isShowTableRouteOption == true)
+                {
+                    //tao 1 scroll view
+                    ScrollView{
+                        VStack (spacing: 20){
+                            ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
+                                Text(item.route.name )
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth:.infinity, alignment: .leading)
+                                    .foregroundColor(.blue)
+                                    .font(Font.system(size: 12, design: .default))
+                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    .onTapGesture {
+                                        mapData.drawRoute(route: item.route)
+                                        mapData.isShowTableRouteOption = false
+                                    }
+                                }
+                            Divider()
+                        }
+                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    }
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(5)
+                    .padding(.horizontal)
+                }
                 
                 
             }

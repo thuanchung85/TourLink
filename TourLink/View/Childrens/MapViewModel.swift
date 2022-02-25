@@ -164,6 +164,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             //tinh khoan cach voi vitri cua cua user neu di chuyen qua 100m thi ghi vao database
             if(vitricu != nil)
             {
+                guard (self!.locationManager.location != nil) else {return}
                 let khoanCach = self!.locationManager.location!.distance(from: CLLocation(latitude: vitricu!.latitude, longitude: vitricu!.longitude))
                 //print(khoanCach)
                 if(khoanCach >= 10.0)

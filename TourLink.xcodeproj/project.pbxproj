@@ -18,6 +18,7 @@
 		E038201A2799102C00104801 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E03820192799102C00104801 /* FirebaseFirestoreCombine-Community */; };
 		E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */; };
 		E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */; };
+		E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EE67BB27D594F600190436 /* SharedFunctions.swift */; };
 		E0F047702790200E0065262D /* TourLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0476F2790200E0065262D /* TourLinkApp.swift */; };
 		E0F047722790200E0065262D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F047712790200E0065262D /* ContentView.swift */; };
 		E0F04774279020100065262D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F04773279020100065262D /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		E038200A27990C2500104801 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
 		E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroupMemberView.swift; sourceTree = "<group>"; };
+		E0EE67BB27D594F600190436 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E0F0476C2790200E0065262D /* TourLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TourLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F0476F2790200E0065262D /* TourLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourLinkApp.swift; sourceTree = "<group>"; };
 		E0F047712790200E0065262D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		E0F0476E2790200E0065262D /* TourLink */ = {
 			isa = PBXGroup;
 			children = (
+				E0EE67BB27D594F600190436 /* SharedFunctions.swift */,
 				E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */,
 				E0F047A3279174DF0065262D /* View */,
 				E0F0476F2790200E0065262D /* TourLinkApp.swift */,
@@ -219,6 +222,7 @@
 				E034103427C32A8200BFC511 /* RouteModel.swift in Sources */,
 				E0F047A5279174F90065262D /* Home.swift in Sources */,
 				E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */,
+				E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */,
 				E0F047AE279269050065262D /* PlaceModel.swift in Sources */,
 				E0F047702790200E0065262D /* TourLinkApp.swift in Sources */,
 				E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */,

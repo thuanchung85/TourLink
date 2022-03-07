@@ -200,24 +200,25 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func drawRoute(route:MKRoute)
     {
         //tinh khoan cach bao nhieu km
-        let distanceKM = (route.distance / 1000)
+        /*let distanceKM = (route.distance / 1000)
         if(distanceKM >= 1)
         {
             self.soKm = String(distanceKM) + " Km"
         }
         else{
             self.soKm = String(distanceKM * 1000) + " meter"
-        }
-        
+        }*/
+        self.soKm = tinhKhoanCach(route: route)
+        self.soHour = tinhSoGio(distanceKM: route.distance / 1000)
         //tinh thoi gian = quang duong / van toc (50km/h)
-        let tinhsoGio = Int(distanceKM / 50)
+        /*let tinhsoGio = Int(distanceKM / 50)
         
         var tinhsoPhut = (distanceKM / 50) - Double(tinhsoGio)
         if tinhsoPhut < 1 && tinhsoPhut > 0
         {
             tinhsoPhut = tinhsoPhut * 60
         }
-        self.soHour = String(tinhsoGio)  + " h " + String(Int(round(tinhsoPhut))) + " m"
+        self.soHour = String(tinhsoGio)  + " h " + String(Int(round(tinhsoPhut))) + " m"*/
         self.showSoKM()
         
         self.mapView.addOverlay(route.polyline)

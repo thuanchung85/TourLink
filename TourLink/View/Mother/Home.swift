@@ -180,6 +180,7 @@ struct Home: View {
                         VStack (spacing: 20){
                             ForEach(mapData.arrPlacesFound, id: \.id) { item in
                                 Text(item.place.name ?? "none")
+                                    .fontWeight(.bold)
                                     .foregroundColor(.blue)
                                     .frame(maxWidth:.infinity, alignment: .leading)
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
@@ -208,8 +209,9 @@ struct Home: View {
                         VStack (spacing: 20){
                             ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
                                 HStack{
+                                    //show ten duong di
                                     Text(item.route.name )
-                                        .foregroundColor(.black)
+                                        .fontWeight(.bold)
                                         .frame(maxWidth:.infinity, alignment: .leading)
                                         .foregroundColor(.blue)
                                         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
@@ -218,11 +220,19 @@ struct Home: View {
                                             mapData.isShowTableRouteOption = false
                                         }
                                     
-                                    Text("\(Int(round(item.route.distance / 1000))) Km")
-                                        .font(Font.system(size: 16, design: .default))
-                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    }
+                                    //show so km
+                                    VStack{
+                                        Text(tinhKhoanCach(route: item.route))//("\(Int(round(item.route.distance / 1000))) Km")
+                                            .foregroundColor(.white)
+                                            .font(Font.system(size: 16, design: .default))
+                                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                            
+                                        }
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                 }
+                            }
                             Divider()
                         }
                         .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))

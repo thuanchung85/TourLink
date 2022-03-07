@@ -25,6 +25,7 @@ func tinhKhoanCach(route:MKRoute) -> String {
 //ham tinh ra so gio phut can den dich, van toc trung binh 50km/h
 func tinhSoGio(distanceKM: Double, vanToc: Double = 50) -> String {
     //tinh thoi gian = quang duong / van toc (50km/h)
+    let distanceKM = distanceKM / 1000
     let tinhsoGio = Int(distanceKM / 50)
     
     var tinhsoPhut = (distanceKM / 50) - Double(tinhsoGio)

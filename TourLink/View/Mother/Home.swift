@@ -215,22 +215,33 @@ struct Home: View {
                                         .frame(maxWidth:.infinity, alignment: .leading)
                                         .foregroundColor(.blue)
                                         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                        .onTapGesture {
-                                            mapData.drawRoute(route: item.route)
-                                            mapData.isShowTableRouteOption = false
-                                        }
+                                        
                                     
-                                    //show so km
+                                    //show so km va so gio
                                     VStack{
-                                        Text(tinhKhoanCach(route: item.route))//("\(Int(round(item.route.distance / 1000))) Km")
+                                        //show so gio
+                                        Text(tinhSoGio(distanceKM: item.route.distance))//("\(Int(round(item.route.distance / 1000))) Km")
                                             .foregroundColor(.white)
                                             .font(Font.system(size: 16, design: .default))
-                                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
+                                        
+                                        //show so km
+                                        Text(tinhKhoanCach(route: item.route))//("\(Int(round(item.route.distance / 1000))) Km")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                            .font(Font.system(size: 16, design: .default))
+                                            .padding(EdgeInsets(top: 3, leading: 10, bottom: 5, trailing: 10))
                                             
-                                        }
+                                    }
                                     .background(Color.blue)
                                     .cornerRadius(10)
                                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    
+                                }
+                                .onTapGesture {
+                                    //khi tap vao row thi bat dau ve duong di
+                                    mapData.drawRoute(route: item.route)
+                                    mapData.isShowTableRouteOption = false
                                 }
                             }
                             Divider()

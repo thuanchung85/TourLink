@@ -80,9 +80,9 @@ struct MapView: UIViewRepresentable {
                 }
                 //neu là dich den thi dung hinh kim cham
                 else{
-                    let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
+                    let pinAnnotation = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
                     pinAnnotation.tintColor = .red
-                    pinAnnotation.animatesDrop = true
+                    pinAnnotation.animatesWhenAdded = true
                     pinAnnotation.canShowCallout = true
                     return pinAnnotation
                 }

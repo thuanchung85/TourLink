@@ -9,7 +9,7 @@ import SwiftUI
 import CoreLocation
 
 struct Home: View {
-    
+   
     //chua 1 environment object de update data mapData
     @StateObject var mapData = MapViewModel()
     
@@ -175,82 +175,107 @@ struct Home: View {
                 
                 //hien ket qua tim dia chi, neu co data trong arrPlacesFound
                 if (!mapData.arrPlacesFound.isEmpty && mapData.searchTxt != "") {
-                    //tao 1 scroll view
-                    ScrollView{
-                        VStack (spacing: 20){
-                            ForEach(mapData.arrPlacesFound, id: \.id) { item in
-                                Text(item.place.name ?? "none")
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.blue)
-                                    .frame(maxWidth:.infinity, alignment: .leading)
-                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    .onTapGesture {
-                                        mapData.selectPlace(place: item)
-                                        self.endTextEditing()
-                                        self.mapData.isShowTableRouteOption = false
+                    VStack{
+                        //tao 1 scroll view
+                        ScrollView{
+                            VStack (spacing: 20){
+                                ForEach(mapData.arrPlacesFound, id: \.id) { item in
+                                    Text(item.place.name ?? "none")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                        .frame(maxWidth:.infinity, alignment: .leading)
+                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                        .onTapGesture {
+                                            mapData.selectPlace(place: item)
+                                            self.endTextEditing()
+                                            self.mapData.isShowTableRouteOption = false
+                                        }
                                     }
-                                }
-                            Divider()
+                                Divider()
+                            }
+                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                         }
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(5)
+                        .padding(.horizontal)
+                        
+                        HStack{
+                            Spacer()
+                            Button {
+                                mapData.arrPlacesFound.removeAll()
+                                mapData.searchTxt = ""
+                                
+                            } label: {
+                                Text("Back")
+                                    .foregroundColor(.red)
+                                    .padding(3)
+                            }
+                            .padding(10)
+                                .background(.white.opacity(0.8))
+                                .cornerRadius(5)
+                        }
                     }
-                    .background(Color.white.opacity(0.8))
-                    .cornerRadius(5)
-                    .padding(.horizontal)
-                    
+                   
+
                 }
                 
                 
                //hien table neu bam nut chi duong ma co nhieu option routes tra ra
                 if(mapData.isShowTableRouteOption == true)
                 {
-                    //tao 1 scroll view
-                    ScrollView{
-                        VStack (spacing: 20){
-                            ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
-                                HStack{
-                                    //show ten duong di
-                                    Text(item.route.name )
-                                        .fontWeight(.bold)
-                                        .frame(maxWidth:.infinity, alignment: .leading)
-                                        .foregroundColor(.blue)
+                   
+                        //tao 1 scroll view
+                        ScrollView{
+                          
+                            
+                            VStack (spacing: 20){
+                                ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
+                                    HStack{
+                                        //show ten duong di
+                                        Text(item.route.name )
+                                            .fontWeight(.bold)
+                                            .frame(maxWidth:.infinity, alignment: .leading)
+                                            .foregroundColor(.blue)
+                                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                            
+                                        
+                                        //show so km va so gio
+                                        VStack{
+                                            //show so gio
+                                            Text(tinhSoGio(distanceKM: item.route.distance))//("\(Int(round(item.route.distance / 1000))) Km")
+                                                .foregroundColor(.white)
+                                                .font(Font.system(size: 16, design: .default))
+                                                .padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
+                                            
+                                            //show so km
+                                            Text(tinhKhoanCach(route: item.route))//("\(Int(round(item.route.distance / 1000))) Km")
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.white)
+                                                .font(Font.system(size: 16, design: .default))
+                                                .padding(EdgeInsets(top: 3, leading: 10, bottom: 5, trailing: 10))
+                                                
+                                        }
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
                                         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                         
-                                    
-                                    //show so km va so gio
-                                    VStack{
-                                        //show so gio
-                                        Text(tinhSoGio(distanceKM: item.route.distance))//("\(Int(round(item.route.distance / 1000))) Km")
-                                            .foregroundColor(.white)
-                                            .font(Font.system(size: 16, design: .default))
-                                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
-                                        
-                                        //show so km
-                                        Text(tinhKhoanCach(route: item.route))//("\(Int(round(item.route.distance / 1000))) Km")
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                            .font(Font.system(size: 16, design: .default))
-                                            .padding(EdgeInsets(top: 3, leading: 10, bottom: 5, trailing: 10))
-                                            
                                     }
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
-                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    
+                                    .onTapGesture {
+                                        //khi tap vao row thi bat dau ve duong di
+                                        mapData.drawRoute(route: item.route)
+                                        mapData.isShowTableRouteOption = false
+                                    }
                                 }
-                                .onTapGesture {
-                                    //khi tap vao row thi bat dau ve duong di
-                                    mapData.drawRoute(route: item.route)
-                                    mapData.isShowTableRouteOption = false
-                                }
+                                Divider()
                             }
-                            Divider()
+                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                         }
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
-                    }
-                    .background(Color.white.opacity(0.8))
-                    .cornerRadius(5)
-                    .padding(.horizontal)
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(5)
+                        .padding(.horizontal)
+                        
+                    
+                   
                 }
                 
                 

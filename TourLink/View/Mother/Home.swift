@@ -8,8 +8,11 @@
 import SwiftUI
 import CoreLocation
 
+
 struct Home: View {
    
+   
+    
     //chua 1 environment object de update data mapData
     @StateObject var mapData = MapViewModel()
     
@@ -117,6 +120,8 @@ struct Home: View {
                                     
                         ).background(Color.white.opacity(0.9))
                         .cornerRadius(10)
+                        
+                    
                     
                     //so km
                     TextField("Km", text: $mapData.soKmorHour )
@@ -200,19 +205,18 @@ struct Home: View {
                         .padding(.horizontal)
                         
                         HStack{
-                            Spacer()
                             Button {
                                 mapData.arrPlacesFound.removeAll()
                                 mapData.searchTxt = ""
-                                
+                                self.endTextEditing()
                             } label: {
                                 Text("Back")
                                     .foregroundColor(.red)
                                     .padding(3)
                             }
                             .padding(10)
-                                .background(.white.opacity(0.8))
-                                .cornerRadius(5)
+                            .background(.white.opacity(0.8))
+                            .cornerRadius(5)
                         }
                     }
                    
@@ -223,10 +227,10 @@ struct Home: View {
                //hien table neu bam nut chi duong ma co nhieu option routes tra ra
                 if(mapData.isShowTableRouteOption == true)
                 {
-                   
+                    VStack{
                         //tao 1 scroll view
                         ScrollView{
-                          
+                            
                             
                             VStack (spacing: 20){
                                 ForEach(mapData.arrRouteOptionsFound, id: \.id) { item in
@@ -237,7 +241,7 @@ struct Home: View {
                                             .frame(maxWidth:.infinity, alignment: .leading)
                                             .foregroundColor(.blue)
                                             .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                            
+                                        
                                         
                                         //show so km va so gio
                                         VStack{
@@ -253,7 +257,7 @@ struct Home: View {
                                                 .foregroundColor(.white)
                                                 .font(Font.system(size: 16, design: .default))
                                                 .padding(EdgeInsets(top: 3, leading: 10, bottom: 5, trailing: 10))
-                                                
+                                            
                                         }
                                         .background(Color.blue)
                                         .cornerRadius(10)
@@ -274,8 +278,21 @@ struct Home: View {
                         .cornerRadius(5)
                         .padding(.horizontal)
                         
-                    
-                   
+                        HStack(alignment: .center){
+                            
+                            Button {
+                                mapData.isShowTableRouteOption = false
+                                self.endTextEditing()
+                            } label: {
+                                Text("Back")
+                                    .foregroundColor(.red)
+                                    .padding(3)
+                            }
+                            .padding(10)
+                            .background(.white.opacity(0.8))
+                            .cornerRadius(5)
+                        }
+                    }
                 }
                 
                 

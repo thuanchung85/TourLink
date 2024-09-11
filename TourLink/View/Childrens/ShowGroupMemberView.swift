@@ -16,9 +16,11 @@ struct ShowGroupMemberView : View {
     var body: some View{
         
         
-        
+        //form
         VStack(alignment: .center, spacing: 15, content: {
-            
+            HStack{
+                Text("Enter your group name connect to members")
+            }
             //form
             HStack
             {

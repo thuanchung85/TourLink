@@ -35,7 +35,7 @@ struct Home: View {
                 //spacer de đẩy vùng HStack o tren va VStack o dưới ra xa nhau maximun
                 Spacer()
                 
-                //vùng cac nut ben duoi mang hinh
+                //vùng cac nut ben duoi man hinh
                 HStack{
                     //nut show vi tri cac member thay doi dang map
                    
@@ -157,11 +157,12 @@ struct Home: View {
                         mapData.showRoutesOptionsTable()
                         
                     } label: {
-                        Image(systemName: "scribble")
-                            .padding()
+                        //Image(systemName: "scribble")
+                            //.padding()
+                        Text("Go").tint(Color.white).padding()
                     }
-                    .frame(width: 40, height: 40, alignment: .center)
-                    .background(Color.primary.opacity(0.8))
+                    .frame(width: 60, height: 40, alignment: .center)
+                    .background(Color.blue.opacity(0.8))
                     .cornerRadius(20)
                     .overlay(
                             RoundedRectangle(cornerRadius: 20)

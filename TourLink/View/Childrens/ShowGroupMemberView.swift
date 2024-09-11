@@ -33,7 +33,7 @@ struct ShowGroupMemberView : View {
                 
                 //nut show vi tri cac member
                 Button {
-                    mapData.getAllMemberDataFromDatabase(isZoomin: true)
+                    //mapData.getAllMemberDataFromDatabase(isZoomin: true)
                     showEnterGroupNameView = false
                 } label: {
                     Image(systemName: "person.fill.questionmark")

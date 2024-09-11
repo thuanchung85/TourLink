@@ -6,7 +6,7 @@
 //
 import MapKit
 import SwiftUI
-import Firebase
+
 
 struct ContentView: View {
     
@@ -15,8 +15,10 @@ struct ContentView: View {
     
     //====BODY===//
     var body: some View {
-        
-        Home()
+        ZStack{
+            Home()
+            //Text("1.0.1")
+        }
         
     }//end body
     

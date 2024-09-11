@@ -8,14 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E034103427C32A8200BFC511 /* RouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E034103327C32A8200BFC511 /* RouteModel.swift */; };
-		E038200B27990C2500104801 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E038200A27990C2500104801 /* GoogleService-Info.plist */; };
-		E038200E2799102C00104801 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E038200D2799102C00104801 /* FirebaseFirestore */; };
-		E03820102799102C00104801 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E038200F2799102C00104801 /* FirebaseFirestoreSwift-Beta */; };
-		E03820122799102C00104801 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E03820112799102C00104801 /* FirebaseStorageCombine-Community */; };
-		E03820142799102C00104801 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E03820132799102C00104801 /* FirebaseAnalytics */; };
-		E03820162799102C00104801 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E03820152799102C00104801 /* FirebaseStorageSwift-Beta */; };
-		E03820182799102C00104801 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E03820172799102C00104801 /* FirebaseStorage */; };
-		E038201A2799102C00104801 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E03820192799102C00104801 /* FirebaseFirestoreCombine-Community */; };
 		E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */; };
 		E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */; };
 		E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EE67BB27D594F600190436 /* SharedFunctions.swift */; };
@@ -31,7 +23,6 @@
 
 /* Begin PBXFileReference section */
 		E034103327C32A8200BFC511 /* RouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteModel.swift; sourceTree = "<group>"; };
-		E038200A27990C2500104801 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
 		E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroupMemberView.swift; sourceTree = "<group>"; };
 		E0EE67BB27D594F600190436 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
@@ -52,13 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E03820162799102C00104801 /* FirebaseStorageSwift-Beta in Frameworks */,
-				E038200E2799102C00104801 /* FirebaseFirestore in Frameworks */,
-				E03820122799102C00104801 /* FirebaseStorageCombine-Community in Frameworks */,
-				E03820142799102C00104801 /* FirebaseAnalytics in Frameworks */,
-				E03820102799102C00104801 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				E03820182799102C00104801 /* FirebaseStorage in Frameworks */,
-				E038201A2799102C00104801 /* FirebaseFirestoreCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +75,6 @@
 				E0F047712790200E0065262D /* ContentView.swift */,
 				E0F04773279020100065262D /* Assets.xcassets */,
 				E0F04778279020100065262D /* Info.plist */,
-				E038200A27990C2500104801 /* GoogleService-Info.plist */,
 				E0F04775279020100065262D /* Preview Content */,
 			);
 			path = TourLink;
@@ -151,13 +134,6 @@
 			);
 			name = TourLink;
 			packageProductDependencies = (
-				E038200D2799102C00104801 /* FirebaseFirestore */,
-				E038200F2799102C00104801 /* FirebaseFirestoreSwift-Beta */,
-				E03820112799102C00104801 /* FirebaseStorageCombine-Community */,
-				E03820132799102C00104801 /* FirebaseAnalytics */,
-				E03820152799102C00104801 /* FirebaseStorageSwift-Beta */,
-				E03820172799102C00104801 /* FirebaseStorage */,
-				E03820192799102C00104801 /* FirebaseFirestoreCombine-Community */,
 			);
 			productName = TourLink;
 			productReference = E0F0476C2790200E0065262D /* TourLink.app */;
@@ -204,7 +180,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F04777279020100065262D /* Preview Assets.xcassets in Resources */,
-				E038200B27990C2500104801 /* GoogleService-Info.plist in Resources */,
 				E0F04774279020100065262D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +333,7 @@
 				DEVELOPMENT_TEAM = 2SG8TQJQR9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TourLink/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -365,6 +341,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Chung.TourLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -380,6 +359,7 @@
 				DEVELOPMENT_TEAM = 2SG8TQJQR9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TourLink/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -387,6 +367,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Chung.TourLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -425,44 +408,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E038200D2799102C00104801 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		E038200F2799102C00104801 /* FirebaseFirestoreSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreSwift-Beta";
-		};
-		E03820112799102C00104801 /* FirebaseStorageCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageCombine-Community";
-		};
-		E03820132799102C00104801 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		E03820152799102C00104801 /* FirebaseStorageSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageSwift-Beta";
-		};
-		E03820172799102C00104801 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-		E03820192799102C00104801 /* FirebaseFirestoreCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreCombine-Community";
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E0F047642790200E0065262D /* Project object */;
 }

@@ -310,7 +310,7 @@ struct Home: View {
         }
         .onAppear {
             //lay thong tin member co bao nhieu nguoi
-            mapData.getAllMemberDataFromDatabase()
+            //mapData.getAllMemberDataFromDatabase()
             
             //khi init home view xong thi khoi tao location manager
             mapData.locationManager.delegate = mapData

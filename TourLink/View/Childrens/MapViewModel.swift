@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 import CoreLocation
 import Foundation
-import Firebase
+
 
 //all map data goes here
 
@@ -45,70 +45,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationManager = CLLocationManager()
     
     //firestore database
-    let db = Firestore.firestore()
+    //let db = Firestore.firestore()
     
     var groupName:String = ""
     
-    //ham lay het data tu firebase
-    func getAllMemberDataFromDatabase(isZoomin:Bool? = false)
-    {
-        print("name of group: ", self.groupName)
-        //xoa cac dinh vi ton tai truoc do tren map cua group truoc
-        if(!arrHinhVeCacVitriMember.isEmpty){
-        self.mapView.removeAnnotations(arrHinhVeCacVitriMember)
-        }
-        
-        //neu o text nhap group name bi bo trong thi hok lam gi ca
-        guard !self.groupName.isEmpty && self.groupName != "" && self.groupName != " " else {
-            return
-        }
-        
-        DispatchQueue.main.async { [weak self] in
-            self!.db
-                .collection(((self!.groupName == "") || (self!.groupName == " ")) ? "My_Location" : self!.groupName)
-                .getDocuments{ data, error in
-                    guard error == nil else {
-                        print(error as Any)
-                        return}
-                    
-                    if(data != nil)
-                    {
-                        print("so luong member: ",data?.documents.count as Any)
-                        
-                        //lay data vitri cac member roi covert qua dang arrCacVitriMember
-                        self!.arrCacVitriMember =  data?.documents.map({ doc in
-                            let pointAnnotation = MKPointAnnotation()
-                            pointAnnotation.coordinate = CLLocationCoordinate2D.init(latitude: doc["latitude"] as! CLLocationDegrees,
-                                                                                     longitude: doc["longitude"] as! CLLocationDegrees)
-                            pointAnnotation.title = String(doc.documentID)
-                            
-                            return ( toado: pointAnnotation.coordinate, tenMember: pointAnnotation.title ?? "no name")
-                        })
-                        //loai tru vitri chinh user
-                        .filter({ item in
-                            let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
-                            let name = "vitriHienTai-\(iphoneHardWareUniqueID)"
-                            
-                            if item.tenMember == name{
-                                return false
-                            }
-                            else
-                            {
-                                return true
-                            }
-                        })
-                        
-                        if(isZoomin == true){
-                            //ve hinh ngoi sao vi tri cac member
-                            if(self!.arrCacVitriMember?.isEmpty == false){
-                                self!.makeStarForMemberLocation(arrVitri:   self!.arrCacVitriMember!)
-                            }
-                        }
-                    }
-                }
-        }
-    }
-    
+   
     //ham gan ngoi sao vao vi tri cua cac member
     func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])
     {
@@ -172,10 +113,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     if( self!.vitriCuaUserHienTai != nil)
                     {
                         let iphoneHardWareUniqueID = UIDevice.current.identifierForVendor!.uuidString
-                        self!.db
+                        /*self!.db
                             .collection(((self!.groupName == "") || (self!.groupName == " ")) ? "My_Location" : self!.groupName)
                             .document("vitriHienTai-\(iphoneHardWareUniqueID)")
-                            .setData(["longitude" : Location.longitude, "latitude": Location.latitude])
+                            .setData(["longitude" : Location.longitude, "latitude": Location.latitude])*/
                         
                         self!.vitriCuaUserHienTai = self!.locationManager.location!.coordinate
                     }

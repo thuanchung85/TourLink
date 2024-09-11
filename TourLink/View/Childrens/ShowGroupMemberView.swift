@@ -14,6 +14,9 @@ struct ShowGroupMemberView : View {
     
     
     var body: some View{
+        
+        
+        
         VStack(alignment: .center, spacing: 15, content: {
             
             //form
@@ -25,7 +28,7 @@ struct ShowGroupMemberView : View {
                     .foregroundColor(.blue)
                     .font(Font.system(size: 15, design: .default))
                     .padding()
-                    .frame( height: 30)
+                    .frame( height: 40)
                     .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.blue, lineWidth: 1)
@@ -38,10 +41,11 @@ struct ShowGroupMemberView : View {
                     //mapData.getAllMemberDataFromDatabase(isZoomin: true)
                     showEnterGroupNameView = false
                 } label: {
-                    Image(systemName: "person.fill.questionmark")
-                        .padding()
+                    
+                        Text(String(localized:"Ok")).tint(Color.white)
+                    
                 }
-                .frame(width: 40, height: 40, alignment: .center)
+                .frame(width: 60, height: 40, alignment: .center)
                 .background(Color.primary.opacity(0.8))
                 .cornerRadius(20)
                 .overlay(
@@ -53,22 +57,23 @@ struct ShowGroupMemberView : View {
                
             }
             
-            //nút huỷ
-            HStack{
-                Button {
-                    showEnterGroupNameView.toggle()
-                } label: {
-                    Text(String(localized:"Cancel")).tint(Color.white)
-                }
-                .frame(width: 80, height: 40, alignment: .center)
-                .background(Color.primary.opacity(0.8))
-                .cornerRadius(20)
-            }
+           
         })
         .padding()
-        .background(Color.blue.opacity(0.5))
+        .background(Color.blue.opacity(0.8))
         .cornerRadius(25)
        
+        //nút huỷ
+        HStack{
+            Button {
+                showEnterGroupNameView.toggle()
+            } label: {
+                Text(String(localized:"Cancel")).tint(Color.white)
+            }
+            .frame(width: 80, height: 40, alignment: .center)
+            .background(Color.primary.opacity(0.8))
+            .cornerRadius(20)
+        }
     }
   
 }

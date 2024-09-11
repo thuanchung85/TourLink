@@ -113,7 +113,7 @@ struct Home: View {
                         .foregroundColor(.blue)
                         .font(Font.system(size: 15, design: .default))
                         .padding()
-                        .frame( height: 30)
+                        .frame( height: 40)
                         .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)
@@ -131,7 +131,7 @@ struct Home: View {
                         .font(Font.system(size: 15, design: .default))
                         .padding(.horizontal,5)
                         .minimumScaleFactor(0.01)
-                        .frame(width: 80, height: 30)
+                        .frame(width: 80, height: 40)
                         .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.blue, lineWidth: 1)

@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TourLink
+
+  Created by Luong Thuan Chung on 11/09/2024.
+  
+*/
+
+"Group" = "Nhóm";
+"Name of your group" = "Tên Nhóm";
+"Cancel" = "Hủy bỏ";

@@ -15,11 +15,13 @@ struct ShowGroupMemberView : View {
     
     var body: some View{
         VStack(alignment: .center, spacing: 15, content: {
+            
+            //form
             HStack
             {
-                Text("Group: ")
+                Text( String(localized: "Group")  + ": ")
                     .font(Font.system(size: 15, design: .default))
-                TextField("Name of your group", text: $mapData.groupName)
+                TextField(String(localized: "Name of your group"), text: $mapData.groupName)
                     .foregroundColor(.blue)
                     .font(Font.system(size: 15, design: .default))
                     .padding()
@@ -49,6 +51,18 @@ struct ShowGroupMemberView : View {
                 )
                 .padding(.horizontal,5)
                
+            }
+            
+            //nút huỷ
+            HStack{
+                Button {
+                    showEnterGroupNameView.toggle()
+                } label: {
+                    Text(String(localized:"Cancel")).tint(Color.white)
+                }
+                .frame(width: 80, height: 40, alignment: .center)
+                .background(Color.primary.opacity(0.8))
+                .cornerRadius(20)
             }
         })
         .padding()

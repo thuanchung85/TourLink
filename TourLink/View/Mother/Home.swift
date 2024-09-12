@@ -209,7 +209,8 @@ struct Home: View {
                             ScrollView{
                                 VStack (spacing: 20){
                                     ForEach(mapData.arrPlacesFound, id: \.id) { item in
-                                        Text(item.place.name ?? "none")
+                                       
+                                        Text(  makeAddress(place: item.place) )
                                             .fontWeight(.bold)
                                             .foregroundColor(.blue)
                                             .frame(maxWidth:.infinity, alignment: .leading)
@@ -340,6 +341,7 @@ struct Home: View {
                 
                 //khi init home view xong thi khoi tao location manager
                 mapData.locationManager.delegate = mapData
+                mapData.locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 mapData.locationManager.requestWhenInUseAuthorization()
                 mapData.locationManager.startUpdatingHeading()
                 
@@ -381,4 +383,33 @@ struct Home: View {
             
         }
     }
+}
+
+//==============MAKE ADDRESS TEXT========//
+
+func makeAddress(place: CLPlacemark) ->String
+{
+    let streetName     = place.thoroughfare ?? ""
+    let streetNumber   = place.subThoroughfare ?? ""
+    let city           = place.locality ?? ""
+    let state          = place.administrativeArea ?? ""
+    let zipCode        = place.postalCode ?? ""
+    let country        = place.country ?? ""
+    let isoCountryCode = place.isoCountryCode ?? ""
+    
+    print(streetName)
+    print(streetNumber)
+    print(city)
+    print(state)
+    print(zipCode)
+    print(country)
+    print(isoCountryCode)
+    
+    
+    
+    let ss = (place.name ?? streetName)
+    let ss1 = streetNumber
+    let ss2 = place.locality ?? ""
+    let ss3 =  place.administrativeArea ?? ""
+     return ss + " " + ss1 + " " + ss2 + " " + ss3
 }

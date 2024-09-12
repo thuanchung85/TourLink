@@ -208,27 +208,56 @@ struct Home: View {
                             //tao 1 scroll view
                             ScrollView{
                                 VStack (spacing: 20){
-                                    ForEach(mapData.arrPlacesFound, id: \.id) { item in
-                                       
-                                        Text(  makeAddress(place: item.place) )
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.blue)
-                                            .frame(maxWidth:.infinity, alignment: .leading)
-                                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                            .onTapGesture {
-                                                mapData.selectPlace(place: item)
-                                                self.endTextEditing()
-                                                self.mapData.isShowTableRouteOption = false
+                                    ForEach(Array(mapData.arrPlacesFound.enumerated()), id: \.offset) { (index,item) in
+                                        HStack{
+                                            if(index % 2 == 1 ){
+                                                HStack{
+                                                    Text(item.place.name ?? "").fontWeight(.bold) .foregroundColor(.blue)
+                                                    
+                                                    Text(  makeAddress(place: item.place) )
+                                                        .fontWeight(.thin)
+                                                        .foregroundColor(.blue)
+                                                        .frame(maxWidth:.infinity, alignment: .leading)
+                                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                                    
+                                                   
+                                                }
+                                                .padding()
+                                                .background(Color.white.opacity(0.9))
+                                                .cornerRadius(20)
                                             }
+                                            else{
+                                                HStack{
+                                                Text(item.place.name ?? "").fontWeight(.bold).foregroundColor(Color.black)
+                                                
+                                                Text(  makeAddress(place: item.place) )
+                                                    .fontWeight(.thin)
+                                                    .foregroundColor(Color.black)
+                                                    .frame(maxWidth:.infinity, alignment: .leading)
+                                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                                    
+                                               
+                                                }
+                                                .padding()
+                                                .background(Color.gray.opacity(0.9))
+                                                .cornerRadius(20)
+                                            }
+                                        }
+                                        .onTapGesture {
+                                            mapData.selectPlace(place: item)
+                                            self.endTextEditing()
+                                            self.mapData.isShowTableRouteOption = false
+                                        }
                                     }
-                                    Divider()
+                                   
                                 }
                                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                             }
-                            .background(Color.white.opacity(0.8))
-                            .cornerRadius(5)
+                            //.background(Color.white.opacity(0.8))
+                            //.cornerRadius(5)
                             .padding(.horizontal)
                             
+                            //nut cancel
                             HStack{
                                 Button {
                                     mapData.arrPlacesFound.removeAll()
@@ -389,6 +418,7 @@ struct Home: View {
 
 func makeAddress(place: CLPlacemark) ->String
 {
+    let placeName      = place.name ?? ""
     let streetName     = place.thoroughfare ?? ""
     let streetNumber   = place.subThoroughfare ?? ""
     let city           = place.locality ?? ""
@@ -397,6 +427,7 @@ func makeAddress(place: CLPlacemark) ->String
     let country        = place.country ?? ""
     let isoCountryCode = place.isoCountryCode ?? ""
     
+    print(placeName)
     print(streetName)
     print(streetNumber)
     print(city)
@@ -405,11 +436,10 @@ func makeAddress(place: CLPlacemark) ->String
     print(country)
     print(isoCountryCode)
     
-    
-    
-    let ss = (place.name ?? streetName)
-    let ss1 = streetNumber
-    let ss2 = place.locality ?? ""
-    let ss3 =  place.administrativeArea ?? ""
-     return ss + " " + ss1 + " " + ss2 + " " + ss3
+  
+     return //String(localized: "place name: ") + placeName + "\n" +
+    String(localized:"street name: ") + streetName + "\n" +
+    String(localized:"street number: ") + streetNumber + "\n" +
+    String(localized:"city: ") + city + "\n" +
+    String(localized:"state: ") + state
 }

@@ -15,3 +15,8 @@
 "Back" = "Hủy";
 "TRACKING YOUR LOCATION..." = "ĐANG DÒ VỊ TRÍ CỦA BẠN...VUI LÒNG CHỜ";
 "Network connection seems to be offline." = "Internet của bạn đang có vấn đề, vui lòng kiểm tra lại.";
+"place name: " = "Địa điểm: ";
+"street name: " = "Đường: ";
+"street number: " = "Số: ";
+"city: " = "Tp: ";
+"state: " = "Tỉnh: ";

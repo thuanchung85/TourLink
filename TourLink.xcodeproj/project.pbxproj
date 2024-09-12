@@ -17,6 +17,9 @@
 		E0C0F4A12C926DB3005A719B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4A02C926DB3005A719B /* FirebaseDatabase */; };
 		E0C0F4A32C926DB3005A719B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4A22C926DB3005A719B /* FirebaseFirestore */; };
 		E0C0F4A52C926DB3005A719B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4A42C926DB3005A719B /* FirebaseStorage */; };
+		E0C0F4A82C927111005A719B /* CardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4A72C927111005A719B /* CardRepository.swift */; };
+		E0C0F4AA2C9271D4005A719B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4A92C9271D4005A719B /* Card.swift */; };
+		E0C0F4AC2C927493005A719B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4AB2C927493005A719B /* FirebaseFirestoreSwift */; };
 		E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EE67BB27D594F600190436 /* SharedFunctions.swift */; };
 		E0F047702790200E0065262D /* TourLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0476F2790200E0065262D /* TourLinkApp.swift */; };
 		E0F047722790200E0065262D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F047712790200E0065262D /* ContentView.swift */; };
@@ -35,6 +38,8 @@
 		E0C0F4962C918ACD005A719B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0C0F4982C918AE9005A719B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0C0F4992C926BCF005A719B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0C0F4A72C927111005A719B /* CardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRepository.swift; sourceTree = "<group>"; };
+		E0C0F4A92C9271D4005A719B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E0EE67BB27D594F600190436 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E0F0476C2790200E0065262D /* TourLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TourLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F0476F2790200E0065262D /* TourLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourLinkApp.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 				E0C0F49D2C926DB3005A719B /* FirebaseAnalytics in Frameworks */,
 				E0C0F4A52C926DB3005A719B /* FirebaseStorage in Frameworks */,
 				E0C0F49F2C926DB3005A719B /* FirebaseAuth in Frameworks */,
+				E0C0F4AC2C927493005A719B /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +75,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0C0F4A62C9270FC005A719B /* AppFireStore */ = {
+			isa = PBXGroup;
+			children = (
+				E0C0F4AD2C9274AC005A719B /* Models */,
+				E0C0F4A72C927111005A719B /* CardRepository.swift */,
+			);
+			path = AppFireStore;
+			sourceTree = "<group>";
+		};
+		E0C0F4AD2C9274AC005A719B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E0C0F4A92C9271D4005A719B /* Card.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E0F047632790200E0065262D = {
@@ -116,6 +139,7 @@
 		E0F047A3279174DF0065262D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0C0F4A62C9270FC005A719B /* AppFireStore */,
 				E0F047AB279183DF0065262D /* Childrens */,
 				E0F047AA279183D20065262D /* Mother */,
 			);
@@ -164,6 +188,7 @@
 				E0C0F4A02C926DB3005A719B /* FirebaseDatabase */,
 				E0C0F4A22C926DB3005A719B /* FirebaseFirestore */,
 				E0C0F4A42C926DB3005A719B /* FirebaseStorage */,
+				E0C0F4AB2C927493005A719B /* FirebaseFirestoreSwift */,
 			);
 			productName = TourLink;
 			productReference = E0F0476C2790200E0065262D /* TourLink.app */;
@@ -232,7 +257,9 @@
 				E0F047A5279174F90065262D /* Home.swift in Sources */,
 				E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */,
 				E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */,
+				E0C0F4AA2C9271D4005A719B /* Card.swift in Sources */,
 				E0F047AE279269050065262D /* PlaceModel.swift in Sources */,
+				E0C0F4A82C927111005A719B /* CardRepository.swift in Sources */,
 				E0F047702790200E0065262D /* TourLinkApp.swift in Sources */,
 				E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */,
 			);
@@ -484,6 +511,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		E0C0F4AB2C927493005A719B /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseCore
 
 
+//===FOR THE FIREBASE===//
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -19,6 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 
+//=====MAIN APP====//
 @main
 struct TourLinkApp: App {
     // register app delegate for Firebase setup

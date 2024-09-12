@@ -21,6 +21,7 @@
 		E0C0F4AA2C9271D4005A719B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4A92C9271D4005A719B /* Card.swift */; };
 		E0C0F4AC2C927493005A719B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4AB2C927493005A719B /* FirebaseFirestoreSwift */; };
 		E0C0F4AF2C927698005A719B /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4AE2C927698005A719B /* CardListViewModel.swift */; };
+		E0C0F4B22C92A849005A719B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4B12C92A849005A719B /* NetworkMonitor.swift */; };
 		E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EE67BB27D594F600190436 /* SharedFunctions.swift */; };
 		E0F047702790200E0065262D /* TourLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0476F2790200E0065262D /* TourLinkApp.swift */; };
 		E0F047722790200E0065262D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F047712790200E0065262D /* ContentView.swift */; };
@@ -42,6 +43,7 @@
 		E0C0F4A72C927111005A719B /* CardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRepository.swift; sourceTree = "<group>"; };
 		E0C0F4A92C9271D4005A719B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E0C0F4AE2C927698005A719B /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
+		E0C0F4B12C92A849005A719B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E0EE67BB27D594F600190436 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E0F0476C2790200E0065262D /* TourLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TourLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F0476F2790200E0065262D /* TourLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourLinkApp.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E0C0F4B02C92A83F005A719B /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				E0C0F4B12C92A849005A719B /* NetworkMonitor.swift */,
+			);
+			path = NetworkMonitor;
+			sourceTree = "<group>";
+		};
 		E0F047632790200E0065262D = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +152,7 @@
 		E0F047A3279174DF0065262D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0C0F4B02C92A83F005A719B /* NetworkMonitor */,
 				E0C0F4A62C9270FC005A719B /* AppFireStore */,
 				E0F047AB279183DF0065262D /* Childrens */,
 				E0F047AA279183D20065262D /* Mother */,
@@ -266,6 +277,7 @@
 				E0C0F4A82C927111005A719B /* CardRepository.swift in Sources */,
 				E0F047702790200E0065262D /* TourLinkApp.swift in Sources */,
 				E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */,
+				E0C0F4B22C92A849005A719B /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,16 +26,15 @@ struct TourLinkApp: App {
     // register app delegate for Firebase setup
      @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-
-    init()
-    {
-        
-    }
+    //kiem tra network
+    @StateObject var networkMonitor = NetworkMonitor()
     
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(networkMonitor)
+            
         }
     }
 }

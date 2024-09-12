@@ -10,16 +10,44 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
+    @EnvironmentObject var networkMonitor: NetworkMonitor
    
+    @State private var showNetworkAlert = false
     
     //====BODY===//
     var body: some View {
-        ZStack{
-            Home()
-            //Text("1.0.1")
-        }
-        
+        NavigationView {
+                  //neu internet ok
+                    if networkMonitor.isConnected {
+                            Home(isDisAble: false)
+                    }
+                    //neu khong co internet
+                    else{
+                        ZStack{
+                            Home(isDisAble: true)
+                            Text( "Network connection seems to be offline.")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 12))
+                                .scaledToFill()
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.15)
+                                .frame(width: 340, height: 50, alignment: .center)
+                                .background(Color.black.opacity(0.8))
+                                .cornerRadius(20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.blue, lineWidth: 1)
+                                    
+                                )
+                            
+                                .padding(5)
+                        }
+                    }
+                }
+        .onChange(of: networkMonitor.isConnected) { connection in
+                  showNetworkAlert = connection == false
+              }
+        .alert("Network connection seems to be offline.",isPresented: $showNetworkAlert) {}
     }//end body
     
     

@@ -47,7 +47,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //firestore database
     //let db = Firestore.firestore()
     
-    var groupName:String = ""
+    @Published var groupName:String = ""
     
    
     //ham gan ngoi sao vao vi tri cua cac member

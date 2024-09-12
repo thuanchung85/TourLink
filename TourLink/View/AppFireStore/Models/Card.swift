@@ -10,9 +10,10 @@ import FirebaseFirestoreSwift
 
 struct Card: Identifiable, Codable {
   @DocumentID var id: String?
-    
+    var pass:String
   var latitude: Double
   var longitude: Double
+var timeStamp: Double
     
   var isAvaiable: Bool
     var status :String

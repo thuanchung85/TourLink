@@ -16,6 +16,8 @@ class CardListViewModel: ObservableObject {
 
   // 4
   func add(_ card: Card) {
-    cardRepository.add(card)
+      if (!card.pass.isEmpty) && (card.latitude != 0) && (card.longitude != 0) && (!card.userPhone.isEmpty) {
+          cardRepository.add(card)
+      }
   }
 }

@@ -22,12 +22,31 @@ struct Home: View {
     
     var body: some View {
         ZStack{
-            
+           
             //đây là MapView la view con nam bên dưới zstack
             MapView(mapData: mapData)
                 .environmentObject(mapData)
                 .ignoresSafeArea(.all, edges: .all)
             
+            //text hiện đang tracking khi mở app
+            if(mapData.vitriCuaUserHienTai == nil){
+                Text("TRACKING YOUR LOCATION...")
+                    .foregroundStyle(.white)
+                    .font(.system(size: 15))
+                    .scaledToFill()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.15)
+                    .frame(width: 340, height: 50, alignment: .center)
+                    .background(Color.black.opacity(0.8))
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.blue, lineWidth: 1)
+                        
+                    )
+                   
+                    .padding(5)
+            }
             
             //đây la khu cac nut bam va text search nam o tren zstack
             VStack(alignment: .leading, spacing: 0)

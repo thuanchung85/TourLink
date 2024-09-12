@@ -37,26 +37,36 @@ struct ShowGroupMemberView : View {
                                 
                     ).background(Color.white.opacity(0.9))
                     .cornerRadius(10)
+                    
+                   
                 
-                //nut show vi tri cac member
-                Button {
-                    //mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                    showEnterGroupNameView = false
-                } label: {
-                    
+                //nut OK
+                if(!mapData.groupName.isEmpty){
+                    //nut OK
+                    Button {
+                        //mapData.getAllMemberDataFromDatabase(isZoomin: true)
+                        showEnterGroupNameView = false
+                        
+                        //lấy thông tin toạ độ user khi mở view này lên
+                        saveLocationOfUserToFireStore(pass: mapData.groupName,
+                                                      mapData: mapData,
+                                                      cardListViewModel: cardListViewModel)
+                        
+                    } label: {
+                        
                         Text(String(localized:"Ok")).tint(Color.white)
-                    
-                }
-                .frame(width: 60, height: 40, alignment: .center)
-                .background(Color.primary.opacity(0.8))
-                .cornerRadius(20)
-                .overlay(
+                        
+                    }
+                    .frame(width: 60, height: 40, alignment: .center)
+                    .background(Color.primary.opacity(0.8))
+                    .cornerRadius(20)
+                    .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.blue, lineWidth: 1)
-                            
-                )
-                .padding(.horizontal,5)
-               
+                        
+                    )
+                    .padding(.horizontal,5)
+                }
             }
             
            
@@ -64,6 +74,10 @@ struct ShowGroupMemberView : View {
         .padding()
         .background(Color.blue.opacity(0.8))
         .cornerRadius(25)
+        .onChange(of: mapData.groupName) { value in
+            
+        }
+        
        
         //nút huỷ
         HStack{
@@ -77,24 +91,32 @@ struct ShowGroupMemberView : View {
             .cornerRadius(20)
         }
         
-        //lấy thông tin toạ độ user khi mở view này lên
-        .onAppear(perform: {
-            if(mapData.vitriCuaUserHienTai != nil){
-               
-              
-                let lat = mapData.vitriCuaUserHienTai?.latitude
-                let long = mapData.vitriCuaUserHienTai?.longitude
-                
-                let myCardData = Card(latitude: lat ?? 0.0, 
-                                      longitude: long ?? 0.0,
-                                      isAvaiable: true,
-                                      status:  "i am here",
-                                      userPhone: "0365413666")
-                print(myCardData)
-                  
-                cardListViewModel.add(myCardData)
-            }
-        })
-    }
         
+        
+    }
+    
+        
+}
+
+//hàm save upload data vị trí của user lên fire store
+func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListViewModel: CardListViewModel) -> Void
+{
+    if(mapData.vitriCuaUserHienTai != nil){
+       
+      
+        let lat = mapData.vitriCuaUserHienTai?.latitude
+        let long = mapData.vitriCuaUserHienTai?.longitude
+        let timestamp = NSDate().timeIntervalSince1970
+
+        let myCardData = Card(pass:pass,
+                              latitude: lat ?? 0.0,
+                              longitude: long ?? 0.0,
+                              timeStamp: timestamp,
+                              isAvaiable: true,
+                              status:  "i am here",
+                              userPhone: "0365413666")
+        print(myCardData)
+          
+        cardListViewModel.add(myCardData)
+    }
 }

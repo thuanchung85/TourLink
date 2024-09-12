@@ -35,3 +35,5 @@ func tinhSoGio(distanceKM: Double, vanToc: Double = 50) -> String {
     }
     return String(tinhsoGio)  + " h " + String(Int(round(tinhsoPhut))) + " m"
 }
+
+

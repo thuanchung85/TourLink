@@ -37,26 +37,27 @@ struct Home: View {
                 
                 //vùng cac nut ben duoi man hinh
                 HStack{
+                    //chỉ hiện khi mà user get đươc grps vi trí hiện tại.
                     //nut show vi tri cac member thay doi dang map
-                   
-                    Button {
-                        self.showEnterGroupNameView.toggle()
-                        //mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                        
-                    } label: {
-                        Image(systemName: "person.2")
-                            .padding()
-                    }
-                    .frame(width: 40, height: 40, alignment: .center)
-                    .background(Color.primary.opacity(0.8))
-                    .cornerRadius(20)
-                    .overlay(
+                    if(mapData.vitriCuaUserHienTai != nil){
+                        Button {
+                            self.showEnterGroupNameView.toggle()
+                            //mapData.getAllMemberDataFromDatabase(isZoomin: true)
+                            
+                        } label: {
+                            Image(systemName: "person.2")
+                                .padding()
+                        }
+                        .frame(width: 40, height: 40, alignment: .center)
+                        .background(Color.primary.opacity(0.8))
+                        .cornerRadius(20)
+                        .overlay(
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.blue, lineWidth: 1)
-                                
-                    )
-                    .padding(.horizontal,5)
-                       
+                            
+                        )
+                        .padding(.horizontal,5)
+                    }
                     Spacer()
                 
                     
@@ -303,7 +304,9 @@ struct Home: View {
             VStack{
                 if(self.showEnterGroupNameView == true)
                 {
-                    ShowGroupMemberView(mapData: self.mapData, showEnterGroupNameView: $showEnterGroupNameView)
+                    ShowGroupMemberView(mapData: self.mapData,
+                                        showEnterGroupNameView: $showEnterGroupNameView,
+                                        cardListViewModel: CardListViewModel())
                         .padding(.horizontal)
                 }
             }

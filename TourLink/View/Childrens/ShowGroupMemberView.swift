@@ -11,7 +11,7 @@ import SwiftUI
 struct ShowGroupMemberView : View {
     @StateObject var mapData : MapViewModel
     @Binding var showEnterGroupNameView:Bool
-    
+    @ObservedObject var cardListViewModel: CardListViewModel
     
     var body: some View{
         
@@ -76,6 +76,25 @@ struct ShowGroupMemberView : View {
             .background(Color.primary.opacity(0.8))
             .cornerRadius(20)
         }
+        
+        //lấy thông tin toạ độ user khi mở view này lên
+        .onAppear(perform: {
+            if(mapData.vitriCuaUserHienTai != nil){
+               
+              
+                let lat = mapData.vitriCuaUserHienTai?.latitude
+                let long = mapData.vitriCuaUserHienTai?.longitude
+                
+                let myCardData = Card(latitude: lat ?? 0.0, 
+                                      longitude: long ?? 0.0,
+                                      isAvaiable: true,
+                                      status:  "i am here",
+                                      userPhone: "0365413666")
+                print(myCardData)
+                  
+                cardListViewModel.add(myCardData)
+            }
+        })
     }
-  
+        
 }

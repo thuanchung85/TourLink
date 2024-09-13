@@ -11,16 +11,15 @@ import FirebaseFirestoreSwift
 import Combine
 // 2
 class CardRepository: ObservableObject {
-  // 3
-  private let path: String = "cards"
-  // 4
+ 
+ 
   private let store = Firestore.firestore()
 
-  // 5
-  func add(_ card: Card) {
+  
+    func add(_ card: Card, collectname:String) {
     do {
       // 6
-      _ = try store.collection(path).addDocument(from: card)
+      _ = try store.collection(collectname).addDocument(from: card)
     } catch {
       fatalError("Unable to add card: \(error.localizedDescription).")
     }

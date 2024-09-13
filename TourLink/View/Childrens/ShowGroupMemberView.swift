@@ -117,6 +117,6 @@ func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListVi
                               userPhone: "0365413666")
         print(myCardData)
           
-        cardListViewModel.add(myCardData)
+        cardListViewModel.add(myCardData, collectname: pass)
     }
 }

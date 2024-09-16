@@ -13,6 +13,12 @@ struct ShowGroupMemberView : View {
     @Binding var showEnterGroupNameView:Bool
     @ObservedObject var cardListViewModel: CardListViewModel
     
+    @State var arrUserSamePass = [Card]()
+    @State var showListView = false;
+    @FocusState private var nameIsFocused: Bool
+    
+    
+    //=======BODY======//
     var body: some View{
         
         
@@ -37,7 +43,7 @@ struct ShowGroupMemberView : View {
                                 
                     ).background(Color.white.opacity(0.9))
                     .cornerRadius(10)
-                    
+                    .focused($nameIsFocused)
                    
                 
                 //nut OK
@@ -45,14 +51,18 @@ struct ShowGroupMemberView : View {
                     //nut OK
                     Button {
                         //mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                        showEnterGroupNameView = false
+                        //showEnterGroupNameView = false
+                        showListView = true
+                        nameIsFocused.toggle()
                         
                         //lấy thông tin toạ độ user khi mở view này lên
                         saveLocationOfUserToFireStore(pass: mapData.groupName,
                                                       mapData: mapData,
                                                       cardListViewModel: cardListViewModel)
                         //thu lay ra lai data
-                        getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel)
+                        getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
+                            arrUserSamePass = datas
+                        })
                         
                     } label: {
                         
@@ -93,6 +103,86 @@ struct ShowGroupMemberView : View {
             .cornerRadius(20)
         }
         
+        //show list of user theo arrUserSamePass lấy data từ firebase về
+        if(showListView){
+            List{
+                ForEach(arrUserSamePass, id: \.timeStamp) { card in
+                    HStack{
+                        VStack{
+                            //phone , time
+                            HStack{
+                                //userPhone
+                                Text(card.userPhone)
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 15))
+                                    .fontWeight(.bold)
+                                    .frame(width: 140, height: 40, alignment: .center)
+                                    .background(Color.blue.opacity(0.8))
+                                    .cornerRadius(25)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.3)
+                                    .padding(.leading, 10)
+                                Spacer()
+                                //time
+                                Text(convertTimeStamp(timeResult: card.timeStamp))
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 10))
+                                    .frame(width: 200, height: 30, alignment: .center)
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(25)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .padding(.trailing, 10)
+                                
+                                
+                                
+                            }
+                         
+                            //vi tri
+                            HStack{
+                                VStack{
+                                    Text(String(card.longitude))
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 10))
+                                        .fontWeight(.bold)
+                                        .frame(width: 140, height: 20, alignment: .center)
+                                        .background(Color.green.opacity(0.2))
+                                        .cornerRadius(25)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.3)
+                                        .padding(.leading, 10)
+                                    Text(String(card.latitude))
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 10))
+                                        .fontWeight(.bold)
+                                        .frame(width: 140, height: 20, alignment: .center)
+                                        .background(Color.green.opacity(0.2))
+                                        .cornerRadius(25)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.3)
+                                        .padding(.leading, 10)
+                                }
+                                Spacer()
+                            }
+                            
+                           
+                        }
+                        
+                    }
+                    .padding(.vertical,10)
+                    .listRowSeparatorTint(.blue)
+                   
+                    
+                }
+              
+                .listRowBackground(Color.clear)
+               
+            }
+            .scrollContentBackground(.hidden)
+            .background(Color.primary.opacity(0.8))
+            .cornerRadius(15)
+        }
+        
         
         
     }
@@ -124,10 +214,12 @@ func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListVi
 }
 
 //hàm lấy ra data các user củng pass trên firestore
-func getListOfUserSamePass(pass:String, cardListViewModel: CardListViewModel){
+func getListOfUserSamePass(pass:String, cardListViewModel: CardListViewModel,completionHandler:  @escaping ([Card]) -> Void){
   
     cardListViewModel.get(collectname: pass, completionHandler: { datas in
-        print(datas)
+       
+        completionHandler(datas)
+      
     })
   
 }

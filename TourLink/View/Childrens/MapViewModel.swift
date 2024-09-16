@@ -48,8 +48,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //let db = Firestore.firestore()
     
     @Published var groupName:String = ""
+    @Published var userName:String = "Lương THuận Chung"
+    @Published var userPhoneNumber:String = "(+84) 365413666"
     
-   
     //ham gan ngoi sao vao vi tri cua cac member
     func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])
     {

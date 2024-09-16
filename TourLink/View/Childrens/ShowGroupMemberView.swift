@@ -21,15 +21,45 @@ struct ShowGroupMemberView : View {
     //=======BODY======//
     var body: some View{
         
-        
+        HStack {
+            
+             
+            Text(mapData.userName + "  " + mapData.userPhoneNumber) .foregroundStyle(.white)
+                .font(Font.system(size: 15, design: .default))
+                .frame(maxWidth: .infinity, maxHeight: 20)
+                .lineLimit(1)
+                .padding()
+                .background(Color.primary.opacity(0.7))
+                .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.blue, lineWidth: 1)
+                    
+                )
+                .minimumScaleFactor(0.3)
+               
+          
+            
+          
+                
+          
+                
+        }
         //form
         VStack(alignment: .center, spacing: 15, content: {
+            
+          
+               
+            
             HStack{
                 Text("Enter your group name connect to members")
+                Spacer()
             }
             //form
             HStack
             {
+               
+                
                 Text( String(localized: "Group")  + ": ")
                     .font(Font.system(size: 15, design: .default))
                 TextField(String(localized: "Name of your group"), text: $mapData.groupName)
@@ -53,12 +83,16 @@ struct ShowGroupMemberView : View {
                         //mapData.getAllMemberDataFromDatabase(isZoomin: true)
                         //showEnterGroupNameView = false
                         showListView = true
-                        nameIsFocused.toggle()
+                        nameIsFocused = false
                         
                         //lấy thông tin toạ độ user khi mở view này lên
-                        saveLocationOfUserToFireStore(pass: mapData.groupName,
-                                                      mapData: mapData,
-                                                      cardListViewModel: cardListViewModel)
+                        saveLocationOfUserToFireStore(
+                            name: mapData.userName,
+                            phone: mapData.userPhoneNumber,
+                            pass: mapData.groupName,
+                            mapData: mapData,
+                            cardListViewModel: cardListViewModel)
+                        
                         //thu lay ra lai data
                         getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
                             arrUserSamePass = datas
@@ -109,25 +143,38 @@ struct ShowGroupMemberView : View {
                 ForEach(arrUserSamePass, id: \.timeStamp) { card in
                     HStack{
                         VStack{
+                            HStack{
+                                //user name
+                                Text(card.name)
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                    .frame(width: 340, height: 40, alignment: .center)
+                                    .cornerRadius(25)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.3)
+                                    .padding(.leading, 10)
+                            }
                             //phone , time
                             HStack{
                                 //userPhone
                                 Text(card.userPhone)
                                     .foregroundStyle(.white)
                                     .font(.system(size: 15))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
                                     .fontWeight(.bold)
-                                    .frame(width: 140, height: 40, alignment: .center)
+                                    .frame(width: 160, height: 40, alignment: .center)
                                     .background(Color.blue.opacity(0.8))
                                     .cornerRadius(25)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.3)
+                                  
                                     .padding(.leading, 10)
-                                Spacer()
+                               
                                 //time
                                 Text(convertTimeStamp(timeResult: card.timeStamp))
                                     .foregroundStyle(.white)
                                     .font(.system(size: 10))
-                                    .frame(width: 200, height: 30, alignment: .center)
+                                    .frame(width: 180, height: 30, alignment: .center)
                                     .background(Color.gray.opacity(0.2))
                                     .cornerRadius(25)
                                     .lineLimit(1)
@@ -137,7 +184,7 @@ struct ShowGroupMemberView : View {
                                 
                                 
                             }
-                         
+                            .padding(.horizontal, 10)
                             //vi tri
                             HStack{
                                 VStack{
@@ -164,7 +211,7 @@ struct ShowGroupMemberView : View {
                                 }
                                 Spacer()
                             }
-                            
+                            .padding(.horizontal, 10)
                            
                         }
                         
@@ -191,7 +238,7 @@ struct ShowGroupMemberView : View {
 }
 
 //hàm save upload data vị trí của user lên fire store
-func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListViewModel: CardListViewModel) -> Void
+func saveLocationOfUserToFireStore(name : String, phone:String,pass:String,mapData :MapViewModel, cardListViewModel: CardListViewModel) -> Void
 {
     if(mapData.vitriCuaUserHienTai != nil){
        
@@ -199,14 +246,16 @@ func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListVi
         let lat = mapData.vitriCuaUserHienTai?.latitude
         let long = mapData.vitriCuaUserHienTai?.longitude
         let timestamp = NSDate().timeIntervalSince1970
-
-        let myCardData = Card(pass:pass,
-                              latitude: lat ?? 0.0,
-                              longitude: long ?? 0.0,
-                              timeStamp: timestamp,
-                              isAvaiable: true,
-                              status:  "i am here",
-                              userPhone: "0365413666")
+        
+        let myCardData = Card(
+            name: name,
+            pass:pass,
+            latitude: lat ?? 0.0,
+            longitude: long ?? 0.0,
+            timeStamp: timestamp,
+            isAvaiable: true,
+            status:  "i am here",
+            userPhone: phone)
         print(myCardData)
           
         cardListViewModel.add(myCardData, collectname: pass)

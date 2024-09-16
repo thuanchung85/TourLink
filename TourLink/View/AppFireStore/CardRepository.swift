@@ -50,7 +50,8 @@ class CardRepository: ObservableObject
                     let documentData = documentSnapshot.data()
                     
                     
-                    let mCard = Card(pass: documentData["pass"] as! String,
+                    let mCard = Card(name: documentData["name"] as! String, 
+                                     pass: documentData["pass"] as! String,
                                      latitude: documentData["latitude"] as! Double,
                                      longitude: documentData["longitude"] as! Double,
                                      timeStamp: documentData["timeStamp"] as! Double,

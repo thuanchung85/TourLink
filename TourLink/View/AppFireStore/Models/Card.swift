@@ -9,15 +9,16 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Card: Identifiable, Codable {
-  @DocumentID var id: String?
+    @DocumentID var id: String?
+    var name:String
     var pass:String
-  var latitude: Double
-  var longitude: Double
-var timeStamp: Double
+    var latitude: Double
+    var longitude: Double
+    var timeStamp: Double
     
-  var isAvaiable: Bool
+    var isAvaiable: Bool
     var status :String
-  var userPhone: String
+    var userPhone: String
 }
 
 

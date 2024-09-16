@@ -15,15 +15,10 @@ class CardRepository: ObservableObject
     
    
     
-    @Published var cards: [Card] = []
+   
     
     private let store = Firestore.firestore()
     
-    
-    //========INIT=======//
-    init() {
-        
-    }
     
     //=========ADD===//
     func add(_ card: Card, collectname:String) {

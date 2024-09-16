@@ -51,6 +51,8 @@ struct ShowGroupMemberView : View {
                         saveLocationOfUserToFireStore(pass: mapData.groupName,
                                                       mapData: mapData,
                                                       cardListViewModel: cardListViewModel)
+                        //thu lay ra lai data
+                        getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel)
                         
                     } label: {
                         
@@ -119,4 +121,13 @@ func saveLocationOfUserToFireStore(pass:String,mapData :MapViewModel, cardListVi
           
         cardListViewModel.add(myCardData, collectname: pass)
     }
+}
+
+//hàm lấy ra data các user củng pass trên firestore
+func getListOfUserSamePass(pass:String, cardListViewModel: CardListViewModel){
+  
+    cardListViewModel.get(collectname: pass, completionHandler: { datas in
+        print(datas)
+    })
+  
 }

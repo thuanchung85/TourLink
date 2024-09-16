@@ -10,14 +10,28 @@ import Foundation
 import Combine
 
 // 2
-class CardListViewModel: ObservableObject {
-  // 3
-  @Published var cardRepository = CardRepository()
+class CardListViewModel: ObservableObject
+{
+ 
+    @Published var cardRepository = CardRepository()
 
-  // 4
-  func add(_ card: Card, collectname:String) {
-      if (!card.pass.isEmpty) && (card.latitude != 0) && (card.longitude != 0) && (!card.userPhone.isEmpty) {
-          cardRepository.add(card, collectname: collectname)
-      }
-  }
+    
+    //=====ADD======//
+    func add(_ card: Card, collectname:String) {
+        if (!card.pass.isEmpty) && (card.latitude != 0) && (card.longitude != 0) && (!card.userPhone.isEmpty) {
+            cardRepository.add(card, collectname: collectname)
+        }
+    }
+    
+    //=====GET========//
+    func get( collectname:String, completionHandler:  @escaping ([Card]) -> Void)  {
+        
+       
+        cardRepository.get(collectname: collectname, completionHandler: {datas in
+            completionHandler(datas)
+        })
+     
+    }
+    
+    
 }

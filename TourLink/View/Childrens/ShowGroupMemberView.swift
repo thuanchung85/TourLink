@@ -213,6 +213,26 @@ struct ShowGroupMemberView : View {
                                         .padding(.leading, 10)
                                 }
                                 Spacer()
+                                
+                                //nut goto user location
+                                Button {
+                                   print("GO TO USER LOCATION")
+                                    mapData.focusDestinationByLongLat(latitude: card.latitude, longitude: card.longitude)
+                                    
+                                } label: {
+                                    Text(String(localized:"Location"))
+                                        .foregroundColor(.white)
+                                        .tint(Color.white)
+                                }
+                                .frame(width: 120, height: 40, alignment: .center)
+                                .background(Color.primary.opacity(0.8))
+                                .cornerRadius(20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.blue, lineWidth: 1)
+                                    
+                                )
+                                .padding(.trailing, 10)
                             }
                             .padding(.horizontal, 10)
                            

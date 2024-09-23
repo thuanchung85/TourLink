@@ -95,7 +95,10 @@ struct ShowGroupMemberView : View {
                         
                         //thu lay ra lai data
                         getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
-                            arrUserSamePass = datas
+                            
+                            //lấy ra vị trí cuối cùng của user trên map
+                            arrUserSamePass = getLastLocation(datas: datas)
+                            
                         })
                         
                     } label: {
@@ -271,4 +274,42 @@ func getListOfUserSamePass(pass:String, cardListViewModel: CardListViewModel,com
       
     })
   
+}
+
+//hàm trả ra các vị trí cuối cùng theo tên user
+func getLastLocation(datas:[Card]) -> [Card]
+{
+    var arrChuaItemLastTimeUpdate = [Card]()
+ 
+    //lọc ra trong datas co bao nhieu name
+    let arr_kiemRaCacNameKhacNhau = datas.removingDuplicates(withSame: \.name).map { item  in
+        item.name
+    }
+    print(arr_kiemRaCacNameKhacNhau)
+    
+    //dùng qua các name khác nhau đó loop lọc array datas theo name
+    var arrOf_arrayCard = [[Card]]()
+    
+    for i in 0..<arr_kiemRaCacNameKhacNhau.count{
+        print(arr_kiemRaCacNameKhacNhau[i])
+        //lọc array x theo tên
+        let x = datas.filter { item in
+            item.name.contains(find: arr_kiemRaCacNameKhacNhau[i])
+        }
+        //kiem tra lai cac card trong arr x -> lọc ra ngày mới nhất
+        //for z in 0..<x.count{
+            //print(x[z])
+        //}
+        let xSort = x.sorted { c1, c2 in
+            c1.timeStamp > c2.timeStamp
+        }
+        print(xSort)
+        
+        let lastestItem = xSort.first
+        if(lastestItem != nil){
+            arrChuaItemLastTimeUpdate.append(lastestItem!)
+        }
+    }
+    
+    return arrChuaItemLastTimeUpdate
 }

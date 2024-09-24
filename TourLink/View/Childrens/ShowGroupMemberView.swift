@@ -217,7 +217,9 @@ struct ShowGroupMemberView : View {
                                 //nut goto user location
                                 Button {
                                    print("GO TO USER LOCATION")
-                                    mapData.focusDestinationByLongLat(latitude: card.latitude, longitude: card.longitude)
+                                    mapData.focusDestinationByLongLat(latitude: card.latitude,
+                                                                      longitude: card.longitude,
+                                                                      name: card.name)
                                     
                                 } label: {
                                     Text(String(localized:"Location"))

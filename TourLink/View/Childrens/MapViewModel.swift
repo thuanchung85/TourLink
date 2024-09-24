@@ -340,7 +340,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     //zoom vao vi tri bất kỳ theo lat va long
-    func focusDestinationByLongLat( latitude: Double, longitude: Double)
+    func focusDestinationByLongLat( latitude: Double, longitude: Double, name:String)
     {
        
         let mLo = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -348,7 +348,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.mapView.setRegion(MKCoordinateRegion(center: mLo, span: region.span), animated: true)
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
         
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = mLo
+        pointAnnotation.title = name
         
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(pointAnnotation)
     }
     
     //xin phep cap quyen lay data location

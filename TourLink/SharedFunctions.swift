@@ -46,3 +46,11 @@ func convertTimeStamp(timeResult:Double)->String{
     let localDate = dateFormatter.string(from: date)
     return localDate
 }
+
+//hàm tạo 1 cuộc gọi bằng số phone
+func makeACallPhone(numberString:String){
+    let telephone = "tel://"
+        let formattedString = telephone + numberString
+        guard let url = URL(string: formattedString) else { return }
+        UIApplication.shared.open(url)
+}

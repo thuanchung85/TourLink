@@ -172,6 +172,10 @@ struct ShowGroupMemberView : View {
                                     .cornerRadius(25)
                                   
                                     .padding(.leading, 10)
+                                    .onTapGesture {
+                                        print("MAKE A CALL: " , card.userPhone)
+                                        makeACallPhone(numberString: card.userPhone)
+                                    }
                                
                                 //time
                                 Text(convertTimeStamp(timeResult: card.timeStamp))

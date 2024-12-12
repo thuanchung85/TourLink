@@ -15,244 +15,152 @@ struct ShowGroupMemberView : View {
     
     @State var arrUserSamePass = [Card]()
     @State var showListView = false;
+    @State var showUserInfoEditView = false;
     @FocusState private var nameIsFocused: Bool
     
     
     //=======BODY======//
     var body: some View{
-        
-        HStack {
-            
-             
-            Text(mapData.userName + "  " + mapData.userPhoneNumber) .foregroundStyle(.white)
-                .font(Font.system(size: 15, design: .default))
-                .frame(maxWidth: .infinity, maxHeight: 20)
-                .lineLimit(1)
-                .padding()
-                .background(Color.primary.opacity(0.7))
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.blue, lineWidth: 1)
-                    
-                )
-                .minimumScaleFactor(0.3)
-               
-          
-            
-          
+        //show form nhập tên nhóm
+        if(showUserInfoEditView == false) && (showListView == false){
+            HStack {
                 
-          
                 
-        }
-        //form
-        VStack(alignment: .center, spacing: 15, content: {
-            
-          
-               
-            
-            HStack{
-                Text("Enter your group name connect to members")
-                Spacer()
-            }
-            //form
-            HStack
-            {
-                VStack{
-                    //nhập tên nhóm
-                    HStack{
-                        Text( String(localized: "Group")  + ": ")
-                            .font(Font.system(size: 15, design: .default))
-                        TextField(String(localized: "Name of your group"), text: $mapData.groupName)
-                            .foregroundColor(.blue)
-                            .font(Font.system(size: 15, design: .default))
-                            .padding()
-                            .frame( height: 40)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                                
-                            ).background(Color.white.opacity(0.9))
-                            .cornerRadius(10)
-                            .focused($nameIsFocused)
-                        
-                    }
-                    
-                    //nhập status của mình hiện tại
-                    HStack{
-                        Text( String(localized: "Status")  + ": ")
-                            .font(Font.system(size: 15, design: .default))
-                        TextField(String(localized: "Enter your status"), text: $mapData.statusString)
-                            .foregroundColor(.blue)
-                            .font(Font.system(size: 15, design: .default))
-                            .padding()
-                            .frame( height: 40)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                                
-                            ).background(Color.white.opacity(0.9))
-                            .cornerRadius(10)
-                            .focused($nameIsFocused)
-                        
-                    }
-                }
-                
-                //nut OK
-                if(!mapData.groupName.isEmpty){
-                    //nut OK
-                    Button {
-                        //mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                        //showEnterGroupNameView = false
-                        showListView = true
-                        nameIsFocused = false
-                        
-                        //lấy thông tin toạ độ user khi mở view này lên
-                        saveLocationOfUserToFireStore(
-                            name: mapData.userName, status: mapData.statusString,
-                            phone: mapData.userPhoneNumber,
-                            pass: mapData.groupName,
-                            mapData: mapData,
-                            cardListViewModel: cardListViewModel)
-                        
-                        //thu lay ra lai data
-                        getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
-                            
-                            //lấy ra vị trí cuối cùng của user trên map
-                            arrUserSamePass = getLastLocation(datas: datas)
-                            
-                        })
-                        
-                    } label: {
-                        
-                        Text(String(localized:"Ok")).tint(Color.white)
-                        
-                    }
-                    .frame(width: 60, height: 40, alignment: .center)
-                    .background(Color.primary.opacity(0.8))
+                Text(mapData.userName + "  " + mapData.userPhoneNumber) .foregroundStyle(.white)
+                    .font(Font.system(size: 15, design: .default))
+                    .frame(maxWidth: .infinity, maxHeight: 20)
+                    .lineLimit(1)
+                    .padding()
+                    .background(Color.primary.opacity(0.7))
                     .cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.blue, lineWidth: 1)
                         
                     )
-                    .padding(.horizontal,5)
+                    .minimumScaleFactor(0.3)
+                
+                if(showListView == false){
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: 50, maxHeight: 50)
+                        .background(Color.primary.opacity(0.7))
+                        .cornerRadius(20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.blue, lineWidth: 1)
+                            
+                        )
+                        .onTapGesture {
+                            print("SHOW USER INFO EDIT")
+                            showUserInfoEditView.toggle()
+                            
+                        }
                 }
+                
+                
+                
             }
-            
-           
-        })
-        .padding()
-        .background(Color.blue.opacity(0.8))
-        .cornerRadius(25)
-        .onChange(of: mapData.groupName) { value in
-            
-        }
-        
-       
-        //nút huỷ
-        HStack{
-            Button {
-                showEnterGroupNameView.toggle()
-            } label: {
-                Text(String(localized:"Cancel")).tint(Color.white)
-            }
-            .frame(width: 80, height: 40, alignment: .center)
-            .background(Color.primary.opacity(0.8))
-            .cornerRadius(20)
-        }
-        
-        //show list of user theo arrUserSamePass lấy data từ firebase về
-        if(showListView){
-            List{
-                ForEach(arrUserSamePass, id: \.timeStamp) { card in
-                    HStack{
-                        VStack{
-                            HStack{
-                                //user name
-                                Text(card.name)
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 25))
-                                    .fontWeight(.bold)
-                                    .frame(width: 340, height: 40, alignment: .center)
-                                    .cornerRadius(25)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.3)
-                                    .padding(.leading, 10)
-                            }
-                            //phone , time
-                            HStack{
-                                //userPhone
-                                Text(card.userPhone)
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 15))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .fontWeight(.bold)
-                                    .frame(width: 160, height: 40, alignment: .center)
-                                    .background(Color.blue.opacity(0.8))
-                                    .cornerRadius(25)
-                                  
-                                    .padding(.leading, 10)
-                                    .onTapGesture {
-                                        print("MAKE A CALL: " , card.userPhone)
-                                        makeACallPhone(numberString: card.userPhone)
-                                    }
+            //form
+            VStack(alignment: .center, spacing: 15, content: {
+                
+                
+                
+                
+                HStack{
+                    Text("Enter your group name connect to members")
+                    Spacer()
+                }
+                //form
+                HStack
+                {
+                    VStack{
+                        //nhập tên nhóm
+                        HStack{
+                            Text( String(localized: "Group")  + ": ")
+                                .font(Font.system(size: 15, design: .default))
+                            TextField(String(localized: "Name of your group"), text: $mapData.groupName)
+                                .foregroundColor(.blue)
+                                .font(Font.system(size: 15, design: .default))
+                                .padding()
+                                .frame( height: 40)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.blue, lineWidth: 1)
+                                    
+                                ).background(Color.white.opacity(0.9))
+                                .cornerRadius(10)
+                                .focused($nameIsFocused)
+                            
+                        }
+                        
+                        //nhập status của mình hiện tại
+                        HStack {
+                            VStack(alignment: .leading, content: {
+                                Text( String(localized: "Status")  + ": ")
+                                    .font(Font.system(size: 15, design: .default))
+                                TextEditor( text: $mapData.statusString)
+                                    .foregroundColor(.blue)
+                                    .font(Font.system(size: 15, design: .default))
+                                    .frame(width: .infinity, height: 240)
+                                    .border(Color.blue, width: 1)
+                                    .cornerRadius(15)
+                                    .lineSpacing(10)
+                                    .autocapitalization(.words)
+                                    .disableAutocorrection(true)
+                                    .focused($nameIsFocused)
+                            })
                                
-                                //time
-                                Text(convertTimeStamp(timeResult: card.timeStamp))
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 10))
-                                    .frame(width: 180, height: 30, alignment: .center)
-                                    .background(Color.gray.opacity(0.2))
-                                    .cornerRadius(25)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .padding(.trailing, 10)
-                                
-                                
-                                
+                        }
+                        
+                        
+                        
+                        //nút huỷ, va ok
+                        HStack{
+                            //nut huỷ
+                            Button {
+                                showEnterGroupNameView.toggle()
+                            } label: {
+                                Text(String(localized:"Cancel")).tint(Color.white)
                             }
-                            .padding(.horizontal, 10)
-                            //vi tri
-                            HStack{
-                                VStack{
-                                    Text(String(card.longitude))
-                                        .foregroundStyle(.white)
-                                        .font(.system(size: 10))
-                                        .fontWeight(.bold)
-                                        .frame(width: 140, height: 20, alignment: .center)
-                                        .background(Color.green.opacity(0.2))
-                                        .cornerRadius(25)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.3)
-                                        .padding(.leading, 10)
-                                    Text(String(card.latitude))
-                                        .foregroundStyle(.white)
-                                        .font(.system(size: 10))
-                                        .fontWeight(.bold)
-                                        .frame(width: 140, height: 20, alignment: .center)
-                                        .background(Color.green.opacity(0.2))
-                                        .cornerRadius(25)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.3)
-                                        .padding(.leading, 10)
-                                }
-                                Spacer()
-                                
-                                //nut goto user location
+                            .frame(width: 80, height: 40, alignment: .center)
+                            .background(Color.primary.opacity(0.8))
+                            .cornerRadius(20)
+                            
+                            Spacer()
+                            //nut OK
+                            if(!mapData.groupName.isEmpty){
+                                //nut OK
                                 Button {
-                                   print("GO TO USER LOCATION")
-                                    mapData.focusDestinationByLongLat(latitude: card.latitude,
-                                                                      longitude: card.longitude,
-                                                                      name: card.name)
+                                    
+                                    
+                                    //mapData.getAllMemberDataFromDatabase(isZoomin: true)
+                                    //showEnterGroupNameView = false
+                                    showListView = true
+                                    nameIsFocused = false
+                                    
+                                    //lấy thông tin toạ độ user khi mở view này lên
+                                    saveLocationOfUserToFireStore(
+                                        name: mapData.userName, status: mapData.statusString,
+                                        phone: mapData.userPhoneNumber,
+                                        pass: mapData.groupName,
+                                        mapData: mapData,
+                                        cardListViewModel: cardListViewModel)
+                                    
+                                    //thu lay ra lai data
+                                    getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
+                                        
+                                        //lấy ra vị trí cuối cùng của user trên map
+                                        arrUserSamePass = getLastLocation(datas: datas)
+                                        
+                                    })
                                     
                                 } label: {
-                                    Text(String(localized:"Location"))
-                                        .foregroundColor(.white)
-                                        .tint(Color.white)
+                                    
+                                    Text(String(localized:"Ok")).tint(Color.white)
+                                    
                                 }
-                                .frame(width: 120, height: 40, alignment: .center)
+                                .frame(width: 60, height: 40, alignment: .center)
                                 .background(Color.primary.opacity(0.8))
                                 .cornerRadius(20)
                                 .overlay(
@@ -260,38 +168,174 @@ struct ShowGroupMemberView : View {
                                         .stroke(Color.blue, lineWidth: 1)
                                     
                                 )
-                                .padding(.trailing, 10)
+                                .padding(.horizontal,5)
                             }
-                            .padding(.horizontal, 10)
-                            
-                            //user ghi chú status
-                            HStack{
-                                Text(card.status)
-                                    .foregroundStyle(.yellow)
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color.primary.opacity(0.1))
-                                    .padding()
-                            }
-                            .padding(.horizontal, 5)
                         }
-                        
                     }
-                    .listRowSeparatorTint(.blue)
-                    .padding(.vertical,10)
                     
-                   
                     
                 }
-              
-                .listRowBackground(Color.clear)
-               
+                
+                
+            })
+            .padding()
+            .background(Color.blue.opacity(0.8))
+            .cornerRadius(25)
+            .onChange(of: mapData.groupName) { value in
+                
             }
-            .scrollContentBackground(.hidden)
-            .background(Color.primary.opacity(0.8))
-            .cornerRadius(15)
+        }
+       
+       
+        
+        //show list of user theo arrUserSamePass lấy data từ firebase về
+        if(showListView){
+            VStack{
+                List{
+                    ForEach(arrUserSamePass, id: \.timeStamp) { card in
+                        HStack{
+                            VStack{
+                                HStack{
+                                    //user name
+                                    Text(card.name)
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
+                                        .frame(width: 340, height: 40, alignment: .center)
+                                        .cornerRadius(25)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.3)
+                                        .padding(.leading, 10)
+                                }
+                                //phone , time
+                                HStack{
+                                    //userPhone
+                                    Text(card.userPhone)
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 15))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                        .fontWeight(.bold)
+                                        .frame(width: 160, height: 40, alignment: .center)
+                                        .background(Color.blue.opacity(0.8))
+                                        .cornerRadius(25)
+                                    
+                                        .padding(.leading, 10)
+                                        .onTapGesture {
+                                            print("MAKE A CALL: " , card.userPhone)
+                                            makeACallPhone(numberString: card.userPhone)
+                                        }
+                                    
+                                    //time
+                                    Text(convertTimeStamp(timeResult: card.timeStamp))
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 10))
+                                        .frame(width: 180, height: 30, alignment: .center)
+                                        .background(Color.gray.opacity(0.2))
+                                        .cornerRadius(25)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                        .padding(.trailing, 10)
+                                    
+                                    
+                                    
+                                }
+                                .padding(.horizontal, 10)
+                                //vi tri
+                                HStack{
+                                    VStack{
+                                        Text(String(card.longitude))
+                                            .foregroundStyle(.white)
+                                            .font(.system(size: 10))
+                                            .fontWeight(.bold)
+                                            .frame(width: 140, height: 20, alignment: .center)
+                                            .background(Color.green.opacity(0.2))
+                                            .cornerRadius(25)
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.3)
+                                            .padding(.leading, 10)
+                                        Text(String(card.latitude))
+                                            .foregroundStyle(.white)
+                                            .font(.system(size: 10))
+                                            .fontWeight(.bold)
+                                            .frame(width: 140, height: 20, alignment: .center)
+                                            .background(Color.green.opacity(0.2))
+                                            .cornerRadius(25)
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.3)
+                                            .padding(.leading, 10)
+                                    }
+                                    Spacer()
+                                    
+                                    //nut goto user location
+                                    Button {
+                                        print("GO TO USER LOCATION")
+                                        mapData.focusDestinationByLongLat(latitude: card.latitude,
+                                                                          longitude: card.longitude,
+                                                                          name: card.name)
+                                        
+                                    } label: {
+                                        Text(String(localized:"Location"))
+                                            .foregroundColor(.white)
+                                            .tint(Color.white)
+                                    }
+                                    .frame(width: 120, height: 40, alignment: .center)
+                                    .background(Color.primary.opacity(0.8))
+                                    .cornerRadius(20)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.blue, lineWidth: 1)
+                                        
+                                    )
+                                    .padding(.trailing, 10)
+                                }
+                                .padding(.horizontal, 10)
+                                
+                                //user ghi chú status
+                                HStack{
+                                    Text(card.status)
+                                        .foregroundStyle(.yellow)
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.primary.opacity(0.1))
+                                        .padding()
+                                }
+                                .padding(.horizontal, 5)
+                            }
+                            
+                        }
+                        .listRowSeparatorTint(.blue)
+                        .padding(.vertical,10)
+                        
+                        
+                        
+                    }
+                    
+                    .listRowBackground(Color.clear)
+                    
+                }
+                .scrollContentBackground(.hidden)
+                .background(Color.primary.opacity(0.8))
+                .cornerRadius(15)
+                
+                //nut huỷ
+                Button {
+                    showEnterGroupNameView.toggle()
+                } label: {
+                    Text(String(localized:"Cancel")).tint(Color.white)
+                }
+                .frame(width: 80, height: 40, alignment: .center)
+                .background(Color.primary.opacity(0.8))
+                .cornerRadius(20)
+            }
         }
         
+        //khi bấm nut edit user name và phone thì show ShowUserInfoEditView, cho user enter name và phone
+        if(showUserInfoEditView){
+            
+            ShowUserInfoEditView(userName: $mapData.userName, userPhone: $mapData.userPhoneNumber, showUserInfoEditView: $showUserInfoEditView)
+        }
         
+       
         
     }
     

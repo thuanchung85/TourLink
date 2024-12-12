@@ -49,8 +49,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var groupName:String = ""
     @Published var statusString:String = ""
-    @Published var userName:String = "Lương THuận Chung"
-    @Published var userPhoneNumber:String = "(+84) 365413666"
+    @Published var userName:String = "User"
+    @Published var userPhoneNumber:String = "(no phone)"
     
     //ham gan ngoi sao vao vi tri cua cac member
     func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])

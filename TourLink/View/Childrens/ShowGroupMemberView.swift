@@ -241,12 +241,22 @@ struct ShowGroupMemberView : View {
                                 .padding(.trailing, 10)
                             }
                             .padding(.horizontal, 10)
-                           
+                            
+                            //user ghi chú status
+                            HStack{
+                                Text(card.status)
+                                    .foregroundStyle(.yellow)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.primary.opacity(0.1))
+                                    .padding()
+                            }
+                            .padding(.horizontal, 5)
                         }
                         
                     }
-                    .padding(.vertical,10)
                     .listRowSeparatorTint(.blue)
+                    .padding(.vertical,10)
+                    
                    
                     
                 }
@@ -283,7 +293,7 @@ func saveLocationOfUserToFireStore(name : String, phone:String,pass:String,mapDa
             longitude: long ?? 0.0,
             timeStamp: timestamp,
             isAvaiable: true,
-            status:  "i am here",
+            status:  "this is my status, please come here, i at station near the book store at LE THANH TON st.",
             userPhone: phone)
         print(myCardData)
           

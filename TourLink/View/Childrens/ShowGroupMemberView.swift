@@ -58,23 +58,45 @@ struct ShowGroupMemberView : View {
             //form
             HStack
             {
-               
-                
-                Text( String(localized: "Group")  + ": ")
-                    .font(Font.system(size: 15, design: .default))
-                TextField(String(localized: "Name of your group"), text: $mapData.groupName)
-                    .foregroundColor(.blue)
-                    .font(Font.system(size: 15, design: .default))
-                    .padding()
-                    .frame( height: 40)
-                    .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.blue, lineWidth: 1)
+                VStack{
+                    //nhập tên nhóm
+                    HStack{
+                        Text( String(localized: "Group")  + ": ")
+                            .font(Font.system(size: 15, design: .default))
+                        TextField(String(localized: "Name of your group"), text: $mapData.groupName)
+                            .foregroundColor(.blue)
+                            .font(Font.system(size: 15, design: .default))
+                            .padding()
+                            .frame( height: 40)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
                                 
-                    ).background(Color.white.opacity(0.9))
-                    .cornerRadius(10)
-                    .focused($nameIsFocused)
-                   
+                            ).background(Color.white.opacity(0.9))
+                            .cornerRadius(10)
+                            .focused($nameIsFocused)
+                        
+                    }
+                    
+                    //nhập status của mình hiện tại
+                    HStack{
+                        Text( String(localized: "Status")  + ": ")
+                            .font(Font.system(size: 15, design: .default))
+                        TextField(String(localized: "Enter your status"), text: $mapData.statusString)
+                            .foregroundColor(.blue)
+                            .font(Font.system(size: 15, design: .default))
+                            .padding()
+                            .frame( height: 40)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.blue, lineWidth: 1)
+                                
+                            ).background(Color.white.opacity(0.9))
+                            .cornerRadius(10)
+                            .focused($nameIsFocused)
+                        
+                    }
+                }
                 
                 //nut OK
                 if(!mapData.groupName.isEmpty){
@@ -87,7 +109,7 @@ struct ShowGroupMemberView : View {
                         
                         //lấy thông tin toạ độ user khi mở view này lên
                         saveLocationOfUserToFireStore(
-                            name: mapData.userName,
+                            name: mapData.userName, status: mapData.statusString,
                             phone: mapData.userPhoneNumber,
                             pass: mapData.groupName,
                             mapData: mapData,
@@ -277,7 +299,7 @@ struct ShowGroupMemberView : View {
 }
 
 //hàm save upload data vị trí của user lên fire store
-func saveLocationOfUserToFireStore(name : String, phone:String,pass:String,mapData :MapViewModel, cardListViewModel: CardListViewModel) -> Void
+func saveLocationOfUserToFireStore(name : String,status:String, phone:String,pass:String,mapData :MapViewModel, cardListViewModel: CardListViewModel) -> Void
 {
     if(mapData.vitriCuaUserHienTai != nil){
        
@@ -293,7 +315,7 @@ func saveLocationOfUserToFireStore(name : String, phone:String,pass:String,mapDa
             longitude: long ?? 0.0,
             timeStamp: timestamp,
             isAvaiable: true,
-            status:  "this is my status, please come here, i at station near the book store at LE THANH TON st.",
+            status:  status,
             userPhone: phone)
         print(myCardData)
           

@@ -48,6 +48,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //let db = Firestore.firestore()
     
     @Published var groupName:String = ""
+    @Published var statusString:String = ""
     @Published var userName:String = "Lương THuận Chung"
     @Published var userPhoneNumber:String = "(+84) 365413666"
     

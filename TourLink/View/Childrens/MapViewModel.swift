@@ -341,7 +341,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     //zoom vao vi tri bất kỳ theo lat va long
-    func focusDestinationByLongLat( latitude: Double, longitude: Double, name:String)
+    func focusDestinationByLongLat( latitude: Double, longitude: Double, name:String, status:String)
     {
        
         let mLo = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -351,7 +351,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         let pointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = mLo
-        pointAnnotation.title = name
+        pointAnnotation.title = name + "\n( \(status) )"
+        
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(pointAnnotation)

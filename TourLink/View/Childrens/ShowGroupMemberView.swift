@@ -102,7 +102,7 @@ struct ShowGroupMemberView : View {
                                 TextEditor( text: $mapData.statusString)
                                     .foregroundColor(.blue)
                                     .font(Font.system(size: 15, design: .default))
-                                    .frame(width: .infinity, height: 240)
+                                    .frame( height: 240)
                                     .border(Color.blue, width: 1)
                                     .cornerRadius(15)
                                     .lineSpacing(10)
@@ -272,7 +272,9 @@ struct ShowGroupMemberView : View {
                                         print("GO TO USER LOCATION")
                                         mapData.focusDestinationByLongLat(latitude: card.latitude,
                                                                           longitude: card.longitude,
-                                                                          name: card.name)
+                                                                          name: card.name ,status: card.status)
+                                        //shut off this view
+                                        showEnterGroupNameView = false
                                         
                                     } label: {
                                         Text(String(localized:"Location"))

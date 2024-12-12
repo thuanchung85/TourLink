@@ -65,7 +65,7 @@ struct Home: View {
                             Button {
                                 self.showEnterGroupNameView.toggle()
                                 //mapData.getAllMemberDataFromDatabase(isZoomin: true)
-                                
+                                self.endTextEditing()
                             } label: {
                                 Image(systemName: "person.2")
                                     .padding()
@@ -86,7 +86,7 @@ struct Home: View {
                         //nut 1 zoom vao vitri user
                         Button {
                             mapData.focusLocation()
-                            
+                            self.endTextEditing()
                         } label: {
                             Image(systemName: "figure.walk")
                                 .font(.title2)
@@ -132,6 +132,7 @@ struct Home: View {
                         TextField("Search", text: $mapData.searchTxt)
                             .onTapGesture {
                                 self.mapData.arrRouteOptionsFound.removeAll()
+                                showEnterGroupNameView = false
                             }
                             .foregroundColor(.blue)
                             .font(Font.system(size: 15, design: .default))
@@ -360,6 +361,7 @@ struct Home: View {
                                             showEnterGroupNameView: $showEnterGroupNameView,
                                             cardListViewModel: CardListViewModel())
                         .padding(.horizontal)
+                       
                     }
                 }
                 

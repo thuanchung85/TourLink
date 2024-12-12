@@ -327,6 +327,7 @@ struct ShowGroupMemberView : View {
                 .background(Color.primary.opacity(0.8))
                 .cornerRadius(20)
             }
+            .padding(.bottom,60)
         }
         
         //khi bấm nut edit user name và phone thì show ShowUserInfoEditView, cho user enter name và phone

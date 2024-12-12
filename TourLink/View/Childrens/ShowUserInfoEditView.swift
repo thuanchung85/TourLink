@@ -25,7 +25,7 @@ struct ShowUserInfoEditView : View {
                
             
             HStack{
-                Text("Enter you informations")
+                Text(String(localized:"Enter you informations"))
                 Spacer()
             }
             //form

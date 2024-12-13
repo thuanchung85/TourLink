@@ -75,9 +75,10 @@ struct MapView: UIViewRepresentable {
                     let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "FRIEND_VIEW")
                          annotationView.canShowCallout = true
                          annotationView.animatesWhenAdded = true
-                         annotationView.glyphImage = UIImage(systemName: "person.fill")
+                        let configuration = UIImage.SymbolConfiguration(pointSize: 50)
+                         annotationView.glyphImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
                          annotationView.glyphTintColor = .systemBlue
-                         annotationView.markerTintColor = .white
+                         annotationView.markerTintColor = .green
                          print(annotationView.bounds.size) // defaulted to 28,28
                          annotationView.bounds.size = CGSize(width: 50, height: 50) // Does not change bubble size
                     

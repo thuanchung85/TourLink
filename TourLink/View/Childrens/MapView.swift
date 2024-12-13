@@ -118,7 +118,14 @@ struct MapView: UIViewRepresentable {
         }
         
        
-        
+        //===Khi user tap vào vi tri đánh dấu trên MAP===//
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+                if let annotation = view.annotation {
+                    //Process your annotation here
+                    print("Annotation CLICK!", annotation)
+                    self.parent?.vitriNoiCanDen = annotation.coordinate
+                }
+            }
        
     }//end class Coordination
     

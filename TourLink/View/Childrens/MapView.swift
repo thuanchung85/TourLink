@@ -70,13 +70,20 @@ struct MapView: UIViewRepresentable {
             {
                 let s = annotation.title ?? ""
                 //neu la cac member thi dung hinh marker
-                if (s?.contains(find: "MEMBER @_@") == true)
+                if (s?.contains(find: "Friend @_@") == true)
                 {
-                    let memberAnnotation = MKMarkerAnnotationView()
-                    //pinAnnotation.tintColor = .green
-                    //pinAnnotation.animatesDrop = true
-                    //pinAnnotation.canShowCallout = true
-                    return memberAnnotation
+                    let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "FRIEND_VIEW")
+                         annotationView.canShowCallout = true
+                         annotationView.animatesWhenAdded = true
+                         annotationView.glyphImage = UIImage(systemName: "person.fill")
+                         annotationView.glyphTintColor = .systemBlue
+                         annotationView.markerTintColor = .white
+                         print(annotationView.bounds.size) // defaulted to 28,28
+                         annotationView.bounds.size = CGSize(width: 50, height: 50) // Does not change bubble size
+                    
+                    print("return friend annotation view")
+                    
+                    return annotationView
                 }
                 //neu là dich den thi dung hinh kim cham
                 else{
@@ -84,10 +91,14 @@ struct MapView: UIViewRepresentable {
                     pinAnnotation.tintColor = .red
                     pinAnnotation.animatesWhenAdded = true
                     pinAnnotation.canShowCallout = true
+                    print("return PIN_VIEW annotation view")
                     return pinAnnotation
                 }
                 
             }
+            
+            
+            
             return nil
                 
             

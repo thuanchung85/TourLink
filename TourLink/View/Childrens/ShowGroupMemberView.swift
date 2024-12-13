@@ -270,7 +270,7 @@ struct ShowGroupMemberView : View {
                                     //nut goto user location
                                     Button {
                                         print("GO TO USER LOCATION")
-                                        mapData.focusDestinationByLongLat(latitude: card.latitude,
+                                        mapData.focusDestinationOfFriend(latitude: card.latitude,
                                                                           longitude: card.longitude,
                                                                           name: card.name ,status: card.status)
                                         //shut off this view

@@ -53,6 +53,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userPhoneNumber:String = "(no phone)"
     
     //ham gan ngoi sao vao vi tri cua cac member
+    //tam thời chưa dùng
     func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])
     {
         if(self.arrHinhVeCacVitriMember.isEmpty == false){
@@ -95,6 +96,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
+     
     
     //ham add data vao database firestore chay duoi background theard
     func saveLocationData_ToFireStore(Location:CLLocationCoordinate2D)  {
@@ -358,6 +360,27 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         mapView.addAnnotation(pointAnnotation)
     }
     
+    //zoom vao vi tri bạn bè
+    func focusDestinationOfFriend( latitude: Double, longitude: Double, name:String, status:String)
+    {
+       
+        let mLo = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+       
+        self.mapView.setRegion(MKCoordinateRegion(center: mLo, span: region.span), animated: true)
+        self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
+        
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = mLo
+        pointAnnotation.title = "Friend @_@ " + name + "\n( \(status) )"
+        
+       //loc ra các annotaion bạn be remove het chung
+        let arrAnnoFriend = mapView.annotations.filter { item in
+            item.title!!.contains("Friend")
+        }
+        mapView.removeAnnotations(arrAnnoFriend)
+        mapView.addAnnotation(pointAnnotation)
+    }
+    
     //xin phep cap quyen lay data location
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         //check permissions...
@@ -398,7 +421,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
        
         self.mapView.setVisibleMapRect(self.mapView.visibleMapRect, animated: true)
-        
         
     }
     

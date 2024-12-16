@@ -18,6 +18,8 @@ struct ShowGroupMemberView : View {
     @State var showUserInfoEditView = false;
     @FocusState private var nameIsFocused: Bool
     
+    @State private var showingAlert = false
+    @State var isDeleteAllDocumentFireStoreOK = ""
     
     //=======BODY======//
     var body: some View{
@@ -131,7 +133,7 @@ struct ShowGroupMemberView : View {
                             
                             //nut xoá hết data vị trí
                             Button {
-                                deleteAllLocationOfuserFireStore(cardListViewModel: cardListViewModel)
+                                isDeleteAllDocumentFireStoreOK =  deleteAllLocationOfuserFireStore(cardListViewModel: cardListViewModel)
                             } label: {
                                 Text(String(localized:"Delete your data")).tint(Color.white)
                             }
@@ -196,6 +198,14 @@ struct ShowGroupMemberView : View {
             .cornerRadius(25)
             .onChange(of: mapData.groupName) { value in
                 
+            }
+            .alert("Your location data have been delete!", isPresented: $showingAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
+            .onChange(of: isDeleteAllDocumentFireStoreOK) { value in
+                if (value == "ok delete success"){
+                    showingAlert.toggle()
+                }
             }
         }
        
@@ -354,7 +364,7 @@ struct ShowGroupMemberView : View {
        
         
     }
-        
+       
         
 }
 
@@ -384,8 +394,8 @@ func saveLocationOfUserToFireStore(name : String,status:String, phone:String,pas
 }
 
 //hàm xoá toàn bộ ví trí củ của user
-func deleteAllLocationOfuserFireStore(cardListViewModel: CardListViewModel){
-    cardListViewModel.delete()
+func deleteAllLocationOfuserFireStore(cardListViewModel: CardListViewModel) ->String{
+   return  cardListViewModel.delete()
 }
 
 //hàm lấy ra data các user củng pass trên firestore

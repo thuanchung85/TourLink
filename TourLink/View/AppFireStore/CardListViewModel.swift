@@ -34,7 +34,7 @@ class CardListViewModel: ObservableObject
     }
     
     //=====DELETE=====//
-    func delete(){
-        cardRepository.delete()
+    func delete() ->String{
+      return   cardRepository.delete()
     }
 }

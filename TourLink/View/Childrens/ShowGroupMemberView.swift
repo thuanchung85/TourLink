@@ -127,7 +127,20 @@ struct ShowGroupMemberView : View {
                             .background(Color.primary.opacity(0.8))
                             .cornerRadius(20)
                             
+                           Spacer()
+                            
+                            //nut xoá hết data vị trí
+                            Button {
+                                deleteAllLocationOfuserFireStore(cardListViewModel: cardListViewModel)
+                            } label: {
+                                Text(String(localized:"Delete your data")).tint(Color.white)
+                            }
+                            .frame(width: 180, height: 40, alignment: .center)
+                            .background(Color.primary.opacity(0.8))
+                            .cornerRadius(20)
+                            
                             Spacer()
+                            
                             //nut OK
                             if(!mapData.groupName.isEmpty){
                                 //nut OK
@@ -341,7 +354,7 @@ struct ShowGroupMemberView : View {
        
         
     }
-    
+        
         
 }
 
@@ -368,6 +381,11 @@ func saveLocationOfUserToFireStore(name : String,status:String, phone:String,pas
           
         cardListViewModel.add(myCardData, collectname: pass)
     }
+}
+
+//hàm xoá toàn bộ ví trí củ của user
+func deleteAllLocationOfuserFireStore(cardListViewModel: CardListViewModel){
+    cardListViewModel.delete()
 }
 
 //hàm lấy ra data các user củng pass trên firestore

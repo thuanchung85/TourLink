@@ -31,7 +31,7 @@ class CardRepository: ObservableObject
             
             //ghi lai document id vào user default để dùng cho delete document sau này trong firestore
             array = defaults.array(forKey: "SavedStringArray_DocumentID_FireStore") as? [String] ?? []
-            array.append(documentID)
+            array.append(documentID + "<$>" + collectname)
             defaults.set(array, forKey: "SavedStringArray_DocumentID_FireStore")
             print("SAVE FINISH", defaults.array(forKey: "SavedStringArray_DocumentID_FireStore") as Any)
             
@@ -81,16 +81,30 @@ class CardRepository: ObservableObject
     }
     
     //==========DELETE===//
-    func delete(collectname:String, documentID:String){
-       
-        store.collection(collectname).document(documentID).delete(){ err in
-            if let err = err {
-                print("Error removing document: \(err)")
+    func delete() -> String{
+        
+        array = defaults.array(forKey: "SavedStringArray_DocumentID_FireStore") as? [String] ?? []
+        array = array.filter({ $0 != ""})
+        for i in array{
+            guard let collectname = i.components(separatedBy: "<$>").last else { return "delete fail no collectname" }
+            guard let documentID = i.components(separatedBy: "<$>").first else { return "delete fail no documentID" }
+            if(collectname.isEmpty == false){
+                store.collection(collectname).document(documentID).delete(){ err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    }
+                    else {
+                        print("Document successfully removed!")
+                    }
+                    
+                }
+               
             }
-            else {
-                print("Document successfully removed!")
+            else{
+                return "delete fail no collectname"
             }
-            
         }
+      
+        return "ok delete success"
     }
 }

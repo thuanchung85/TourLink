@@ -14,8 +14,8 @@ class CardRepository: ObservableObject
 {
     
    
-    
-   
+    var array = [String]()
+    let defaults = UserDefaults.standard
     
     private let store = Firestore.firestore()
     
@@ -25,7 +25,18 @@ class CardRepository: ObservableObject
       
         do {
             // 6
-            _ = try store.collection(collectname).addDocument(from: card)
+            let documentRef = try store.collection(collectname).addDocument(from: card)
+            let documentID = documentRef.documentID
+            print("SUCCESS WRITE DATABASE FIRE STORE AT:  ", documentID)
+            
+            //ghi lai document id vào user default để dùng cho delete document sau này trong firestore
+            array = defaults.array(forKey: "SavedStringArray_DocumentID_FireStore") as? [String] ?? []
+            array.append(documentID)
+            defaults.set(array, forKey: "SavedStringArray_DocumentID_FireStore")
+            print("SAVE FINISH", defaults.array(forKey: "SavedStringArray_DocumentID_FireStore") as Any)
+            
+           
+           
         } catch {
             fatalError("Unable to add card: \(error.localizedDescription).")
         }
@@ -69,5 +80,17 @@ class CardRepository: ObservableObject
         
     }
     
-    
+    //==========DELETE===//
+    func delete(collectname:String, documentID:String){
+       
+        store.collection(collectname).document(documentID).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            }
+            else {
+                print("Document successfully removed!")
+            }
+            
+        }
+    }
 }

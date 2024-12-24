@@ -42,6 +42,9 @@ struct ShowGroupMemberView : View {
                         
                     )
                     .minimumScaleFactor(0.3)
+                    .onAppear{
+                        print(mapData.userName + ":" + mapData.userPhoneNumber)
+                    }
                 
                 if(showListView == false){
                     Image(systemName: "square.and.pencil")

@@ -76,7 +76,9 @@ struct ShowUserInfoEditView : View {
                     Button {
                         
                         showUserInfoEditView.toggle()
-                        
+                        print("SAVE you is : " + userName + " : " + userPhone)
+                        UserDefaults.standard.set(userName, forKey: "userName_Save_Local")
+                        UserDefaults.standard.set(userPhone, forKey: "userPhone_Save_Local")
                         
                     } label: {
                         

@@ -52,6 +52,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userName:String = "User"
     @Published var userPhoneNumber:String = "(no phone)"
     
+    //init
+    override init() {
+        print("INIT MapViewModel")
+        userName = UserDefaults.standard.string(forKey: "userName_Save_Local") ?? "User"
+        userPhoneNumber = UserDefaults.standard.string(forKey: "userPhone_Save_Local") ?? "(no phone)"
+    }
+    
     //ham gan ngoi sao vao vi tri cua cac member
     //tam thời chưa dùng
     func makeStarForMemberLocation(arrVitri:[(toado : CLLocationCoordinate2D , tenMember : String)])

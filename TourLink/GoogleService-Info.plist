@@ -9,11 +9,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Chung.TourLink</string>
+	<string>com.chunghome.TourLink</string>
 	<key>PROJECT_ID</key>
 	<string>tourlink-aebea</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tourlink-aebea.appspot.com</string>
+	<string>tourlink-aebea.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:423751510728:ios:1273900fe9535ead3e93fd</string>
+	<string>1:423751510728:ios:2470cbec1a61f51b3e93fd</string>
 </dict>
 </plist>

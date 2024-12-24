@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E034103427C32A8200BFC511 /* RouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E034103327C32A8200BFC511 /* RouteModel.swift */; };
+		E049B5F42D1A368E0077D92B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E049B5F32D1A368E0077D92B /* GoogleService-Info.plist */; };
 		E09F8DB32793CB4800FD6F74 /* ExtensionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */; };
 		E0B8E60227A77A3F004B579D /* ShowGroupMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */; };
 		E0C0F4972C918ACD005A719B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E0C0F4952C918ACD005A719B /* Localizable.strings */; };
-		E0C0F49A2C926BCF005A719B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0C0F4992C926BCF005A719B /* GoogleService-Info.plist */; };
 		E0C0F49D2C926DB3005A719B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F49C2C926DB3005A719B /* FirebaseAnalytics */; };
 		E0C0F49F2C926DB3005A719B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F49E2C926DB3005A719B /* FirebaseAuth */; };
 		E0C0F4A12C926DB3005A719B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E0C0F4A02C926DB3005A719B /* FirebaseDatabase */; };
@@ -23,6 +23,7 @@
 		E0C0F4AF2C927698005A719B /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4AE2C927698005A719B /* CardListViewModel.swift */; };
 		E0C0F4B22C92A849005A719B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0F4B12C92A849005A719B /* NetworkMonitor.swift */; };
 		E0CCBDF12D0AA223003349CC /* ShowUserInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CCBDF02D0AA223003349CC /* ShowUserInfoEditView.swift */; };
+		E0CFB4382D194DC000CE458A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = E0CFB4372D194DC000CE458A /* FirebaseMessaging */; };
 		E0EE67BC27D594F600190436 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EE67BB27D594F600190436 /* SharedFunctions.swift */; };
 		E0F047702790200E0065262D /* TourLinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0476F2790200E0065262D /* TourLinkApp.swift */; };
 		E0F047722790200E0065262D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F047712790200E0065262D /* ContentView.swift */; };
@@ -36,16 +37,17 @@
 
 /* Begin PBXFileReference section */
 		E034103327C32A8200BFC511 /* RouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteModel.swift; sourceTree = "<group>"; };
+		E049B5F32D1A368E0077D92B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
 		E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroupMemberView.swift; sourceTree = "<group>"; };
 		E0C0F4962C918ACD005A719B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0C0F4982C918AE9005A719B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E0C0F4992C926BCF005A719B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0C0F4A72C927111005A719B /* CardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRepository.swift; sourceTree = "<group>"; };
 		E0C0F4A92C9271D4005A719B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E0C0F4AE2C927698005A719B /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
 		E0C0F4B12C92A849005A719B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E0CCBDF02D0AA223003349CC /* ShowUserInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowUserInfoEditView.swift; sourceTree = "<group>"; };
+		E0CFB4362D194BBE00CE458A /* TourLink.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TourLink.entitlements; sourceTree = "<group>"; };
 		E0EE67BB27D594F600190436 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		E0F0476C2790200E0065262D /* TourLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TourLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F0476F2790200E0065262D /* TourLinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourLinkApp.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			files = (
 				E0C0F4A12C926DB3005A719B /* FirebaseDatabase in Frameworks */,
 				E0C0F4A32C926DB3005A719B /* FirebaseFirestore in Frameworks */,
+				E0CFB4382D194DC000CE458A /* FirebaseMessaging in Frameworks */,
 				E0C0F49D2C926DB3005A719B /* FirebaseAnalytics in Frameworks */,
 				E0C0F4A52C926DB3005A719B /* FirebaseStorage in Frameworks */,
 				E0C0F49F2C926DB3005A719B /* FirebaseAuth in Frameworks */,
@@ -130,6 +133,7 @@
 		E0F0476E2790200E0065262D /* TourLink */ = {
 			isa = PBXGroup;
 			children = (
+				E0CFB4362D194BBE00CE458A /* TourLink.entitlements */,
 				E0EE67BB27D594F600190436 /* SharedFunctions.swift */,
 				E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */,
 				E0F047A3279174DF0065262D /* View */,
@@ -137,7 +141,7 @@
 				E0F047712790200E0065262D /* ContentView.swift */,
 				E0F04773279020100065262D /* Assets.xcassets */,
 				E0F04778279020100065262D /* Info.plist */,
-				E0C0F4992C926BCF005A719B /* GoogleService-Info.plist */,
+				E049B5F32D1A368E0077D92B /* GoogleService-Info.plist */,
 				E0F04775279020100065262D /* Preview Content */,
 			);
 			path = TourLink;
@@ -206,6 +210,7 @@
 				E0C0F4A22C926DB3005A719B /* FirebaseFirestore */,
 				E0C0F4A42C926DB3005A719B /* FirebaseStorage */,
 				E0C0F4AB2C927493005A719B /* FirebaseFirestoreSwift */,
+				E0CFB4372D194DC000CE458A /* FirebaseMessaging */,
 			);
 			productName = TourLink;
 			productReference = E0F0476C2790200E0065262D /* TourLink.app */;
@@ -254,7 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F04777279020100065262D /* Preview Assets.xcassets in Resources */,
-				E0C0F49A2C926BCF005A719B /* GoogleService-Info.plist in Resources */,
+				E049B5F42D1A368E0077D92B /* GoogleService-Info.plist in Resources */,
 				E0C0F4972C918ACD005A719B /* Localizable.strings in Resources */,
 				E0F04774279020100065262D /* Assets.xcassets in Resources */,
 			);
@@ -425,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TourLink/TourLink.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TourLink/Preview Content\"";
 				DEVELOPMENT_TEAM = 2SG8TQJQR9;
@@ -436,7 +442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Chung.TourLink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chunghome.TourLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -451,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TourLink/TourLink.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TourLink/Preview Content\"";
 				DEVELOPMENT_TEAM = 2SG8TQJQR9;
@@ -462,7 +469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Chung.TourLink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chunghome.TourLink;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -536,6 +543,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		E0CFB4372D194DC000CE458A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E038200C2799102C00104801 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

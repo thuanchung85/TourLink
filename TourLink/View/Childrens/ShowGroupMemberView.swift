@@ -19,6 +19,7 @@ struct ShowGroupMemberView : View {
     @FocusState private var nameIsFocused: Bool
     
     @State private var showingAlert = false
+    @State private var showingAlertInVaildSMSNumber = false
     @State var isDeleteAllDocumentFireStoreOK = ""
     
     //=======BODY======//
@@ -267,6 +268,33 @@ struct ShowGroupMemberView : View {
                                 //vi tri
                                 HStack{
                                     VStack{
+                                        //nut send SMS to user
+                                        Text(String(localized:"send SMS"))
+                                            .foregroundStyle(.white)
+                                            .font(.system(size: 15))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                            .fontWeight(.bold)
+                                            .frame(width: 120, height: 40, alignment: .center)
+                                            .background(Color.blue.opacity(0.8))
+                                            .cornerRadius(25)
+                                        
+                                            .padding(.leading, 10)
+                                            .onTapGesture {
+                                                print("SMS")
+                                                let mPhoneNumber = card.userPhone;
+                                                let mMessage = "";
+                                                if let url = URL(string: "sms://" + mPhoneNumber + "&body="+mMessage) {
+                                                    UIApplication.shared.open(url)
+                                                }
+                                                else{
+                                                    showingAlertInVaildSMSNumber = true
+                                                    print("phone number SMS invalid")
+                                                }
+                                                
+                                            }
+                                       
+                                        
                                         Text(String(card.longitude))
                                             .foregroundStyle(.white)
                                             .font(.system(size: 10))
@@ -290,29 +318,27 @@ struct ShowGroupMemberView : View {
                                     }
                                     Spacer()
                                     
-                                    //nut goto user location
-                                    Button {
-                                        print("GO TO USER LOCATION")
-                                        mapData.focusDestinationOfFriend(latitude: card.latitude,
-                                                                          longitude: card.longitude,
-                                                                          name: card.name ,status: card.status)
-                                        //shut off this view
-                                        showEnterGroupNameView = false
-                                        
-                                    } label: {
-                                        Text(String(localized:"Location"))
-                                            .foregroundColor(.white)
-                                            .tint(Color.white)
-                                    }
-                                    .frame(width: 120, height: 40, alignment: .center)
-                                    .background(Color.primary.opacity(0.8))
-                                    .cornerRadius(20)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(Color.blue, lineWidth: 1)
-                                        
-                                    )
-                                    .padding(.trailing, 10)
+                                    //"GO TO USER LOCATION"
+                                    Text(String(localized:"Location"))
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 15))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                        .fontWeight(.bold)
+                                        .frame(width: 120, height: 40, alignment: .center)
+                                        .background(Color.green.opacity(0.8))
+                                        .cornerRadius(25)
+                                    
+                                        .padding(.trailing, 10)
+                                        .onTapGesture {
+                                            print("GO TO USER LOCATION")
+                                            mapData.focusDestinationOfFriend(latitude: card.latitude,
+                                                                              longitude: card.longitude,
+                                                                              name: card.name ,status: card.status)
+                                            //shut off this view
+                                            showEnterGroupNameView = false
+                                        }
+                                   
                                 }
                                 .padding(.horizontal, 10)
                                 
@@ -353,6 +379,9 @@ struct ShowGroupMemberView : View {
                 .cornerRadius(20)
             }
             .padding(.bottom,60)
+            .alert("Phone number wrong so SMS disable!", isPresented: $showingAlertInVaildSMSNumber) {
+                        Button("OK", role: .cancel) { }
+                    }
         }
         
         //khi bấm nut edit user name và phone thì show ShowUserInfoEditView, cho user enter name và phone

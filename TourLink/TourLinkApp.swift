@@ -10,7 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseMessaging
-
+import FirebaseInAppMessaging
 
 //===FOR THE FIREBASE===//
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -43,21 +43,27 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 extension AppDelegate: MessagingDelegate {
        
-       func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-           print("Firebase registration token: \(String(describing: fcmToken))")
-           
-           let dataDict: [String: String] = ["token": fcmToken ?? ""]
-           NotificationCenter.default.post(
-               name: Notification.Name("FCMToken"),
-               object: nil,
-               userInfo: dataDict
-           )
-       }
+    //nếu FCM ok thì sẽ có token FCM
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+        
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
+    }
     
-   }
+    //nếu FCM fail thi bao lỗi
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: \(error.localizedDescription)")
+    }
+}
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
+    //muốn co FCM thì phải qua bước lấy token APNS từ apple trước
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNS token: \(deviceToken)")
         Messaging.messaging().apnsToken = deviceToken
@@ -70,6 +76,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
     }
+}
+
+extension AppDelegate {
+    func userNotificationCenter(
+            _ center: UNUserNotificationCenter,
+            willPresent notification: UNNotification,
+            withCompletionHandler completionHandler:
+            @escaping (UNNotificationPresentationOptions) -> Void
+        ) {
+            completionHandler([[.banner, .sound, .badge]])
+        }
 }
   
 

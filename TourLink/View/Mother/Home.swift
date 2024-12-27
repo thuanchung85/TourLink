@@ -10,6 +10,7 @@ import CoreLocation
 
 
 struct Home: View {
+    var cardListViewModel: CardListViewModel
    
    @State var isDisAble = false
     
@@ -19,7 +20,22 @@ struct Home: View {
     //bien co show va hide action sheet
     @State var showEnterGroupNameView = false
     
-    
+    //timer để save vi trí của user theo thời gian thật khi có điền tên group mỗi 1 phut update vị trí 1 lần
+    @State var duration = "---"
+        private let timeStarted = Date()
+        private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+        
+    static var duratioinFormatter: DateComponentsFormatter = {
+           let formatter = DateComponentsFormatter()
+           formatter.allowedUnits = [.hour, .minute, .second]
+           formatter.unitsStyle = .abbreviated
+           formatter.zeroFormattingBehavior = .dropLeading
+           return formatter
+       }()
+
+  
+
+    //====BODY====//
     var body: some View {
         if(isDisAble == false){
             
@@ -359,7 +375,7 @@ struct Home: View {
                     {
                         ShowGroupMemberView(mapData: self.mapData,
                                             showEnterGroupNameView: $showEnterGroupNameView,
-                                            cardListViewModel: CardListViewModel())
+                                            cardListViewModel: cardListViewModel)
                         .padding(.horizontal)
                        
                     }
@@ -398,6 +414,28 @@ struct Home: View {
                     }
                 }
             }
+            
+            //thử ghi lai vitri user save vao firestore 30s 1 lần
+            .onReceive(timer) { _ in
+                let delta = Date().timeIntervalSince(timeStarted)
+                duration = Home.duratioinFormatter.string(from: delta) ?? "---"
+                print("timer. home duration : " + duration)
+                
+                //save lên firestore database nếu user có điền tên group name
+                if(mapData.groupName.isEmpty == false){
+                    print(">>>>update YOUR LOCATION!! FOR GROUP: " + mapData.groupName)
+                    saveLocationOfUserToFireStore(
+                        name: mapData.userName, status: mapData.statusString,
+                        phone: mapData.userPhoneNumber,
+                        pass: mapData.groupName,
+                        mapData: mapData,
+                        cardListViewModel: cardListViewModel)
+                }
+                else{
+                    print("YOU LOSE GROUP NAME, SO not update your location")
+                }
+            }
+            
             
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification), perform: { output in
                 //khi user turn off app thi save lai vi tri cuoi cung cua user

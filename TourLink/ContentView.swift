@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
+    @ObservedObject var cardListViewModel: CardListViewModel = CardListViewModel()
     @EnvironmentObject var networkMonitor: NetworkMonitor
    
     @State private var showNetworkAlert = false
@@ -19,12 +19,12 @@ struct ContentView: View {
         NavigationView {
                   //neu internet ok
                     if networkMonitor.isConnected {
-                            Home(isDisAble: false)
+                        Home(cardListViewModel: cardListViewModel ,isDisAble: false)
                     }
                     //neu khong co internet
                     else{
                         ZStack{
-                            Home(isDisAble: true)
+                            Home(cardListViewModel: cardListViewModel, isDisAble: true)
                             Text( "Network connection seems to be offline.")
                                 .foregroundStyle(.white)
                                 .font(.system(size: 12))

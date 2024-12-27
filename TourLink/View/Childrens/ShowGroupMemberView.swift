@@ -11,7 +11,7 @@ import SwiftUI
 struct ShowGroupMemberView : View {
     @StateObject var mapData : MapViewModel
     @Binding var showEnterGroupNameView:Bool
-    @ObservedObject var cardListViewModel: CardListViewModel
+     var cardListViewModel: CardListViewModel
     
     @State var arrUserSamePass = [Card]()
     @State var showListView = false;

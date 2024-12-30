@@ -56,6 +56,7 @@ struct MapView: UIViewRepresentable {
             let annotation = MKPointAnnotation()
             guard let _newCoordinates = newCoordinates else { return }
             annotation.coordinate = _newCoordinates
+            annotation.title = String(localized: "place you choose")
             parent?.mapView.addAnnotation(annotation)
         }
         

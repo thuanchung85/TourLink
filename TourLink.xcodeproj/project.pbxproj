@@ -43,6 +43,7 @@
 		E09F8DB22793CB4800FD6F74 /* ExtensionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHelper.swift; sourceTree = "<group>"; };
 		E0B3901E2D22247500269B4B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0B3901F2D22256E00269B4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E0B390202D22432A00269B4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E0B8E60127A77A3F004B579D /* ShowGroupMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroupMemberView.swift; sourceTree = "<group>"; };
 		E0C0F4962C918ACD005A719B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E0C0F4982C918AE9005A719B /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				vi,
 				ko,
 				ja,
+				"zh-Hans",
 			);
 			mainGroup = E0F047632790200E0065262D;
 			packageReferences = (
@@ -310,6 +312,7 @@
 				E0C0F4982C918AE9005A719B /* vi */,
 				E0B3901E2D22247500269B4B /* ko */,
 				E0B3901F2D22256E00269B4B /* ja */,
+				E0B390202D22432A00269B4B /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

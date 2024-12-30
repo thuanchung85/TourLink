@@ -34,4 +34,6 @@
 "send SMS" = "gởi SMS";
 "place you choose" = "nơi bạn muốn đến";
 "Go" = "Đi";
-"Delete your data" = "Xoá vị trí củ";
+"Delete your data" = "Xoá vị trí cũ";
+"Phone number wrong so SMS disable!" = "Số phone sai nên không SMS được!";
+"Your location data have been delete!" ="Vị trí cũ đã bị xoá!";

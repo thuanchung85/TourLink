@@ -26,4 +26,6 @@
 "send SMS" = "SMSを送信する";
 "place you choose" = "あなたが選んだ場所" ;
 "Go" = "行く";
-"Delete your data" = "データを削除する";
+"Delete your data" = "場所を削除する";
+"Phone number wrong so SMS disable!" = "電話番号が間違っているためSMSを無効にします!";
+"Your location data have been delete!" ="位置情報が削除されました!";

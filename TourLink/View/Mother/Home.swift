@@ -199,7 +199,7 @@ struct Home: View {
                         } label: {
                             //Image(systemName: "scribble")
                             //.padding()
-                            Text("Go").tint(Color.white).padding()
+                            Text("Go").tint(Color.white)
                         }
                         .frame(width: 60, height: 40, alignment: .center)
                         .background(Color.blue.opacity(0.8))

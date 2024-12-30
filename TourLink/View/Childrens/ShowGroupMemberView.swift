@@ -453,7 +453,7 @@ func getLastLocation(datas:[Card]) -> [Card]
     print(arr_kiemRaCacNameKhacNhau)
     
     //dùng qua các name khác nhau đó loop lọc array datas theo name
-    var arrOf_arrayCard = [[Card]]()
+    //var arrOf_arrayCard = [[Card]]()
     
     for i in 0..<arr_kiemRaCacNameKhacNhau.count{
         print(arr_kiemRaCacNameKhacNhau[i])

@@ -10,6 +10,8 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     
+    
+    
     //map view nay co link toi viewmodel la mapData
     @StateObject var mapData : MapViewModel
     
@@ -23,10 +25,16 @@ struct MapView: UIViewRepresentable {
         view.showsUserLocation = true
         
         view.delegate = context.coordinator
+        
+        let longPressed = UILongPressGestureRecognizer(target: context.coordinator,
+                                                          action: #selector(context.coordinator.addPinBasedOnGesture(_:)))
+        view.addGestureRecognizer(longPressed)
+       
         return view
     
     }
     
+   
     
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -39,9 +47,23 @@ struct MapView: UIViewRepresentable {
         private let parent: MapViewModel?
         private var isUserAddHeadingArrow =  false
         
+       
+        @objc func addPinBasedOnGesture(_ gestureRecognizer:UIGestureRecognizer) 
+        {
+            print("ADD A PIN!!")
+            let touchPoint = gestureRecognizer.location(in: gestureRecognizer.view)
+            let newCoordinates = (gestureRecognizer.view as? MKMapView)?.convert(touchPoint, toCoordinateFrom: gestureRecognizer.view)
+            let annotation = MKPointAnnotation()
+            guard let _newCoordinates = newCoordinates else { return }
+            annotation.coordinate = _newCoordinates
+            parent?.mapView.addAnnotation(annotation)
+        }
+        
         //init
         init(_ parent: MapViewModel) {
             self.parent = parent
+           
+            
         }
         
         //===ham ve duong di mau xanh duong==///

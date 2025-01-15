@@ -385,6 +385,10 @@ struct Home: View {
             .onAppear {
                 //lay thong tin member co bao nhieu nguoi
                 //mapData.getAllMemberDataFromDatabase()
+                DispatchQueue.main.async {
+                    print(" APP INIT NEW, DELETE ALL OLD USER LOCATION DATA")
+                    _ = deleteAllLocationOfuserFireStore(cardListViewModel: cardListViewModel)
+                }
                 
                 //khi init home view xong thi khoi tao location manager
                 mapData.locationManager.delegate = mapData

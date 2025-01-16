@@ -42,6 +42,7 @@ struct Home: View {
             
             ZStack{
                 
+                
                 //đây là MapView la view con nam bên dưới zstack
                 MapView(mapData: mapData)
                     .environmentObject(mapData)
@@ -240,7 +241,7 @@ struct Home: View {
                                                         .frame(maxWidth:.infinity, alignment: .leading)
                                                         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                                                     
-                                                   
+                                                    
                                                 }
                                                 .padding()
                                                 .background(Color.white.opacity(0.9))
@@ -248,15 +249,15 @@ struct Home: View {
                                             }
                                             else{
                                                 HStack{
-                                                Text(item.place.name ?? "").fontWeight(.bold).foregroundColor(Color.black)
-                                                
-                                                Text(  makeAddress(place: item.place) )
-                                                    .fontWeight(.thin)
-                                                    .foregroundColor(Color.black)
-                                                    .frame(maxWidth:.infinity, alignment: .leading)
-                                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                                    Text(item.place.name ?? "").fontWeight(.bold).foregroundColor(Color.black)
                                                     
-                                               
+                                                    Text(  makeAddress(place: item.place) )
+                                                        .fontWeight(.thin)
+                                                        .foregroundColor(Color.black)
+                                                        .frame(maxWidth:.infinity, alignment: .leading)
+                                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                                    
+                                                    
                                                 }
                                                 .padding()
                                                 .background(Color.gray.opacity(0.9))
@@ -269,7 +270,7 @@ struct Home: View {
                                             self.mapData.isShowTableRouteOption = false
                                         }
                                     }
-                                   
+                                    
                                 }
                                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                             }
@@ -370,6 +371,35 @@ struct Home: View {
                     }
                     
                     
+                }
+                
+                
+                
+                //thông báo đang watching member nào đó
+                if(UserDefaults.standard.string(forKey: "nameOfWatchingUser")?.isEmpty == false){
+                    VStack{
+                        Button {
+                            print("watching button click")
+                        } label: {
+                            Image(systemName: "eye")
+                                .padding(5)
+                            Text("Watching: " + (UserDefaults.standard.string(forKey: "nameOfWatchingUser") ?? "") )
+                                .frame(width: 180, height: 40, alignment: .center)
+                                .scaledToFill()
+                                .minimumScaleFactor(0.05)
+                                .lineLimit(1)
+                        }
+                        .frame(width: 240, height: 40, alignment: .center)
+                        .background(Color.primary.opacity(0.8))
+                        .cornerRadius(20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.blue, lineWidth: 1)
+                            
+                        )
+                        .padding(.horizontal,50)
+                        Spacer()
+                    }
                 }
                 
                 //ACTION SHEET hien ra khi bam nut group view

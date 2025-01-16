@@ -196,6 +196,9 @@ struct Home: View {
                             //mapData.showDirection()
                             mapData.showRoutesOptionsTable()
                             
+                            //xoa tên member đang theo doỉ nếu có
+                            UserDefaults.standard.set("", forKey: "nameOfWatchingUser")
+                            
                         } label: {
                             //Image(systemName: "scribble")
                             //.padding()
@@ -434,6 +437,41 @@ struct Home: View {
                         pass: mapData.groupName,
                         mapData: mapData,
                         cardListViewModel: cardListViewModel)
+                    
+                 //goto watch member if choose
+                    let userDangwatch = UserDefaults.standard.string(forKey: "nameOfWatchingUser")
+                    if(userDangwatch?.isEmpty == false){
+                        getListOfUserSamePass(pass: mapData.groupName, cardListViewModel: cardListViewModel, completionHandler: {datas in
+                            
+                            //lấy ra vị trí cuối cùng của user trên map
+                            
+                            let arrUserSamePass = getLastLocation(datas: datas).filter { Card in
+                                Card.name == userDangwatch
+                            }
+                            if let chosenUserWatch = arrUserSamePass.first{
+                                
+                                let vitriFriendWatched_lat = chosenUserWatch.latitude
+                                let vitriFriendWatched_long = chosenUserWatch.longitude
+                                let nameOfFriendWatched = chosenUserWatch.name
+                                let statusFriendWatched = chosenUserWatch.status
+                                print("WATCHING: -> ", chosenUserWatch.name)
+                                print("WATCHING: -> ", chosenUserWatch.latitude)
+                                print("WATCHING: -> ", chosenUserWatch.longitude)
+                                print("WATCHING: -> ", chosenUserWatch.status)
+                                mapData.focusDestinationOfFriend(latitude: vitriFriendWatched_lat,
+                                                                 longitude: vitriFriendWatched_long,
+                                                                 name: nameOfFriendWatched  ,status: statusFriendWatched)
+                            }
+                            else{
+                                print("WATCHING: -> FAIL NO DATA")
+                            }
+                            
+                        })
+                        
+                    }
+                    else{
+                        print("userDangwatch is EMPTY, SO not update your FRIEND location")
+                    }
                 }
                 else{
                     print("YOU LOSE GROUP NAME, SO not update your location")

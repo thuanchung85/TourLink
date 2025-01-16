@@ -335,6 +335,10 @@ struct ShowGroupMemberView : View {
                                         .padding(.trailing, 10)
                                         .onTapGesture {
                                             print("GO TO USER LOCATION")
+                                            //save name of this chosen member
+                                            UserDefaults.standard.set(card.name, forKey: "nameOfWatchingUser")
+                                            
+                                            //show location of chosen user on map
                                             mapData.focusDestinationOfFriend(latitude: card.latitude,
                                                                               longitude: card.longitude,
                                                                               name: card.name ,status: card.status)

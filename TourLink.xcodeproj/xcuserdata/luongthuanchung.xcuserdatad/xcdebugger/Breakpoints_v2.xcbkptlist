@@ -542,8 +542,8 @@
             filePath = "TourLink/View/Childrens/ShowGroupMemberView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "saveLocationOfUserToFireStore(name:status:phone:pass:mapData:cardListViewModel:)"
             landmarkType = "9">
          </BreakpointContent>

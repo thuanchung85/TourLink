@@ -376,29 +376,31 @@ struct Home: View {
                 
                 
                 //thông báo đang watching member nào đó
-                if(UserDefaults.standard.string(forKey: "nameOfWatchingUser")?.isEmpty == false){
-                    VStack{
-                        Button {
-                            print("watching button click")
-                        } label: {
-                            Image(systemName: "eye")
-                                .padding(5)
-                            Text("Watching: " + (UserDefaults.standard.string(forKey: "nameOfWatchingUser") ?? "") )
-                                .frame(width: 180, height: 40, alignment: .center)
-                                .scaledToFill()
-                                .minimumScaleFactor(0.05)
-                                .lineLimit(1)
+                if(!mapData.groupName.isEmpty){
+                    if(UserDefaults.standard.string(forKey: "nameOfWatchingUser")?.isEmpty == false){
+                        VStack{
+                            Button {
+                                print("watching button click")
+                            } label: {
+                                Image(systemName: "eye")
+                                    .padding(5)
+                                Text("Watching: " + (UserDefaults.standard.string(forKey: "nameOfWatchingUser") ?? "") )
+                                    .frame(width: 180, height: 40, alignment: .center)
+                                    .scaledToFill()
+                                    .minimumScaleFactor(0.05)
+                                    .lineLimit(1)
+                            }
+                            .frame(width: 240, height: 40, alignment: .center)
+                            .background(Color.primary.opacity(0.8))
+                            .cornerRadius(20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.blue, lineWidth: 1)
+                                
+                            )
+                            .padding(.horizontal,50)
+                            Spacer()
                         }
-                        .frame(width: 240, height: 40, alignment: .center)
-                        .background(Color.primary.opacity(0.8))
-                        .cornerRadius(20)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.blue, lineWidth: 1)
-                            
-                        )
-                        .padding(.horizontal,50)
-                        Spacer()
                     }
                 }
                 

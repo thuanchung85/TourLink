@@ -4,7 +4,7 @@
 //
 //  Created by Luong Thuan Chung on 12/09/2024.
 //
-
+import UserNotifications
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -118,6 +118,9 @@ class CardRepository: ObservableObject
                 switch documentChange.type {
                   case .added :
                      print("documentChange .... Added")
+                    let dict = documentChange.document.data()
+                    self.notifiWhenADD(title: "TourLink", sub: dict["status"] as! String)
+                    
                   case .modified :
                      print("documentChange .... Modified")
                   case .removed :
@@ -133,4 +136,36 @@ class CardRepository: ObservableObject
         registration?.remove()
     }
    
+    //==========NOTIFICATION: FOR ADD DATA====//
+    func notifiWhenADD(title:String, sub:String){
+        
+        //bắn notification local ra
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("All set!")
+            } else if let error {
+                print(error.localizedDescription)
+                return
+            }
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = sub
+        content.sound = UNNotificationSound.default
+
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+        
+    }
+    
+    
+    
+    
 }//end class

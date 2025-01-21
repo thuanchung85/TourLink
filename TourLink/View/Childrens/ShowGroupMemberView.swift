@@ -4,7 +4,8 @@
 //
 //  Created by Luong Thuan Chung on 31/01/2022.
 //
-
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import Foundation
 import SwiftUI
 
@@ -125,6 +126,7 @@ struct ShowGroupMemberView : View {
                         HStack{
                             //nut huỷ
                             Button {
+                                removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
                                 showEnterGroupNameView.toggle()
                             } label: {
                                 Text(String(localized:"Cancel")).tint(Color.white)
@@ -174,6 +176,10 @@ struct ShowGroupMemberView : View {
                                         
                                     })
                                     
+                                    //watch sự update của data của các document trong colecttion database
+                                    removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                                    watchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                                    
                                 } label: {
                                     
                                     Text(String(localized:"Ok")).tint(Color.white)
@@ -210,6 +216,9 @@ struct ShowGroupMemberView : View {
                 if (value == "ok delete success"){
                     showingAlert.toggle()
                 }
+            }
+            .onAppear(){
+                removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
             }
         }
        
@@ -377,6 +386,7 @@ struct ShowGroupMemberView : View {
                 
                 //nut huỷ
                 Button {
+                    removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
                     showEnterGroupNameView.toggle()
                 } label: {
                     Text(String(localized:"Cancel")).tint(Color.white)
@@ -398,9 +408,8 @@ struct ShowGroupMemberView : View {
         }
         
        
-        
     }
-       
+        
         
 }
 
@@ -481,4 +490,18 @@ func getLastLocation(datas:[Card]) -> [Card]
     }
     
     return arrChuaItemLastTimeUpdate
+}
+
+//hàm theo dỏi update data của các document trong database
+func watchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String)  {
+    print("WATCH -> run func watchDocumentDataChange")
+     cardListViewModel.watch(collectname: pass)
+}
+
+//hàm ngưng theo dỏi
+func removeWatchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String)
+{
+    print("UN WATCH -> removeWatchDocumentDataChange")
+    cardListViewModel.unWatch(collectname: pass)
+    
 }

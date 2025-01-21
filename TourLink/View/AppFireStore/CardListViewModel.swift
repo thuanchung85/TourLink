@@ -4,7 +4,8 @@
 //
 //  Created by Luong Thuan Chung on 12/09/2024.
 //
-
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 import Foundation
 // 1
 import Combine
@@ -36,5 +37,13 @@ class CardListViewModel: ObservableObject
     //=====DELETE=====//
     func delete() ->String{
       return   cardRepository.delete()
+    }
+    
+    //====WATCH=======//
+    func watch(collectname:String) {
+         cardRepository.watch(collectname: collectname )
+    }
+    func unWatch(collectname:String){
+        cardRepository.unwatch(collectname: collectname )
     }
 }

@@ -18,7 +18,7 @@ class CardRepository: ObservableObject
     let defaults = UserDefaults.standard
     
     private let store = Firestore.firestore()
-    
+    private var registration: ListenerRegistration?
     
     //=========ADD===//
     func add(_ card: Card, collectname:String) {
@@ -107,4 +107,30 @@ class CardRepository: ObservableObject
       
         return "ok delete success"
     }
-}
+    
+    //=======WATCH CHANGE OF DOCUMENT====//
+    func watch(collectname:String) 
+    {
+        print("WATCHING --> collection: " + collectname)
+         registration =  store.collection(collectname).addSnapshotListener(includeMetadataChanges: false){ documentSnapshot, error in
+            guard let snapshot = documentSnapshot else { return }
+            snapshot.documentChanges.forEach { (documentChange) in
+                switch documentChange.type {
+                  case .added :
+                     print("documentChange .... Added")
+                  case .modified :
+                     print("documentChange .... Modified")
+                  case .removed :
+                     print("documentChange .... removed")
+                }
+            }
+        }
+       
+    }
+    //=======UNWATCH====//
+    func unwatch(collectname:String){
+        print("UNWATCHING --> collection: " + collectname)
+        registration?.remove()
+    }
+   
+}//end class

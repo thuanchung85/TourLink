@@ -126,7 +126,7 @@ struct ShowGroupMemberView : View {
                         HStack{
                             //nut huỷ
                             Button {
-                                removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                                //removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
                                 showEnterGroupNameView.toggle()
                             } label: {
                                 Text(String(localized:"Cancel")).tint(Color.white)
@@ -218,7 +218,7 @@ struct ShowGroupMemberView : View {
                 }
             }
             .onAppear(){
-                removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                //removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
             }
         }
        
@@ -386,7 +386,7 @@ struct ShowGroupMemberView : View {
                 
                 //nut huỷ
                 Button {
-                    removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                    //removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
                     showEnterGroupNameView.toggle()
                 } label: {
                     Text(String(localized:"Cancel")).tint(Color.white)

@@ -40,8 +40,8 @@ class CardListViewModel: ObservableObject
     }
     
     //====WATCH=======//
-    func watch(collectname:String) {
-         cardRepository.watch(collectname: collectname )
+    func watch(collectname:String, myCurrentName:String) {
+        cardRepository.watch(collectname: collectname, myCurrentName: myCurrentName )
     }
     func unWatch(collectname:String){
         cardRepository.unwatch(collectname: collectname )

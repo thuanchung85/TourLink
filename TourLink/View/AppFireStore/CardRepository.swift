@@ -109,12 +109,14 @@ class CardRepository: ObservableObject
     }
     
     //=======WATCH CHANGE OF DOCUMENT====//
-    func watch(collectname:String) 
+    func watch(collectname:String, myCurrentName:String)
     {
         print("WATCHING --> collection: " + collectname)
          registration =  store.collection(collectname).addSnapshotListener(includeMetadataChanges: false){ documentSnapshot, error in
             guard let snapshot = documentSnapshot else { return }
-            snapshot.documentChanges.forEach { (documentChange) in
+             snapshot.documentChanges.filter({ item in
+                 (item.document.data()["name"] as! String) != myCurrentName//chổ này bị crash app khi name bị null
+             }).forEach { (documentChange) in
                 switch documentChange.type {
                   case .added :
                      print("documentChange .... Added")

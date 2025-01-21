@@ -178,7 +178,7 @@ struct ShowGroupMemberView : View {
                                     
                                     //watch sự update của data của các document trong colecttion database
                                     removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
-                                    watchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
+                                    watchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName, myCurrentName: mapData.userName)
                                     
                                 } label: {
                                     
@@ -493,9 +493,9 @@ func getLastLocation(datas:[Card]) -> [Card]
 }
 
 //hàm theo dỏi update data của các document trong database
-func watchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String)  {
+func watchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String, myCurrentName:String)  {
     print("WATCH -> run func watchDocumentDataChange")
-     cardListViewModel.watch(collectname: pass)
+    cardListViewModel.watch(collectname: pass, myCurrentName: myCurrentName)
 }
 
 //hàm ngưng theo dỏi

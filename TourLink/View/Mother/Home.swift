@@ -33,7 +33,8 @@ struct Home: View {
            return formatter
        }()
 
-  
+    //biến ghi nhận thời gian mốc app được bật lên
+    let thoiGianAppBatLen = NSDate().timeIntervalSince1970
 
     //====BODY====//
     var body: some View {
@@ -410,7 +411,7 @@ struct Home: View {
                     {
                         ShowGroupMemberView(mapData: self.mapData,
                                             showEnterGroupNameView: $showEnterGroupNameView,
-                                            cardListViewModel: cardListViewModel)
+                                            cardListViewModel: cardListViewModel, thoiGianAppBatLen: thoiGianAppBatLen)
                         .padding(.horizontal)
                        
                     }

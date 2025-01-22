@@ -23,6 +23,8 @@ struct ShowGroupMemberView : View {
     @State private var showingAlertInVaildSMSNumber = false
     @State var isDeleteAllDocumentFireStoreOK = ""
     
+    var thoiGianAppBatLen:Double
+    
     //=======BODY======//
     var body: some View{
         //show form nhập tên nhóm
@@ -178,7 +180,7 @@ struct ShowGroupMemberView : View {
                                     
                                     //watch sự update của data của các document trong colecttion database
                                     removeWatchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName)
-                                    watchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName, myCurrentName: mapData.userName)
+                                    watchDocumentDataChange(cardListViewModel: cardListViewModel, pass: mapData.groupName, myCurrentName: mapData.userName, thoiGianAppBatLen: thoiGianAppBatLen)
                                     
                                 } label: {
                                     
@@ -493,9 +495,9 @@ func getLastLocation(datas:[Card]) -> [Card]
 }
 
 //hàm theo dỏi update data của các document trong database
-func watchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String, myCurrentName:String)  {
+func watchDocumentDataChange(cardListViewModel: CardListViewModel,pass:String, myCurrentName:String, thoiGianAppBatLen:Double)  {
     print("WATCH -> run func watchDocumentDataChange")
-    cardListViewModel.watch(collectname: pass, myCurrentName: myCurrentName)
+    cardListViewModel.watch(collectname: pass, myCurrentName: myCurrentName, thoiGianAppBatLen: thoiGianAppBatLen)
 }
 
 //hàm ngưng theo dỏi

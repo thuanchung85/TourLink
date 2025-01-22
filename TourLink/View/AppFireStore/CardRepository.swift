@@ -109,7 +109,7 @@ class CardRepository: ObservableObject
     }
     
     //=======WATCH CHANGE OF DOCUMENT====//
-    func watch(collectname:String, myCurrentName:String)
+    func watch(collectname:String, myCurrentName:String, thoiGianAppBatLen:Double)
     {
         print("WATCHING --> collection: " + collectname)
         
@@ -179,26 +179,35 @@ class CardRepository: ObservableObject
         //========ADD LISTENNER======//
          registration =  store.collection(collectname).addSnapshotListener(includeMetadataChanges: false){ documentSnapshot, error in
             guard let snapshot = documentSnapshot else { return }
-             snapshot.documentChanges
+             
+            let x1 =  snapshot.documentChanges
             .filter({ item in
                  //add ngăn chặn chọn vào chính mình 120s update add vi tri
                  (item.document.data()["name"] as! String) != myCurrentName//chổ này bị crash app khi name bị null
              })
-            .filter({ item in
+             print("x1 COUNT", x1.count)
+             
+            let x2 = x1
+                 //.filter({ item in
                  //lọc theo timeStamp tất cả timeStamp khác nhỏ hơn timeStamp cũa user này sẽ bị bỏ
-                item.document.data()["timeStamp"] as! Double >= NSDate().timeIntervalSince1970
-             })
-             .forEach { (documentChange) in
+                //(item.document.data()["timeStamp"] as! Double) > thoiGianAppBatLen
+             //})
+             print("x2 COUNT", x2.count)
+             
+             x2.forEach { (documentChange) in
                 switch documentChange.type {
                   case .added :
                      print("documentChange .... Added")
                     //hiện tại thì user mới add data vitri hay status thi sẽ nhân đươc notification
                     //nhưng mới vao thi sẽ nhận tất cả các notifi cua user củ trước đó nữa
                     let dict = documentChange.document.data()
-                    self.notifiWhenADD(title: "TourLink:  \(documentChange.document.data()["name"] ?? "")", sub: dict["status"] as! String)
+                    self.notifiWhenADD(title: "TourLink:  \(dict["name"] ?? "")", sub: dict["status"] as! String)
                     
                   case .modified :
                      print("documentChange .... Modified")
+                    let dict = documentChange.document.data()
+                    self.notifiWhenADD(title: "TourLink:  \(dict["name"] ?? "")", sub: dict["status"] as! String)
+                    
                   case .removed :
                      print("documentChange .... removed")
                 }

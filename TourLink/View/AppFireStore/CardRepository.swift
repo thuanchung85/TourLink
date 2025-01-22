@@ -112,16 +112,90 @@ class CardRepository: ObservableObject
     func watch(collectname:String, myCurrentName:String)
     {
         print("WATCHING --> collection: " + collectname)
+        
+        //====tìm ra bên trong collecttion này có bao nhieu user khác tên==//
+        /*
+        var arrCardsT = [Card]()
+        store.collection(collectname)
+            .getDocuments { snapshot, error in
+                guard let snapshot = snapshot, error == nil else {
+                  //handle error
+                    print("get firestore \(collectname) ERROR!")
+                  return
+                }
+                
+                
+                snapshot.documents.forEach({ (documentSnapshot) in
+                    let documentData = documentSnapshot.data()
+                    
+                    
+                    let mCard = Card(name: documentData["name"] as! String,
+                                     pass: documentData["pass"] as! String,
+                                     latitude: documentData["latitude"] as! Double,
+                                     longitude: documentData["longitude"] as! Double,
+                                     timeStamp: documentData["timeStamp"] as! Double,
+                                     isAvaiable: (documentData["isAvaiable"] != nil),
+                                     status: documentData["status"] as! String,
+                                     userPhone: documentData["userPhone"] as! String)
+                    
+                    
+                    arrCardsT.append(mCard)
+                })
+                
+                let arr_kiemRaCacNameKhacNhau = arrCardsT.removingDuplicates(withSame: \.name).map { item  in
+                    item.name
+               
+                }
+                print("CAC USER CO TRONG COLLECTION NAY:  ", arr_kiemRaCacNameKhacNhau)
+                var arrChuaItemLastTimeUpdate = [Card]()
+                for i in 0..<arr_kiemRaCacNameKhacNhau.count{
+                    print(arr_kiemRaCacNameKhacNhau[i])
+                    //lọc array x theo tên
+                    let x = arrCardsT.filter { item in
+                        item.name.contains(find: arr_kiemRaCacNameKhacNhau[i])
+                    }
+                    
+                    let xSort = x.sorted { c1, c2 in
+                        c1.timeStamp > c2.timeStamp
+                    }
+                    
+                    
+                    let lastestItem = xSort.first
+                    if(lastestItem != nil){
+                        arrChuaItemLastTimeUpdate.append(lastestItem!)
+                    }
+                }
+                arrChuaItemLastTimeUpdate = arrChuaItemLastTimeUpdate.filter({ item in
+                    item.name != myCurrentName
+                })
+                
+                arrChuaItemLastTimeUpdate.forEach { mem in
+                    print("\n")
+                    print("member", mem)
+                }
+               
+        }*/
+       
+        //========ADD LISTENNER======//
          registration =  store.collection(collectname).addSnapshotListener(includeMetadataChanges: false){ documentSnapshot, error in
             guard let snapshot = documentSnapshot else { return }
-             snapshot.documentChanges.filter({ item in
+             snapshot.documentChanges
+            .filter({ item in
+                 //add ngăn chặn chọn vào chính mình 120s update add vi tri
                  (item.document.data()["name"] as! String) != myCurrentName//chổ này bị crash app khi name bị null
-             }).forEach { (documentChange) in
+             })
+            .filter({ item in
+                 //lọc theo timeStamp tất cả timeStamp khác nhỏ hơn timeStamp cũa user này sẽ bị bỏ
+                item.document.data()["timeStamp"] as! Double >= NSDate().timeIntervalSince1970
+             })
+             .forEach { (documentChange) in
                 switch documentChange.type {
                   case .added :
                      print("documentChange .... Added")
+                    //hiện tại thì user mới add data vitri hay status thi sẽ nhân đươc notification
+                    //nhưng mới vao thi sẽ nhận tất cả các notifi cua user củ trước đó nữa
                     let dict = documentChange.document.data()
-                    self.notifiWhenADD(title: "TourLink", sub: dict["status"] as! String)
+                    self.notifiWhenADD(title: "TourLink:  \(documentChange.document.data()["name"] ?? "")", sub: dict["status"] as! String)
                     
                   case .modified :
                      print("documentChange .... Modified")

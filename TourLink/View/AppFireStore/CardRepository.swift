@@ -188,10 +188,10 @@ class CardRepository: ObservableObject
              print("x1 COUNT", x1.count)
              
             let x2 = x1
-                 //.filter({ item in
-                 //lọc theo timeStamp tất cả timeStamp khác nhỏ hơn timeStamp cũa user này sẽ bị bỏ
-                //(item.document.data()["timeStamp"] as! Double) > thoiGianAppBatLen
-             //})
+                 .filter({ item in
+                 //lọc theo timeStamp tất cả timeStamp khác nhỏ hơn timeStamp cũa user này sẽ lúc bật app lên - 17 phút sẽ bị lọc ra
+                (item.document.data()["timeStamp"] as! Double) > thoiGianAppBatLen - 1000
+             })
              print("x2 COUNT", x2.count)
              
              x2.forEach { (documentChange) in
